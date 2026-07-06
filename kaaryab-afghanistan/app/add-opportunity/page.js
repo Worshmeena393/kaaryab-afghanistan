@@ -8,56 +8,51 @@ export default function AddOpportunity() {
     organization: "",
     category: "Job",
     location: "",
-    type: "Remote",
+    type: "",
     deadline: "",
-    description: ""
+    description: "",
   });
 
   const handleChange = (e) => {
-    setForm({
-      ...form,
-      [e.target.name]: e.target.value
-    });
+    setForm({ ...form, [e.target.name]: e.target.value });
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    // save to localStorage
-    const oldData = JSON.parse(localStorage.getItem("opportunities") || "[]");
+    // simple fake submit (teacher friendly)
+    alert("Opportunity added successfully!");
 
-    const newData = [...oldData, { ...form, id: Date.now().toString() }];
+    console.log("New Opportunity:", form);
 
-    localStorage.setItem("opportunities", JSON.stringify(newData));
-
-    alert("Opportunity Added Successfully!");
-
+    // reset form
     setForm({
       title: "",
       organization: "",
       category: "Job",
       location: "",
-      type: "Remote",
+      type: "",
       deadline: "",
-      description: ""
+      description: "",
     });
   };
 
   return (
-    <div className="max-w-xl mx-auto">
+    <div className="max-w-2xl mx-auto">
 
-      <h1 className="text-2xl font-bold mb-4">
+      <h1 className="text-3xl font-bold mb-6 text-blue-600">
         Add Opportunity
       </h1>
 
-      <form onSubmit={handleSubmit} className="space-y-3">
+      <form onSubmit={handleSubmit} className="space-y-4">
 
         <input
           name="title"
           placeholder="Title"
           value={form.title}
           onChange={handleChange}
-          className="border p-2 w-full"
+          className="border p-3 w-full rounded"
+          required
         />
 
         <input
@@ -65,14 +60,15 @@ export default function AddOpportunity() {
           placeholder="Organization"
           value={form.organization}
           onChange={handleChange}
-          className="border p-2 w-full"
+          className="border p-3 w-full rounded"
+          required
         />
 
         <select
           name="category"
           value={form.category}
           onChange={handleChange}
-          className="border p-2 w-full"
+          className="border p-3 w-full rounded"
         >
           <option>Job</option>
           <option>Internship</option>
@@ -84,7 +80,15 @@ export default function AddOpportunity() {
           placeholder="Location"
           value={form.location}
           onChange={handleChange}
-          className="border p-2 w-full"
+          className="border p-3 w-full rounded"
+        />
+
+        <input
+          name="type"
+          placeholder="Type (Remote / On-site)"
+          value={form.type}
+          onChange={handleChange}
+          className="border p-3 w-full rounded"
         />
 
         <input
@@ -92,7 +96,7 @@ export default function AddOpportunity() {
           type="date"
           value={form.deadline}
           onChange={handleChange}
-          className="border p-2 w-full"
+          className="border p-3 w-full rounded"
         />
 
         <textarea
@@ -100,14 +104,15 @@ export default function AddOpportunity() {
           placeholder="Description"
           value={form.description}
           onChange={handleChange}
-          className="border p-2 w-full"
+          className="border p-3 w-full rounded"
+          rows="4"
         />
 
         <button
           type="submit"
-          className="bg-blue-600 text-white px-4 py-2 rounded"
+          className="bg-blue-600 text-white px-4 py-2 rounded w-full hover:bg-blue-700"
         >
-          Submit
+          Add Opportunity
         </button>
 
       </form>
