@@ -1,5 +1,5 @@
-import "./globals.css";
-import Link from "next/link";
+﻿import "./globals.css";
+import Navbar from "@/components/Navbar";
 
 export const metadata = {
   title: "KaarYab Afghanistan",
@@ -8,35 +8,15 @@ export const metadata = {
 
 export default function RootLayout({ children }) {
   return (
-    <html lang="en">
-      <body>
+    <html lang="en" className="scroll-smooth">
+      <body className="min-h-screen bg-slate-50 text-slate-900 dark:bg-slate-950 dark:text-slate-100">
+        <Navbar />
 
-        {/* NAVBAR */}
-        <nav className="bg-white shadow px-6 py-4 flex justify-between items-center">
-          <h1 className="font-bold text-blue-600 text-xl">
-            KaarYab Afghanistan
-          </h1>
+        <main className="p-6 max-w-7xl mx-auto">{children}</main>
 
-          <div className="flex gap-4 text-sm flex-wrap">
-            <Link href="/">Home</Link>
-            <Link href="/about">About</Link>
-            <Link href="/opportunities">Opportunities</Link>
-            <Link href="/dashboard">Dashboard</Link>
-            <Link href="/favorites">Favorites ❤️</Link>
-            <Link href="/messages">Messages</Link>
-            <Link href="/contact">Contact</Link>
-            <Link href="/add-opportunity">Add</Link>
-          </div>
-        </nav>
-
-        {/* PAGE CONTENT */}
-        <main className="p-6">{children}</main>
-
-        {/* FOOTER */}
-        <footer className="text-center p-4 border-t mt-10 text-sm">
+        <footer className="text-center p-4 border-t mt-10 text-sm text-slate-500 dark:text-slate-400">
           © 2026 KaarYab Afghanistan
         </footer>
-
       </body>
     </html>
   );

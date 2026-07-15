@@ -1,28 +1,30 @@
 @import "tailwindcss";
 
-/* 🌐 Global Theme */
 :root {
+  color-scheme: light;
   --background: #f9fafb;
   --foreground: #111827;
 }
 
-/* 🌙 Dark Mode */
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0b0f19;
-    --foreground: #f3f4f6;
-  }
+html.dark {
+  color-scheme: dark;
+  --background: #0b0f19;
+  --foreground: #f3f4f6;
 }
 
-/* 🧠 Base Styles */
+html,
 body {
+  min-height: 100%;
+}
+
+body {
+  margin: 0;
   background: var(--background);
   color: var(--foreground);
   font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
   line-height: 1.6;
 }
 
-/* 🔘 Buttons */
 button {
   transition: all 0.2s ease-in-out;
 }
@@ -31,27 +33,26 @@ button:hover {
   transform: translateY(-1px);
 }
 
-/* 🧾 Inputs */
-input, textarea {
+input,
+textarea,
+select {
   outline: none;
   transition: 0.2s;
 }
 
-input:focus, textarea:focus {
+input:focus,
+textarea:focus,
+select:focus {
   border-color: #3b82f6;
   box-shadow: 0 0 0 2px rgba(59,130,246,0.2);
 }
 
-/* 🪟 Cards */
 .card {
   background: white;
   border-radius: 12px;
   box-shadow: 0 6px 20px rgba(0,0,0,0.05);
 }
 
-/* 🌙 Dark card support */
-@media (prefers-color-scheme: dark) {
-  .card {
-    background: #111827;
-  }
+html.dark .card {
+  background: #111827;
 }

@@ -1,67 +1,66 @@
-import Link from "next/link";
-import { useState, useEffect } from "react";
+﻿import Link from "next/link";
+import { useEffect, useState } from "react";
+import { getFavorites, toggleFavorite } from "@/lib/storage";
 
-export default function OpportunityCard({ item, onDelete }) {
+export default function OpportunityCard({ item, onDelete, showSave = true, showDelete = Boolean(onDelete), onFavoriteChange }) {
   const [saved, setSaved] = useState(false);
 
-  // check if already saved
   useEffect(() => {
-    const favs = JSON.parse(localStorage.getItem("favorites") || "[]");
-    setSaved(favs.some((f) => f.id === item.id));
+    setSaved(getFavorites().some((f) => f.id === item.id));
   }, [item.id]);
 
   const toggleSave = () => {
-    const favs = JSON.parse(localStorage.getItem("favorites") || "[]");
-
-    let updated;
-
-    if (saved) {
-      updated = favs.filter((f) => f.id !== item.id);
-    } else {
-      updated = [...favs, item];
+    const updated = toggleFavorite(item);
+    setSaved(updated.some((f) => f.id === item.id));
+    if (typeof onFavoriteChange === "function") {
+      onFavoriteChange(updated);
     }
-
-    localStorage.setItem("favorites", JSON.stringify(updated));
-    setSaved(!saved);
   };
 
   return (
-    <div className="border p-4 rounded shadow bg-white">
-
-      <Link href={`/opportunities/${item.id}`}>
-        <h2 className="text-xl font-bold text-blue-600 cursor-pointer">
-          {item.title}
-        </h2>
-      </Link>
-
-      <p>{item.organization}</p>
-      <p className="text-sm mt-2">{item.description}</p>
-
-      <div className="text-sm text-gray-500 mt-2">
-        📍 {item.location} | 🏷 {item.category}
+    <div className="rounded-[1.75rem] border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-950 p-6 shadow-sm transition hover:-translate-y-1">
+      <div className="flex items-start justify-between gap-4">
+        <div>
+          <Link href={`/opportunities/${item.id}`}>
+            <h2 className="text-xl font-semibold text-blue-600 hover:underline">{item.title}</h2>
+          </Link>
+          <p className="mt-2 text-sm text-slate-500 dark:text-slate-400">{item.organization} · {item.location}</p>
+        </div>
+        <div className="text-right">
+          <p className="text-xs uppercase tracking-[0.2em] text-slate-400">{item.type}</p>
+          <p className="mt-2 text-sm text-slate-500 dark:text-slate-400">Due {item.deadline}</p>
+        </div>
       </div>
 
-      {/* BUTTONS */}
-      <div className="flex gap-2 mt-3">
+      <p className="mt-4 text-slate-600 dark:text-slate-300">{item.description}</p>
 
-        <button
-          onClick={toggleSave}
-          className={`px-3 py-1 rounded text-white ${
-            saved ? "bg-yellow-500" : "bg-gray-500"
-          }`}
-        >
-          {saved ? "Saved ❤️" : "Save"}
-        </button>
-
-        <button
-          onClick={() => onDelete(item.id)}
-          className="bg-red-500 text-white px-3 py-1 rounded"
-        >
-          Delete
-        </button>
-
+      <div className="mt-5 flex flex-wrap gap-2 text-xs font-medium text-slate-500 dark:text-slate-400">
+        <span className="rounded-full border border-slate-200 dark:border-slate-700 bg-slate-100 dark:bg-slate-900 px-3 py-1">{item.category}</span>
+        {item.tags?.map((tag) => (
+          <span key={tag} className="rounded-full border border-slate-200 dark:border-slate-700 bg-slate-100 dark:bg-slate-900 px-3 py-1">{tag}</span>
+        ))}
       </div>
 
+      <div className="mt-5 flex flex-wrap gap-3">
+        {showSave && (
+          <button
+            type="button"
+            onClick={toggleSave}
+            className={`rounded-full px-4 py-2 text-sm font-semibold text-white ${saved ? "bg-yellow-500" : "bg-slate-500"}`}
+          >
+            {saved ? "Saved ❤️" : "Save"}
+          </button>
+        )}
+        {showDelete && (
+          <button
+            type="button"
+            onClick={() => onDelete?.(item.id)}
+            className="rounded-full bg-red-500 px-4 py-2 text-sm font-semibold text-white"
+          >
+            Remove
+          </button>
+        )}
+      </div>
     </div>
   );
 }

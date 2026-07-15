@@ -1,36 +1,68 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+ # KaarYab Afghanistan
 
-## Getting Started
+ KaarYab Afghanistan is an opportunity finder platform built with Next.js, React, and Tailwind CSS. It helps Afghan youth discover jobs, internships, scholarships, remote work, and skill-building opportunities in one place.
 
-First, run the development server:
+ ## Problem It Solves
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+ Many learners and job seekers in Afghanistan struggle to find meaningful opportunities because information is scattered across multiple websites, social media, and community groups. KaarYab brings those opportunities together with search, filter, save, and contact capabilities.
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+ ## Features
 
-You can start editing the page by modifying `app/page.js`. The page auto-updates as you edit the file.
+ - Home page with featured opportunity cards and clear calls to action
+ - Opportunities listing with search, sorting, and saved items
+ - Opportunity detail page with full opportunity information
+ - Add opportunity form with localStorage persistence
+ - Saved opportunities page with search, sort, and clear-all functionality
+ - Dashboard with opportunity stats, saved count, messages count, and deadline insights
+ - Messages inbox page with search, sort, delete, and clear-all controls
+ - Contact form that saves messages locally for review
+ - Dark mode support with theme toggle
+ - Responsive design for mobile, tablet, and desktop
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+ ## Technologies Used
 
-## Learn More
+ - Next.js App Router
+ - React
+ - Tailwind CSS
+ - LocalStorage for data persistence
+ - Client-side state and reusable components
 
-To learn more about Next.js, take a look at the following resources:
+ ## How to Run Locally
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+ 1. Install dependencies:
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+ ```bash
+ npm install
+ ```
 
-## Deploy on Vercel
+ 2. Start development server:
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+ ```bash
+ npm run dev
+ ```
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+ 3. Open http://localhost:3000 in your browser.
+
+ ## Build for Production
+
+ ```bash
+ npm run build
+ ```
+
+ ## App Pages
+
+ - `/` — Home
+ - `/about` — About
+ - `/opportunities` — Opportunity list
+ - `/opportunities/[id]` — Opportunity details
+ - `/add-opportunity` — Add opportunity
+ - `/favorites` — Saved opportunities
+ - `/dashboard` — Dashboard
+ - `/messages` — Message inbox
+ - `/contact` — Contact form
+
+ ## Notes
+
+ - The app passes Next.js production build.
+ - Saved opportunities and messages are persisted in the browser using localStorage.
+ - The design is optimized for dark mode and responsive layouts.

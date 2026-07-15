@@ -1,0 +1,13 @@
+{
+	"version": "2.0.0",
+	"tasks": [
+		{
+			"label": "Fix home page and dark mode",
+			"type": "shell",
+			"command": "echo Fixing home page and dark mode files",
+			"args": [],
+			"isBackground": false,
+			"problemMatcher": []
+		}
+	]
+}
