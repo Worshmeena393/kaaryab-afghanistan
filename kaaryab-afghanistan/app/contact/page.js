@@ -24,25 +24,25 @@ export default function Contact() {
 
       {success && <p className="mb-3 text-green-600">Message saved locally ✔</p>}
 
-      <form onSubmit={handleSubmit} className="space-y-4 rounded-2xl border border-slate-200 p-6 bg-white dark:bg-slate-950">
+      <form onSubmit={handleSubmit} className="space-y-4 rounded-2xl border border-slate-200 dark:border-slate-700 p-6 bg-white dark:bg-slate-950">
         <div>
           <label className="text-sm font-medium text-slate-700 dark:text-slate-300">Your Name</label>
-          <input name="name" value={form.name} onChange={handleChange} required className="mt-2 w-full rounded-2xl border px-4 py-3 dark:bg-slate-900 dark:text-slate-100" />
+          <input name="name" value={form.name} onChange={handleChange} required className="mt-2 w-full rounded-2xl border border-slate-300 bg-white px-4 py-3 text-slate-900 dark:border-slate-700 dark:bg-slate-900 dark:text-slate-100" />
         </div>
 
         <div>
           <label className="text-sm font-medium text-slate-700 dark:text-slate-300">Email</label>
-          <input name="email" type="email" value={form.email} onChange={handleChange} required className="mt-2 w-full rounded-2xl border px-4 py-3 dark:bg-slate-900 dark:text-slate-100" />
+          <input name="email" type="email" value={form.email} onChange={handleChange} required className="mt-2 w-full rounded-2xl border border-slate-300 bg-white px-4 py-3 text-slate-900 dark:border-slate-700 dark:bg-slate-900 dark:text-slate-100" />
         </div>
 
         <div>
           <label className="text-sm font-medium text-slate-700 dark:text-slate-300">Message</label>
-          <textarea name="message" value={form.message} onChange={handleChange} required className="mt-2 w-full rounded-2xl border px-4 py-4 h-36 dark:bg-slate-900 dark:text-slate-100" />
+          <textarea name="message" value={form.message} onChange={handleChange} required className="mt-2 w-full rounded-2xl border border-slate-300 bg-white px-4 py-4 h-36 text-slate-900 dark:border-slate-700 dark:bg-slate-900 dark:text-slate-100" />
         </div>
 
         <div className="flex items-center gap-3">
           <button type="submit" className="rounded-2xl bg-blue-600 px-4 py-2 text-white font-semibold">Send Message</button>
-          <p className="text-sm text-slate-500">Messages are saved locally in your browser.</p>
+          <p className="text-sm text-slate-500 dark:text-slate-400">Messages are saved locally in your browser.</p>
         </div>
       </form>
     </div>
