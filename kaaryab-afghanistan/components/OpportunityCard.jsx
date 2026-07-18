@@ -18,7 +18,7 @@ export default function OpportunityCard({ item, onDelete, showSave = true, showD
   };
 
   return (
-    <div className="rounded-[1.75rem] border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-950 p-6 shadow-sm transition hover:-translate-y-1">
+    <div className="rounded-[1.75rem] border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 p-6 shadow-sm dark:shadow-md transition hover:-translate-y-1 flex flex-col justify-between h-full">
       <div className="flex items-start justify-between gap-4">
         <div>
           <Link href={`/opportunities/${item.id}`}>
@@ -35,9 +35,9 @@ export default function OpportunityCard({ item, onDelete, showSave = true, showD
       <p className="mt-4 text-slate-600 dark:text-slate-300">{item.description}</p>
 
       <div className="mt-5 flex flex-wrap gap-2 text-xs font-medium text-slate-500 dark:text-slate-400">
-        <span className="rounded-full border border-slate-200 dark:border-slate-700 bg-slate-100 dark:bg-slate-900 px-3 py-1">{item.category}</span>
+        <span className="rounded-full border border-slate-200 dark:border-slate-700 bg-slate-100 dark:bg-slate-800 px-3 py-1">{item.category}</span>
         {item.tags?.map((tag) => (
-          <span key={tag} className="rounded-full border border-slate-200 dark:border-slate-700 bg-slate-100 dark:bg-slate-900 px-3 py-1">{tag}</span>
+          <span key={tag} className="rounded-full border border-slate-200 dark:border-slate-700 bg-slate-100 dark:bg-slate-800 px-3 py-1">{tag}</span>
         ))}
       </div>
 
@@ -48,7 +48,7 @@ export default function OpportunityCard({ item, onDelete, showSave = true, showD
             onClick={toggleSave}
             className={`rounded-full px-4 py-2 text-sm font-semibold text-white ${saved ? "bg-yellow-500" : "bg-slate-500"}`}
           >
-            {saved ? "Saved ❤️" : "Save"}
+            {saved ? "Favorited ❤️" : "Favorite"}
           </button>
         )}
         {showDelete && (

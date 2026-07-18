@@ -16,6 +16,7 @@ export default function RootLayout({ children }) {
 
         <footer className="text-center p-4 border-t mt-10 text-sm text-slate-500 dark:text-slate-400">
           © 2026 KaarYab Afghanistan
+          <p className="mt-2 text-xs text-slate-500 dark:text-slate-400">Note: This website uses Demo Data for educational purposes.</p>
         </footer>
       </body>
     </html>

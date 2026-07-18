@@ -13,6 +13,14 @@ export function getStoredOpportunities() {
     localStorage.setItem(STORAGE_KEY, JSON.stringify(opportunities));
     return opportunities;
   }
+  const storedIds = new Set(stored.map((item) => item.id));
+  const missingDefaults = opportunities.filter((item) => !storedIds.has(item.id));
+
+  if (missingDefaults.length > 0) {
+    const updated = [...stored, ...missingDefaults];
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(updated));
+    return updated;
+  }
 
   return stored;
 }

@@ -2,8 +2,17 @@
 
 import { useState } from "react";
 
-const categories = ["Job", "Internship", "Scholarship", "Online course", "Remote work", "Volunteer work"];
-const types = ["Remote", "On-site"];
+const categories = [
+  "Job",
+  "Internship",
+  "Scholarship",
+  "Online course",
+  "Remote work",
+  "Volunteer work",
+  "Advanced Training",
+  "Professional Development",
+];
+const types = ["Remote", "On-site", "Hybrid"];
 
 export default function OpportunityForm({ initialData = {}, onSubmit }) {
   const [form, setForm] = useState({
@@ -19,6 +28,15 @@ export default function OpportunityForm({ initialData = {}, onSubmit }) {
     tags: initialData.tags?.join(", ") || "",
   });
 
+  const isValidUrl = (value) => {
+    try {
+      new URL(value);
+      return true;
+    } catch {
+      return false;
+    }
+  };
+
   const [error, setError] = useState("");
 
   const handleChange = (e) => {
@@ -30,6 +48,11 @@ export default function OpportunityForm({ initialData = {}, onSubmit }) {
 
     if (!form.title || !form.organization || !form.location || !form.deadline || !form.description || !form.applyLink) {
       setError("Please fill all required fields.");
+      return;
+    }
+
+    if (!isValidUrl(form.applyLink)) {
+      setError("Please enter a valid URL for the Apply link.");
       return;
     }
 
@@ -123,6 +146,7 @@ export default function OpportunityForm({ initialData = {}, onSubmit }) {
 
       <input
         name="applyLink"
+        type="url"
         placeholder="Apply link"
         value={form.applyLink}
         onChange={handleChange}

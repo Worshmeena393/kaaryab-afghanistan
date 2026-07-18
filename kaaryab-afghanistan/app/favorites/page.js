@@ -53,7 +53,7 @@ export default function Favorites() {
         <div className="mt-6 grid gap-3 md:grid-cols-[1fr_auto] md:items-end">
           <div className="grid gap-3 sm:grid-cols-2">
             <label className="space-y-2">
-              <span className="text-sm font-medium text-slate-700 dark:text-slate-300">Search saved items</span>
+              <span className="text-sm font-medium text-slate-700 dark:text-slate-300">Search favorites</span>
               <input
                 type="search"
                 value={search}
@@ -70,7 +70,7 @@ export default function Favorites() {
                 className="w-full rounded-2xl border border-slate-300 bg-white px-4 py-3 text-slate-900 outline-none transition focus:border-blue-500 dark:border-slate-700 dark:bg-slate-900 dark:text-slate-100"
               >
                 <option value="recent">Most recent</option>
-                <option value="oldest">Oldest saved</option>
+                <option value="oldest">Oldest favorites</option>
                 <option value="alphabetical">Title A → Z</option>
               </select>
             </label>

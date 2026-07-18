@@ -16,20 +16,20 @@ export default function OpportunityDetail({ params }) {
         {opportunity.title}
       </h1>
 
-      <p className="text-gray-600 mt-2">
+      <p className="text-gray-600 dark:text-slate-300 mt-2">
         {opportunity.organization}
       </p>
 
       <div className="mt-4 space-y-2">
 
-        <p><b>Category:</b> {opportunity.category}</p>
-        <p><b>Location:</b> {opportunity.location}</p>
-        <p><b>Type:</b> {opportunity.type}</p>
-        <p><b>Deadline:</b> {opportunity.deadline}</p>
+        <p className="text-slate-700 dark:text-slate-300"><b>Category:</b> {opportunity.category}</p>
+        <p className="text-slate-700 dark:text-slate-300"><b>Location:</b> {opportunity.location}</p>
+        <p className="text-slate-700 dark:text-slate-300"><b>Type:</b> {opportunity.type}</p>
+        <p className="text-slate-700 dark:text-slate-300"><b>Deadline:</b> {opportunity.deadline}</p>
 
       </div>
 
-      <p className="mt-4">
+      <p className="mt-4 text-slate-700 dark:text-slate-300">
         {opportunity.description}
       </p>
 

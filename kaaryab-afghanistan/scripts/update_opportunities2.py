@@ -1,4 +1,31 @@
-export const opportunities = [
+from pathlib import Path
+
+root = Path(__file__).resolve().parent.parent
+page_path = root / 'app' / 'opportunities' / 'page.js'
+storage_path = root / 'lib' / 'storage.js'
+data_path = root / 'data' / 'opportunities.js'
+
+page_text = page_path.read_text(encoding='utf-8')
+page_text = page_text.replace(
+    'const categories = ["All", "Job", "Internship", "Scholarship", "Online course", "Remote work", "Volunteer work"];
+const types = ["All", "Remote", "On-site"];
+const deadlineOptions = ["All", "Next 14 days", "Next 30 days"];
+',
+    'const categories = ["All", "Job", "Internship", "Scholarship", "Online course", "Remote work", "Volunteer work", "Advanced Training", "Professional Development"];
+const types = ["All", "Remote", "On-site", "Hybrid"];
+const deadlineOptions = ["All", "Next 14 days", "Next 30 days"];
+'
+)
+page_path.write_text(page_text, encoding='utf-8')
+
+storage_text = storage_path.read_text(encoding='utf-8')
+storage_text = storage_text.replace(
+    'export function getStoredOpportunities() {\n  if (typeof window === "undefined") return opportunities;\n\n  const stored = JSON.parse(localStorage.getItem(STORAGE_KEY) || "null");\n\n  if (!stored) {\n    localStorage.setItem(STORAGE_KEY, JSON.stringify(opportunities));\n    return opportunities;\n  }\n\n  return stored;\n}\n',
+    'export function getStoredOpportunities() {\n  if (typeof window === "undefined") return opportunities;\n\n  const stored = JSON.parse(localStorage.getItem(STORAGE_KEY) || "null");\n\n  if (!stored) {\n    localStorage.setItem(STORAGE_KEY, JSON.stringify(opportunities));\n    return opportunities;\n  }\n\n  const storedIds = new Set(stored.map((item) => item.id));\n  const missingDefaults = opportunities.filter((item) => !storedIds.has(item.id));\n\n  if (missingDefaults.length > 0) {\n    const updated = [...stored, ...missingDefaults];\n    localStorage.setItem(STORAGE_KEY, JSON.stringify(updated));\n    return updated;\n  }\n\n  return stored;\n}\n'
+)
+storage_path.write_text(storage_text, encoding='utf-8')
+
+new_data = '''export const opportunities = [
   {
     id: "1",
     title: "Frontend Developer Job",
@@ -7,9 +34,7 @@ export const opportunities = [
     location: "Kabul",
     type: "Remote",
     deadline: "2026-07-20",
-    description: "Work as frontend developer using React and collaborate on impact-driven community products.",
-    requirements: ["React", "HTML/CSS", "Team communication"],
-    applyLink: "https://example.com/apply/frontend-developer",
+    description: "Work as frontend developer using React",
     tags: ["React", "Frontend"]
   },
   {
@@ -20,9 +45,7 @@ export const opportunities = [
     location: "Online",
     type: "Remote",
     deadline: "2026-08-01",
-    description: "Learn React and build projects with mentorship from experienced instructors.",
-    requirements: ["Basic HTML/CSS", "Interest in React", "Internet access"],
-    applyLink: "https://example.com/apply/react-internship",
+    description: "Learn React and build projects",
     tags: ["React", "Internship"]
   },
   {
@@ -33,9 +56,7 @@ export const opportunities = [
     location: "Online",
     type: "Remote",
     deadline: "2026-09-10",
-    description: "Full scholarship for online study covering software development and digital skills.",
-    requirements: ["GPA 3.0+", "Motivation letter", "Open to remote learning"],
-    applyLink: "https://example.com/apply/scholarship",
+    description: "Full scholarship for online study",
     tags: ["Scholarship", "Education"]
   },
   {
@@ -46,9 +67,7 @@ export const opportunities = [
     location: "Herat",
     type: "On-site",
     deadline: "2026-07-30",
-    description: "Short-term UX design contract for a civic project with local partners.",
-    requirements: ["Figma", "User research", "Portfolio"],
-    applyLink: "https://example.com/apply/ux-designer",
+    description: "Short-term UX design contract for a civic project",
     tags: ["UX", "Design"]
   },
   {
@@ -59,9 +78,7 @@ export const opportunities = [
     location: "Online",
     type: "Remote",
     deadline: "2026-08-15",
-    description: "Intensive bootcamp covering Python, ML, and data-driven storytelling.",
-    requirements: ["Python basics", "Analytical mindset", "Project work"],
-    applyLink: "https://example.com/apply/data-science-bootcamp",
+    description: "Intensive bootcamp covering Python and ML basics",
     tags: ["Data", "Machine Learning"]
   },
   {
@@ -72,9 +89,7 @@ export const opportunities = [
     location: "Mazar-i-Sharif",
     type: "On-site",
     deadline: "2026-07-25",
-    description: "Coordinate community outreach, events, and volunteer training sessions.",
-    requirements: ["Community engagement", "Event planning", "Local language"],
-    applyLink: "https://example.com/apply/community-organizer",
+    description: "Coordinate community outreach and events",
     tags: ["Volunteer", "Community"]
   },
   {
@@ -85,9 +100,7 @@ export const opportunities = [
     location: "Remote",
     type: "Remote",
     deadline: "2026-08-05",
-    description: "Develop React Native features for a mobile app in a fast-paced startup environment.",
-    requirements: ["React Native", "API integration", "Testing"],
-    applyLink: "https://example.com/apply/mobile-app-developer",
+    description: "Develop React Native features for a mobile app",
     tags: ["Mobile", "React Native"]
   },
   {
@@ -98,9 +111,7 @@ export const opportunities = [
     location: "Kabul",
     type: "Hybrid",
     deadline: "2026-09-01",
-    description: "Apply to a fellowship combining AI product strategy, user research, and leadership training.",
-    requirements: ["Product thinking", "AI knowledge", "Communication skills"],
-    applyLink: "https://example.com/apply/ai-product-manager",
+    description: "Apply to a fellowship combining AI product strategy, user research, and technical leadership.",
     tags: ["AI", "Product", "Fellowship"]
   },
   {
@@ -112,8 +123,6 @@ export const opportunities = [
     type: "Remote",
     deadline: "2026-08-20",
     description: "Develop advanced cybersecurity skills with hands-on incident response labs.",
-    requirements: ["Network basics", "Security fundamentals", "Problem solving"],
-    applyLink: "https://example.com/apply/cybersecurity-program",
     tags: ["Cybersecurity", "Security", "Training"]
   },
   {
@@ -125,8 +134,6 @@ export const opportunities = [
     type: "On-site",
     deadline: "2026-08-12",
     description: "Lead UX research for large-scale apps and mentor junior designers.",
-    requirements: ["UX research", "Interviewing", "Storytelling"],
-    applyLink: "https://example.com/apply/senior-ux-research",
     tags: ["UX", "Research", "Leadership"]
   },
   {
@@ -137,9 +144,7 @@ export const opportunities = [
     location: "Online",
     type: "Remote",
     deadline: "2026-09-15",
-    description: "Immersive bootcamp with project mentorship and portfolio review.",
-    requirements: ["Data analysis", "Python", "Project experience"],
-    applyLink: "https://example.com/apply/data-science-immersion",
+    description: "Immersive data science bootcamp with project mentorship and portfolio review.",
     tags: ["Data", "ML", "Portfolio"]
   },
   {
@@ -151,8 +156,6 @@ export const opportunities = [
     type: "Remote",
     deadline: "2026-09-05",
     description: "Work on blockchain infrastructure and smart contract development with expert mentors.",
-    requirements: ["Solidity", "Smart contracts", "Blockchain fundamentals"],
-    applyLink: "https://example.com/apply/blockchain-fellowship",
     tags: ["Blockchain", "Smart Contracts", "Fellowship"]
   },
   {
@@ -164,8 +167,6 @@ export const opportunities = [
     type: "On-site",
     deadline: "2026-07-28",
     description: "Join a collaborative lab building tech solutions for education and health.",
-    requirements: ["Innovation", "Collaboration", "Community focus"],
-    applyLink: "https://example.com/apply/innovation-lab",
     tags: ["Social Impact", "Innovation", "Volunteer"]
   },
   {
@@ -177,8 +178,9 @@ export const opportunities = [
     type: "Remote",
     deadline: "2026-10-01",
     description: "Scholarship for senior professionals pursuing executive leadership training.",
-    requirements: ["Leadership experience", "Letters of recommendation", "Motivation letter"],
-    applyLink: "https://example.com/apply/leadership-scholarship",
     tags: ["Leadership", "Scholarship", "Executive"]
   }
-];
+]
+'''
+data_path.write_text(new_data, encoding='utf-8')
+print('done')

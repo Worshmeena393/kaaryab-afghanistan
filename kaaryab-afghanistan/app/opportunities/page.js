@@ -4,8 +4,18 @@ import { useMemo, useState } from "react";
 import { getStoredOpportunities, deleteOpportunity } from "@/lib/storage";
 import OpportunityCard from "@/components/OpportunityCard";
 
-const categories = ["All", "Job", "Internship", "Scholarship", "Online course", "Remote work", "Volunteer work"];
-const types = ["All", "Remote", "On-site"];
+const categories = [
+  "All",
+  "Job",
+  "Internship",
+  "Scholarship",
+  "Online course",
+  "Remote work",
+  "Volunteer work",
+  "Advanced Training",
+  "Professional Development",
+];
+const types = ["All", "Remote", "On-site", "Hybrid"];
 const deadlineOptions = ["All", "Next 14 days", "Next 30 days"];
 const sortOptions = ["Newest", "Deadline soon", "Deadline latest"];
 
