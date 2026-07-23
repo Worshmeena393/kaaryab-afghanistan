@@ -133,9 +133,9 @@ export default function Opportunities() {
         </div>
       </div>
 
-      <div className="grid gap-6 xl:grid-cols-[320px_1fr]">
+      <div className="grid gap-6 xl:grid-cols-[320px_1fr] items-start">
         {/* Filters Sidebar */}
-        <aside className="rounded-2xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 p-6 shadow-xl space-y-6 self-start h-fit">
+        <aside className="rounded-2xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 p-6 shadow-xl space-y-6 h-fit">
           <div className="pb-4 border-b border-slate-100 dark:border-slate-800">
             <h2 className="text-xl font-bold text-slate-900 dark:text-white flex items-center gap-2">
               <span>🔍</span> Search & Filters
