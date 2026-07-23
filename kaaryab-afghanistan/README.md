@@ -1,68 +1,133 @@
- # KaarYab Afghanistan
+# KaarYab Afghanistan
 
- KaarYab Afghanistan is an opportunity finder platform built with Next.js, React, and Tailwind CSS. It helps Afghan youth discover jobs, internships, scholarships, remote work, and skill-building opportunities in one place.
+### Opportunity Finder Platform for Afghan Youth
 
- ## Problem It Solves
+---
 
- Many learners and job seekers in Afghanistan struggle to find meaningful opportunities because information is scattered across multiple websites, social media, and community groups. KaarYab brings those opportunities together with search, filter, save, and contact capabilities.
+## Project Overview
 
- ## Features
+KaarYab Afghanistan is a modern, community-focused opportunity finder platform built with **Next.js**, **React**, and **Tailwind CSS**. It helps students, graduates, and young professionals discover curated opportunities in one centralized place—including jobs, internships, scholarships, remote work, and skill-building programs.
 
- - Home page with featured opportunity cards and clear calls to action
- - Opportunities listing with search, sorting, and saved items
- - Opportunity detail page with full opportunity information
- - Add opportunity form with localStorage persistence
- - Saved opportunities page with search, sort, and clear-all functionality
- - Dashboard with opportunity stats, saved count, messages count, and deadline insights
- - Messages inbox page with search, sort, delete, and clear-all controls
- - Contact form that saves messages locally for review
- - Dark mode support with theme toggle
- - Responsive design for mobile, tablet, and desktop
+> **Note**: This project uses demo data for educational purposes.
 
- ## Technologies Used
+---
 
- - Next.js App Router
- - React
- - Tailwind CSS
- - LocalStorage for data persistence
- - Client-side state and reusable components
+## Problem It Solves
 
- ## How to Run Locally
+Many Afghan youth face barriers when searching for career and learning opportunities. Information is often scattered across websites, social media, and community groups, making it difficult to stay updated on relevant roles. KaarYab Afghanistan addresses this by:
+- Bringing together diverse opportunities in a single, easy-to-use interface
+- Enabling search, filtering, and sorting to find roles quickly
+- Allowing users to save favorite opportunities for later
+- Providing a simple way to submit new opportunities to the community
 
- 1. Install dependencies:
+---
 
- ```bash
- npm install
- ```
+## Features
 
- 2. Start development server:
+### Core Features
+- **Home Page**: Clean hero section + featured opportunities
+- **Opportunities Listing**: Search, filter by category/location/type/deadline, and sort
+- **Dynamic Details Page**: Full opportunity information with apply button
+- **Save Opportunities**: Bookmark roles and access them in favorites page
+- **Add/Edit/Delete Opportunities**: Full CRUD functionality (persisted to localStorage)
+- **Dashboard**: Stats overview, upcoming deadlines, and community insights
+- **Messages & Contact**: Inbox for user messages + contact form
 
- ```bash
- npm run dev
- ```
+### UI/UX Features
+- **Dark & Light Mode**: Theme toggle with local persistence
+- **Responsive Design**: Optimized for mobile, tablet, and desktop
+- **Modern UI**: Clean cards, smooth transitions, and intuitive navigation
 
- 3. Open http://localhost:3000 in your browser.
+---
 
- ## Build for Production
+## Technologies Used
 
- ```bash
- npm run build
- ```
+| Tech | Purpose |
+|------|---------|
+| Next.js 15 | App Router, SSR/CSR |
+| React 19 | Component library & state |
+| Tailwind CSS 4 | Modern styling & dark mode |
+| LocalStorage | Data persistence for opportunities, favorites, and messages |
+| React Hooks | useState, useEffect for client-side logic |
 
- ## App Pages
+---
 
- - `/` — Home
- - `/about` — About
- - `/opportunities` — Opportunity list
- - `/opportunities/[id]` — Opportunity details
- - `/add-opportunity` — Add opportunity
- - `/favorites` — Saved opportunities
- - `/dashboard` — Dashboard
- - `/messages` — Message inbox
- - `/contact` — Contact form
+## How to Run Locally
 
- ## Notes
+Follow these steps to set up and run KaarYab Afghanistan locally:
 
- - The app passes Next.js production build.
- - Saved opportunities and messages are persisted in the browser using localStorage.
- - The design is optimized for dark mode and responsive layouts.
+### Prerequisites
+- Node.js (v18 or higher)
+- npm or yarn
+
+### Installation Steps
+
+1. **Clone or navigate to the project directory**:
+   ```bash
+   cd kaaryab-afghanistan
+   ```
+
+2. **Install dependencies**:
+   ```bash
+   npm install
+   ```
+
+3. **Start the development server**:
+   ```bash
+   npm run dev
+   ```
+
+4. **Open the app in your browser**:
+   Visit [http://localhost:3000](http://localhost:3000) (or the port shown in your terminal)
+
+---
+
+## Build & Deploy
+
+### Build for Production
+Create an optimized production build:
+```bash
+npm run build
+```
+
+### Start Production Server
+```bash
+npm start
+```
+
+### Deploy to Vercel
+This project is ready to deploy to Vercel—just connect your Git repository!
+
+---
+
+## App Pages
+
+| Route | Description |
+|-------|-------------|
+| `/` | Home page with featured opportunities |
+| `/about` | About KaarYab Afghanistan & our mission |
+| `/opportunities` | Full opportunity listing with search & filters |
+| `/opportunities/[id]` | Dynamic opportunity details page |
+| `/add-opportunity` | Form to submit a new opportunity |
+| `/favorites` | Saved/favorited opportunities |
+| `/dashboard` | Stats & insights dashboard |
+| `/messages` | Inbox for contact form messages |
+| `/contact` | Contact form to reach the team |
+
+---
+
+## Future Improvements
+
+Some ideas to expand the platform:
+- User authentication & profiles
+- Admin approval system for new opportunities
+- Email notifications for expiring deadlines
+- Multi-language support (English, Dari, Pashto)
+- PDF CV builder
+- Integration with real opportunity APIs
+
+---
+
+## License & Credits
+
+Built as a capstone project with ❤️ for the Afghan youth community.
