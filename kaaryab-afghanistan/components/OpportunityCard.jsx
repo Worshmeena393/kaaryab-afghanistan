@@ -39,33 +39,35 @@ export default function OpportunityCard({ item, onDelete, showSave = true, showD
   };
 
   const categoryColor = getCategoryColor();
+  const saveButtonClass = saved ? "bg-gradient-to-r from-pink-500 to-rose-600 text-white shadow-md hover:shadow-lg" : "bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300 hover:bg-slate-200 dark:hover:bg-slate-700";
+  const deadlineTextClass = isExpiringSoon ? "text-red-600 dark:text-red-400" : "";
 
   return (
     <div className="group rounded-2xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 p-6 shadow-sm hover:shadow-xl transition-all duration-300 hover:-translate-y-2 flex flex-col justify-between h-full overflow-hidden relative">
       {/* Decorative gradient top border */}
       <div className="absolute top-0 left-0 right-0 h-1.5 bg-gradient-to-r from-blue-500 via-indigo-500 to-purple-500 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
 
-      <div className="flex flex-col gap-4">
+      <div className="flex flex-col gap-4 flex-1">
         {/* Header section */}
-        <div className="flex items-start justify-between gap-4">
-          <div className="flex-1">
+        <div className="flex items-start justify-between gap-3">
+          <div className="flex-1 min-w-0">
             <Link href={`/opportunities/${item.id}`} className="block">
               <h2 className="text-lg font-bold text-slate-900 dark:text-white group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors duration-200">{item.title}</h2>
             </Link>
-            <p className="mt-1.5 text-sm text-slate-600 dark:text-slate-400 flex items-center gap-1.5">
-              <span className="text-slate-400">🏢</span> {item.organization}
+            <p className="mt-1.5 text-sm text-slate-600 dark:text-slate-400 flex items-center gap-1.5 flex-wrap">
+              <span className="text-slate-400">🏢</span> <span className="truncate">{item.organization}</span>
               <span className="text-slate-300 dark:text-slate-700">•</span>
-              <span className="text-slate-400">📍</span> {item.location}
+              <span className="text-slate-400">📍</span> <span className="truncate">{item.location}</span>
             </p>
           </div>
-          <div className="flex flex-col items-end gap-2">
-            <span className="text-xs uppercase tracking-[0.15em] font-semibold text-slate-500 dark:text-slate-400">{item.type}</span>
-            <span className={`px-3 py-1 rounded-full text-xs font-bold ${categoryColor}`}>{item.category}</span>
+          <div className="flex flex-col items-end gap-2 flex-shrink-0">
+            <span className="text-xs uppercase tracking-[0.15em] font-semibold text-slate-500 dark:text-slate-400 truncate max-w-[120px] text-right">{item.type}</span>
+            <span className={`px-3 py-1.5 rounded-full text-xs font-bold ${categoryColor} whitespace-nowrap`}>{item.category}</span>
           </div>
         </div>
 
         {/* Description */}
-        <p className="text-sm text-slate-600 dark:text-slate-300 leading-relaxed">{item.description}</p>
+        <p className="text-sm text-slate-600 dark:text-slate-300 leading-relaxed line-clamp-2 flex-1">{item.description}</p>
 
         {/* Tags */}
         <div className="flex flex-wrap gap-2">
@@ -78,26 +80,26 @@ export default function OpportunityCard({ item, onDelete, showSave = true, showD
       </div>
 
       {/* Footer section */}
-      <div className="mt-6 pt-4 border-t border-slate-100 dark:border-slate-800 flex flex-col gap-3">
+      <div className="mt-auto pt-4 border-t border-slate-100 dark:border-slate-800 flex flex-col gap-3">
         {/* Deadline info */}
         <div className="flex items-center justify-between text-xs text-slate-500 dark:text-slate-400">
           <div className="flex items-center gap-1.5">
             <span className={isExpiringSoon ? "text-red-500" : "text-amber-500"}>⏰</span>
-            <span className={`font-medium ${isExpiringSoon ? "text-red-600 dark:text-red-400" : ""}`}>
-              {isExpiringSoon ? `Expiring soon (${daysLeft}d left)` : `Due in ${daysLeft} days`}
+            <span className={"font-medium " + deadlineTextClass}>
+              {isExpiringSoon ? "Expiring soon (" + daysLeft + "d left)" : "Due in " + daysLeft + " days"}
             </span>
           </div>
-          <span>{item.deadline}</span>
+          <span className="whitespace-nowrap">{item.deadline}</span>
         </div>
 
         {/* Action buttons */}
-        <div className="flex items-center justify-between gap-3">
-          <div className="flex gap-2">
+        <div className="flex items-center justify-between gap-2">
+          <div className="flex items-center gap-2">
             {showSave && (
               <button
                 type="button"
                 onClick={toggleSave}
-                className={`flex items-center gap-1.5 px-4 py-2 rounded-full text-xs font-semibold transition-all duration-200 ${saved ? "bg-gradient-to-r from-pink-500 to-rose-600 text-white shadow-md hover:shadow-lg" : "bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300 hover:bg-slate-200 dark:hover:bg-slate-700"}`}
+                className={"flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-semibold transition-all duration-200 " + saveButtonClass}
               >
                 {saved ? "❤️ Saved" : "🤍 Save"}
               </button>
@@ -106,13 +108,13 @@ export default function OpportunityCard({ item, onDelete, showSave = true, showD
               <button
                 type="button"
                 onClick={() => onDelete?.(item.id)}
-                className="flex items-center gap-1.5 px-4 py-2 rounded-full text-xs font-semibold bg-red-50 dark:bg-red-900/20 text-red-600 dark:text-red-400 hover:bg-red-100 dark:hover:bg-red-900/30 transition-all duration-200"
+                className="flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-semibold bg-red-50 dark:bg-red-900/20 text-red-600 dark:text-red-400 hover:bg-red-100 dark:hover:bg-red-900/30 transition-all duration-200"
               >
                 🗑️ Remove
               </button>
             )}
           </div>
-          <Link href={`/opportunities/${item.id}`} className="flex items-center gap-1 px-4 py-2 rounded-full text-xs font-semibold bg-gradient-to-r from-blue-500 to-indigo-600 text-white hover:from-blue-600 hover:to-indigo-700 shadow-md hover:shadow-lg transition-all duration-200">
+          <Link href={`/opportunities/${item.id}`} className="flex items-center gap-1 px-3 py-1.5 rounded-full text-xs font-semibold bg-gradient-to-r from-blue-500 to-indigo-600 text-white hover:from-blue-600 hover:to-indigo-700 shadow-md hover:shadow-lg transition-all duration-200 flex-shrink-0">
             View →
           </Link>
         </div>

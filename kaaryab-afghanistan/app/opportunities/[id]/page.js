@@ -169,79 +169,83 @@ export default function OpportunityDetail() {
         </div>
       </div>
 
-      <div className="grid gap-8 lg:grid-cols-3">
+      <div className="grid gap-6 lg:grid-cols-3 items-stretch">
         {/* Main Content */}
-        <div className="lg:col-span-2 space-y-6">
+        <div className="lg:col-span-2 h-full">
           {/* Description Card */}
-          <div className="rounded-3xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 p-8 shadow-xl">
-            <h2 className="text-2xl font-extrabold text-slate-900 dark:text-white mb-6 flex items-center gap-2">
-              <span>📝</span> Description
-            </h2>
-            <p className="text-slate-700 dark:text-slate-300 leading-relaxed text-lg">{opportunity.description}</p>
+          <div className="rounded-3xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 p-8 shadow-xl h-full flex flex-col justify-between">
+            <div>
+              <h2 className="text-2xl font-extrabold text-slate-900 dark:text-white mb-6 flex items-center gap-2">
+                <span>📝</span> Description
+              </h2>
+              <p className="text-slate-700 dark:text-slate-300 leading-relaxed text-lg">{opportunity.description}</p>
 
-            {/* Requirements */}
-            {opportunity.requirements && opportunity.requirements.length > 0 && (
-              <div className="mt-10">
-                <h3 className="text-xl font-bold text-slate-900 dark:text-white mb-5 flex items-center gap-2">
-                  <span>✅</span> Requirements
-                </h3>
-                <ul className="space-y-3">
-                  {opportunity.requirements.map((req, idx) => (
-                    <li key={idx} className="flex items-start gap-3 p-4 bg-slate-50 dark:bg-slate-800/50 rounded-2xl">
-                      <span className="text-blue-500 text-lg mt-0.5">•</span>
-                      <span className="text-slate-700 dark:text-slate-300 font-medium">{req}</span>
-                    </li>
-                  ))}
-                </ul>
-              </div>
-            )}
-
-            {/* Tags */}
-            {opportunity.tags && opportunity.tags.length > 0 && (
-              <div className="mt-10">
-                <h3 className="text-xl font-bold text-slate-900 dark:text-white mb-5 flex items-center gap-2">
-                  <span>🏷️</span> Tags
-                </h3>
-                <div className="flex flex-wrap gap-3">
-                  {opportunity.tags.map((tag, idx) => (
-                    <span key={idx} className="px-5 py-2 rounded-2xl text-sm font-semibold bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300 border border-slate-200 dark:border-slate-700">
-                      #{tag}
-                    </span>
-                  ))}
+              {/* Requirements */}
+              {opportunity.requirements && opportunity.requirements.length > 0 && (
+                <div className="mt-10">
+                  <h3 className="text-xl font-bold text-slate-900 dark:text-white mb-5 flex items-center gap-2">
+                    <span>✅</span> Requirements
+                  </h3>
+                  <ul className="space-y-3">
+                    {opportunity.requirements.map((req, idx) => (
+                      <li key={idx} className="flex items-start gap-3 p-4 bg-slate-50 dark:bg-slate-800/50 rounded-2xl">
+                        <span className="text-blue-500 text-lg mt-0.5">•</span>
+                        <span className="text-slate-700 dark:text-slate-300 font-medium">{req}</span>
+                      </li>
+                    ))}
+                  </ul>
                 </div>
-              </div>
-            )}
+              )}
+
+              {/* Tags */}
+              {opportunity.tags && opportunity.tags.length > 0 && (
+                <div className="mt-10">
+                  <h3 className="text-xl font-bold text-slate-900 dark:text-white mb-5 flex items-center gap-2">
+                    <span>🏷️</span> Tags
+                  </h3>
+                  <div className="flex flex-wrap gap-3">
+                    {opportunity.tags.map((tag, idx) => (
+                      <span key={idx} className="px-5 py-2 rounded-2xl text-sm font-semibold bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300 border border-slate-200 dark:border-slate-700">
+                        #{tag}
+                      </span>
+                    ))}
+                  </div>
+                </div>
+              )}
+            </div>
           </div>
         </div>
 
         {/* Sidebar */}
-        <div className="space-y-6">
+        <div className="lg:col-span-1 h-full">
           {/* Details Card */}
-          <div className="relative rounded-3xl overflow-hidden shadow-xl">
+          <div className="relative rounded-3xl overflow-hidden shadow-xl h-full flex flex-col">
             <div className={`absolute top-0 left-0 right-0 h-2 bg-gradient-to-r ${categoryGradient}`}></div>
-            <div className="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 p-8 rounded-3xl">
-              <p className="text-xs uppercase tracking-[0.25em] text-slate-500 dark:text-slate-400 font-bold mb-6">Opportunity details</p>
-              
-              <div className="space-y-5">
-                {/* Category */}
-                <div className="p-4 bg-slate-50 dark:bg-slate-800/50 rounded-2xl">
-                  <p className="text-xs uppercase tracking-wide text-slate-500 dark:text-slate-400 font-semibold mb-1">Category</p>
-                  <p className="text-lg font-bold text-slate-900 dark:text-white">{opportunity.category}</p>
-                </div>
+            <div className="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 p-8 rounded-3xl h-full flex flex-col justify-between">
+              <div>
+                <p className="text-xs uppercase tracking-[0.25em] text-slate-500 dark:text-slate-400 font-bold mb-6">Opportunity details</p>
+                
+                <div className="space-y-5">
+                  {/* Category */}
+                  <div className="p-4 bg-slate-50 dark:bg-slate-800/50 rounded-2xl">
+                    <p className="text-xs uppercase tracking-wide text-slate-500 dark:text-slate-400 font-semibold mb-1">Category</p>
+                    <p className="text-lg font-bold text-slate-900 dark:text-white">{opportunity.category}</p>
+                  </div>
 
-                {/* Work Type */}
-                <div className="p-4 bg-slate-50 dark:bg-slate-800/50 rounded-2xl">
-                  <p className="text-xs uppercase tracking-wide text-slate-500 dark:text-slate-400 font-semibold mb-1">Work Type</p>
-                  <p className="text-lg font-bold text-slate-900 dark:text-white">{opportunity.type}</p>
-                </div>
+                  {/* Work Type */}
+                  <div className="p-4 bg-slate-50 dark:bg-slate-800/50 rounded-2xl">
+                    <p className="text-xs uppercase tracking-wide text-slate-500 dark:text-slate-400 font-semibold mb-1">Work Type</p>
+                    <p className="text-lg font-bold text-slate-900 dark:text-white">{opportunity.type}</p>
+                  </div>
 
-                {/* Deadline */}
-                <div className={`p-4 rounded-2xl ${isExpiringSoon ? "bg-red-50 dark:bg-red-900/20 border border-red-200 dark:border-red-800" : "bg-slate-50 dark:bg-slate-800/50"}`}>
-                  <p className="text-xs uppercase tracking-wide text-slate-500 dark:text-slate-400 font-semibold mb-1">Deadline</p>
-                  <p className="text-lg font-bold text-slate-900 dark:text-white">{opportunity.deadline}</p>
-                  <p className={`text-sm font-semibold mt-1 ${isExpiringSoon ? "text-red-600 dark:text-red-400" : "text-slate-600 dark:text-slate-400"}`}>
-                    {isExpiringSoon ? `⚠️ Expiring soon (${daysLeft} days left)` : `⏰ ${daysLeft} days left`}
-                  </p>
+                  {/* Deadline */}
+                  <div className={`p-4 rounded-2xl ${isExpiringSoon ? "bg-red-50 dark:bg-red-900/20 border border-red-200 dark:border-red-800" : "bg-slate-50 dark:bg-slate-800/50"}`}>
+                    <p className="text-xs uppercase tracking-wide text-slate-500 dark:text-slate-400 font-semibold mb-1">Deadline</p>
+                    <p className="text-lg font-bold text-slate-900 dark:text-white">{opportunity.deadline}</p>
+                    <p className={`text-sm font-semibold mt-1 ${isExpiringSoon ? "text-red-600 dark:text-red-400" : "text-slate-600 dark:text-slate-400"}`}>
+                      {isExpiringSoon ? `⚠️ Expiring soon (${daysLeft} days left)` : `⏰ ${daysLeft} days left`}
+                    </p>
+                  </div>
                 </div>
               </div>
 
@@ -271,7 +275,7 @@ export default function OpportunityDetail() {
                     <div className="flex items-start gap-3">
                       <span className="text-xl mt-0.5">⚠️</span>
                       <p className="text-sm text-red-800 dark:text-red-200 leading-relaxed">
-                        The application link is invalid. Please contact the opportunity provider for more information.
+                        The application link is invalid. Please contact the opportunity provider for more information!
                       </p>
                     </div>
                   </div>

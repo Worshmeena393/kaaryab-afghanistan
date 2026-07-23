@@ -1,4 +1,4 @@
-﻿import "./globals.css";
+import "./globals.css";
 import Navbar from "@/components/Navbar";
 
 export const metadata = {
@@ -8,7 +8,7 @@ export const metadata = {
 
 export default function RootLayout({ children }) {
   return (
-    <html lang="en" className="scroll-smooth">
+    <html lang="en" className="scroll-smooth" data-scroll-behavior="smooth">
       <body className="min-h-screen bg-slate-50 text-slate-900 dark:bg-slate-950 dark:text-slate-100">
         <Navbar />
 

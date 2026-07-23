@@ -1,6 +1,7 @@
 "use client";
 
-import { useMemo, useState } from "react";
+import { useMemo, useState, useEffect } from "react";
+import { useSearchParams } from "next/navigation";
 import { getStoredOpportunities, deleteOpportunity } from "@/lib/storage";
 import OpportunityCard from "@/components/OpportunityCard";
 
@@ -20,6 +21,7 @@ const deadlineOptions = ["All", "Next 14 days", "Next 30 days"];
 const sortOptions = ["Newest", "Deadline soon", "Deadline latest"];
 
 export default function Opportunities() {
+  const searchParams = useSearchParams();
   const [opportunities, setOpportunities] = useState(getStoredOpportunities());
   const [search, setSearch] = useState("");
   const [category, setCategory] = useState("All");
@@ -27,6 +29,18 @@ export default function Opportunities() {
   const [type, setType] = useState("All");
   const [deadline, setDeadline] = useState("All");
   const [sort, setSort] = useState("Newest");
+
+  // Initialize from query params
+  useEffect(() => {
+    const searchQuery = searchParams.get("search");
+    const categoryQuery = searchParams.get("category");
+    if (searchQuery) {
+      setSearch(searchQuery);
+    }
+    if (categoryQuery && categories.includes(categoryQuery)) {
+      setCategory(categoryQuery);
+    }
+  }, [searchParams]);
 
   const locations = useMemo(
     () => ["All", ...Array.from(new Set(opportunities.map((item) => item.location))).sort()],
@@ -135,20 +149,20 @@ export default function Opportunities() {
 
       <div className="grid gap-6 xl:grid-cols-[320px_1fr] items-start">
         {/* Filters Sidebar */}
-        <aside className="rounded-2xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 p-6 shadow-xl space-y-6 h-fit">
-          <div className="pb-4 border-b border-slate-100 dark:border-slate-800">
-            <h2 className="text-xl font-bold text-slate-900 dark:text-white flex items-center gap-2">
+        <aside className="sticky top-20 self-start rounded-2xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 p-5 shadow-xl h-fit flex flex-col">
+          <div className="pb-3 border-b border-slate-100 dark:border-slate-800">
+            <h2 className="text-lg font-bold text-slate-900 dark:text-white flex items-center gap-2">
               <span>🔍</span> Search & Filters
             </h2>
-            <p className="mt-2 text-slate-600 dark:text-slate-400 text-sm">
+            <p className="mt-1 text-slate-600 dark:text-slate-400 text-xs">
               Narrow results to find exactly what you're looking for.
             </p>
           </div>
 
-          <div className="space-y-5">
+          <div className="flex-1 space-y-3 mt-4">
             {/* Search Input */}
-            <div className="space-y-2">
-              <label className="block text-sm font-semibold text-slate-700 dark:text-slate-300 flex items-center gap-1.5">
+            <div className="space-y-1.5">
+              <label className="block text-xs font-semibold text-slate-700 dark:text-slate-300 flex items-center gap-1.5">
                 <span>🔎</span> Search
               </label>
               <input
@@ -156,19 +170,19 @@ export default function Opportunities() {
                 placeholder="Search by title, org, or keywords..."
                 value={search}
                 onChange={(e) => setSearch(e.target.value)}
-                className="w-full rounded-xl border border-slate-300 dark:border-slate-700 bg-slate-50 dark:bg-slate-800 px-4 py-3 text-slate-900 dark:text-slate-100 focus:ring-2 focus:ring-blue-500 focus:border-blue-500 focus:bg-white dark:focus:bg-slate-900 transition-all duration-200"
+                className="w-full rounded-lg border border-slate-300 dark:border-slate-700 bg-slate-50 dark:bg-slate-800 px-3 py-2 text-sm text-slate-900 dark:text-slate-100 focus:ring-2 focus:ring-blue-500 focus:border-blue-500 focus:bg-white dark:focus:bg-slate-900 transition-all duration-200"
               />
             </div>
 
             {/* Category Select */}
-            <div className="space-y-2">
-              <label className="block text-sm font-semibold text-slate-700 dark:text-slate-300 flex items-center gap-1.5">
+            <div className="space-y-1.5">
+              <label className="block text-xs font-semibold text-slate-700 dark:text-slate-300 flex items-center gap-1.5">
                 <span>📂</span> Category
               </label>
               <select
                 value={category}
                 onChange={(e) => setCategory(e.target.value)}
-                className="w-full rounded-xl border border-slate-300 dark:border-slate-700 bg-slate-50 dark:bg-slate-800 px-4 py-3 text-slate-900 dark:text-slate-100 focus:ring-2 focus:ring-blue-500 focus:border-blue-500 focus:bg-white dark:focus:bg-slate-900 transition-all duration-200"
+                className="w-full rounded-lg border border-slate-300 dark:border-slate-700 bg-slate-50 dark:bg-slate-800 px-3 py-2 text-sm text-slate-900 dark:text-slate-100 focus:ring-2 focus:ring-blue-500 focus:border-blue-500 focus:bg-white dark:focus:bg-slate-900 transition-all duration-200"
               >
                 {categories.map((option) => (
                   <option key={option} value={option}>{option}</option>
@@ -177,14 +191,14 @@ export default function Opportunities() {
             </div>
 
             {/* Location Select */}
-            <div className="space-y-2">
-              <label className="block text-sm font-semibold text-slate-700 dark:text-slate-300 flex items-center gap-1.5">
+            <div className="space-y-1.5">
+              <label className="block text-xs font-semibold text-slate-700 dark:text-slate-300 flex items-center gap-1.5">
                 <span>📍</span> Location
               </label>
               <select
                 value={location}
                 onChange={(e) => setLocation(e.target.value)}
-                className="w-full rounded-xl border border-slate-300 dark:border-slate-700 bg-slate-50 dark:bg-slate-800 px-4 py-3 text-slate-900 dark:text-slate-100 focus:ring-2 focus:ring-blue-500 focus:border-blue-500 focus:bg-white dark:focus:bg-slate-900 transition-all duration-200"
+                className="w-full rounded-lg border border-slate-300 dark:border-slate-700 bg-slate-50 dark:bg-slate-800 px-3 py-2 text-sm text-slate-900 dark:text-slate-100 focus:ring-2 focus:ring-blue-500 focus:border-blue-500 focus:bg-white dark:focus:bg-slate-900 transition-all duration-200"
               >
                 {locations.map((option) => (
                   <option key={option} value={option}>{option}</option>
@@ -193,14 +207,14 @@ export default function Opportunities() {
             </div>
 
             {/* Work Type Select */}
-            <div className="space-y-2">
-              <label className="block text-sm font-semibold text-slate-700 dark:text-slate-300 flex items-center gap-1.5">
+            <div className="space-y-1.5">
+              <label className="block text-xs font-semibold text-slate-700 dark:text-slate-300 flex items-center gap-1.5">
                 <span>💻</span> Work Type
               </label>
               <select
                 value={type}
                 onChange={(e) => setType(e.target.value)}
-                className="w-full rounded-xl border border-slate-300 dark:border-slate-700 bg-slate-50 dark:bg-slate-800 px-4 py-3 text-slate-900 dark:text-slate-100 focus:ring-2 focus:ring-blue-500 focus:border-blue-500 focus:bg-white dark:focus:bg-slate-900 transition-all duration-200"
+                className="w-full rounded-lg border border-slate-300 dark:border-slate-700 bg-slate-50 dark:bg-slate-800 px-3 py-2 text-sm text-slate-900 dark:text-slate-100 focus:ring-2 focus:ring-blue-500 focus:border-blue-500 focus:bg-white dark:focus:bg-slate-900 transition-all duration-200"
               >
                 {types.map((option) => (
                   <option key={option} value={option}>{option}</option>
@@ -209,14 +223,14 @@ export default function Opportunities() {
             </div>
 
             {/* Deadline Select */}
-            <div className="space-y-2">
-              <label className="block text-sm font-semibold text-slate-700 dark:text-slate-300 flex items-center gap-1.5">
+            <div className="space-y-1.5">
+              <label className="block text-xs font-semibold text-slate-700 dark:text-slate-300 flex items-center gap-1.5">
                 <span>⏰</span> Deadline
               </label>
               <select
                 value={deadline}
                 onChange={(e) => setDeadline(e.target.value)}
-                className="w-full rounded-xl border border-slate-300 dark:border-slate-700 bg-slate-50 dark:bg-slate-800 px-4 py-3 text-slate-900 dark:text-slate-100 focus:ring-2 focus:ring-blue-500 focus:border-blue-500 focus:bg-white dark:focus:bg-slate-900 transition-all duration-200"
+                className="w-full rounded-lg border border-slate-300 dark:border-slate-700 bg-slate-50 dark:bg-slate-800 px-3 py-2 text-sm text-slate-900 dark:text-slate-100 focus:ring-2 focus:ring-blue-500 focus:border-blue-500 focus:bg-white dark:focus:bg-slate-900 transition-all duration-200"
               >
                 {deadlineOptions.map((option) => (
                   <option key={option} value={option}>{option}</option>
@@ -225,37 +239,37 @@ export default function Opportunities() {
             </div>
 
             {/* Sort Select */}
-            <div className="space-y-2">
-              <label className="block text-sm font-semibold text-slate-700 dark:text-slate-300 flex items-center gap-1.5">
+            <div className="space-y-1.5">
+              <label className="block text-xs font-semibold text-slate-700 dark:text-slate-300 flex items-center gap-1.5">
                 <span>🔃</span> Sort By
               </label>
               <select
                 value={sort}
                 onChange={(e) => setSort(e.target.value)}
-                className="w-full rounded-xl border border-slate-300 dark:border-slate-700 bg-slate-50 dark:bg-slate-800 px-4 py-3 text-slate-900 dark:text-slate-100 focus:ring-2 focus:ring-blue-500 focus:border-blue-500 focus:bg-white dark:focus:bg-slate-900 transition-all duration-200"
+                className="w-full rounded-lg border border-slate-300 dark:border-slate-700 bg-slate-50 dark:bg-slate-800 px-3 py-2 text-sm text-slate-900 dark:text-slate-100 focus:ring-2 focus:ring-blue-500 focus:border-blue-500 focus:bg-white dark:focus:bg-slate-900 transition-all duration-200"
               >
                 {sortOptions.map((option) => (
                   <option key={option} value={option}>{option}</option>
                 ))}
               </select>
             </div>
-
-            {/* Clear Filters Button */}
-            <button
-              type="button"
-              onClick={() => {
-                setSearch("");
-                setCategory("All");
-                setLocation("All");
-                setType("All");
-                setDeadline("All");
-                setSort("Newest");
-              }}
-              className="w-full rounded-xl border-2 border-dashed border-slate-300 dark:border-slate-700 bg-slate-50 dark:bg-slate-800/50 px-4 py-3 text-sm font-semibold text-slate-600 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800 transition-all duration-200"
-            >
-              🗑️ Clear all filters
-            </button>
           </div>
+
+          {/* Clear Filters Button */}
+          <button
+            type="button"
+            onClick={() => {
+              setSearch("");
+              setCategory("All");
+              setLocation("All");
+              setType("All");
+              setDeadline("All");
+              setSort("Newest");
+            }}
+            className="w-full rounded-lg border-2 border-dashed border-slate-300 dark:border-slate-700 bg-slate-50 dark:bg-slate-800/50 px-3 py-2 text-xs font-semibold text-slate-600 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800 transition-all duration-200 mt-4"
+          >
+            🗑️ Clear all filters
+          </button>
         </aside>
 
         {/* Main Content */}
