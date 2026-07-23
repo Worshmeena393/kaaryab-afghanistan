@@ -13,16 +13,40 @@ export function getStoredOpportunities() {
     localStorage.setItem(STORAGE_KEY, JSON.stringify(opportunities));
     return opportunities;
   }
-  const storedIds = new Set(stored.map((item) => item.id));
+
+  // Create a map of default items for easy lookup
+  const defaultMap = new Map(opportunities.map((item) => [item.id, item]));
+
+  // Migrate stored items: merge with defaults to ensure all fields exist
+  const migratedStored = stored.map((storedItem) => {
+    const defaultItem = defaultMap.get(storedItem.id);
+    let mergedItem = storedItem;
+    if (defaultItem) {
+      // Merge stored item with defaults, preserving user edits
+      mergedItem = { ...defaultItem, ...storedItem };
+    }
+    // Ensure all required fields exist, even for user-added items
+    return {
+      title: "Untitled Opportunity",
+      organization: "Unknown Organization",
+      category: "Job",
+      location: "Remote",
+      type: "Remote",
+      deadline: new Date(Date.now() + 30 * 24 * 60 * 60 * 1000).toISOString().split('T')[0],
+      description: "No description provided.",
+      requirements: [],
+      applyLink: "https://example.com/apply",
+      tags: [],
+      ...mergedItem,
+    };
+  });
+
+  const storedIds = new Set(migratedStored.map((item) => item.id));
   const missingDefaults = opportunities.filter((item) => !storedIds.has(item.id));
 
-  if (missingDefaults.length > 0) {
-    const updated = [...stored, ...missingDefaults];
-    localStorage.setItem(STORAGE_KEY, JSON.stringify(updated));
-    return updated;
-  }
-
-  return stored;
+  const updated = [...migratedStored, ...missingDefaults];
+  localStorage.setItem(STORAGE_KEY, JSON.stringify(updated));
+  return updated;
 }
 
 export function saveOpportunities(list) {

@@ -254,22 +254,26 @@ export default function OpportunityDetail() {
                   onClick={handleApplyClick}
                   className={`inline-flex items-center justify-center w-full rounded-2xl bg-gradient-to-r ${categoryGradient} text-white px-8 py-4 font-bold hover:opacity-90 transition-all duration-200 shadow-lg hover:shadow-xl cursor-pointer ${!validApplyUrl ? "opacity-70 cursor-not-allowed" : ""}`}
                 >
-                  {!validApplyUrl ? "Apply Link Unavailable" : opportunity.applyLink?.includes("example.com") ? "View Example Link →" : "Apply Now →"}
+                  {!validApplyUrl ? "Apply Link Unavailable" : "Apply Now →"}
                 </a>
                 {opportunity.applyLink?.includes("example.com") && (
-                  <div className="mt-3 p-3 bg-yellow-50 dark:bg-yellow-900/20 border border-yellow-200 dark:border-yellow-800 rounded-2xl">
-                    <p className="text-sm text-yellow-800 dark:text-yellow-200 flex items-center gap-2">
-                      <span>⚠️</span>
-                      This is a <strong>demo link</strong> for educational purposes only—it does not lead to a real application page!
-                    </p>
+                  <div className="mt-3 p-4 bg-yellow-50 dark:bg-yellow-900/20 border border-yellow-200 dark:border-yellow-800 rounded-2xl">
+                    <div className="flex items-start gap-3">
+                      <span className="text-xl mt-0.5">⚠️</span>
+                      <p className="text-sm text-yellow-800 dark:text-yellow-200 leading-relaxed">
+                        This is a <strong>demo link</strong> for educational purposes only—it does not lead to a real application page!
+                      </p>
+                    </div>
                   </div>
                 )}
                 {!validApplyUrl && opportunity.applyLink && (
-                  <div className="mt-3 p-3 bg-red-50 dark:bg-red-900/20 border border-red-200 dark:border-red-800 rounded-2xl">
-                    <p className="text-sm text-red-800 dark:text-red-200 flex items-center gap-2">
-                      <span>⚠️</span>
-                      The application link is invalid. Please contact the opportunity provider for more information.
-                    </p>
+                  <div className="mt-3 p-4 bg-red-50 dark:bg-red-900/20 border border-red-200 dark:border-red-800 rounded-2xl">
+                    <div className="flex items-start gap-3">
+                      <span className="text-xl mt-0.5">⚠️</span>
+                      <p className="text-sm text-red-800 dark:text-red-200 leading-relaxed">
+                        The application link is invalid. Please contact the opportunity provider for more information.
+                      </p>
+                    </div>
                   </div>
                 )}
               </div>
