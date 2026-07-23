@@ -19,29 +19,63 @@ export default function Contact() {
   };
 
   return (
-    <div className="max-w-xl mx-auto">
-      <h1 className="text-3xl font-bold text-slate-900 dark:text-white mb-4">Contact Us</h1>
+    <div className="max-w-2xl mx-auto">
+      <div className="text-center mb-8">
+        <h1 className="text-4xl font-bold text-blue-700 dark:text-blue-400 mb-3">Contact Us</h1>
+        <p className="text-blue-600 dark:text-blue-300">We'd love to hear from you! Send us a message and we'll get back as soon as possible.</p>
+      </div>
 
-      {success && <p className="mb-3 text-green-600">Message saved locally ✔</p>}
+      {success && (
+        <div className="mb-6 rounded-2xl bg-green-50 dark:bg-green-900/30 border border-green-200 dark:border-green-700 p-4 text-center">
+          <p className="text-green-700 dark:text-green-300 font-medium">Message saved locally ✔</p>
+        </div>
+      )}
 
-      <form onSubmit={handleSubmit} className="space-y-4 rounded-2xl border border-slate-200 dark:border-slate-700 p-6 bg-white dark:bg-slate-950">
+      <form onSubmit={handleSubmit} className="space-y-5 rounded-[2rem] border border-slate-200 dark:border-slate-700 p-8 bg-white dark:bg-slate-900 shadow-lg">
         <div>
-          <label className="text-sm font-medium text-slate-700 dark:text-slate-300">Your Name</label>
-          <input name="name" value={form.name} onChange={handleChange} required className="mt-2 w-full rounded-2xl border border-slate-300 bg-white px-4 py-3 text-slate-900 dark:border-slate-700 dark:bg-slate-900 dark:text-slate-100" />
+          <label className="text-sm font-semibold text-slate-700 dark:text-slate-200">Your Name</label>
+          <input
+            name="name"
+            value={form.name}
+            onChange={handleChange}
+            required
+            className="mt-2 w-full rounded-2xl border border-slate-300 bg-white px-5 py-4 text-slate-900 placeholder-slate-400 dark:border-slate-600 dark:bg-slate-800 dark:text-slate-100 dark:placeholder-slate-400 focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all"
+            placeholder="Enter your full name"
+          />
         </div>
 
         <div>
-          <label className="text-sm font-medium text-slate-700 dark:text-slate-300">Email</label>
-          <input name="email" type="email" value={form.email} onChange={handleChange} required className="mt-2 w-full rounded-2xl border border-slate-300 bg-white px-4 py-3 text-slate-900 dark:border-slate-700 dark:bg-slate-900 dark:text-slate-100" />
+          <label className="text-sm font-semibold text-slate-700 dark:text-slate-200">Email</label>
+          <input
+            name="email"
+            type="email"
+            value={form.email}
+            onChange={handleChange}
+            required
+            className="mt-2 w-full rounded-2xl border border-slate-300 bg-white px-5 py-4 text-slate-900 placeholder-slate-400 dark:border-slate-600 dark:bg-slate-800 dark:text-slate-100 dark:placeholder-slate-400 focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all"
+            placeholder="your@email.com"
+          />
         </div>
 
         <div>
-          <label className="text-sm font-medium text-slate-700 dark:text-slate-300">Message</label>
-          <textarea name="message" value={form.message} onChange={handleChange} required className="mt-2 w-full rounded-2xl border border-slate-300 bg-white px-4 py-4 h-36 text-slate-900 dark:border-slate-700 dark:bg-slate-900 dark:text-slate-100" />
+          <label className="text-sm font-semibold text-slate-700 dark:text-slate-200">Message</label>
+          <textarea
+            name="message"
+            value={form.message}
+            onChange={handleChange}
+            required
+            className="mt-2 w-full rounded-2xl border border-slate-300 bg-white px-5 py-4 h-40 text-slate-900 placeholder-slate-400 dark:border-slate-600 dark:bg-slate-800 dark:text-slate-100 dark:placeholder-slate-400 focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all resize-none"
+            placeholder="Tell us what you're thinking..."
+          />
         </div>
 
-        <div className="flex items-center gap-3">
-          <button type="submit" className="rounded-2xl bg-blue-600 px-4 py-2 text-white font-semibold">Send Message</button>
+        <div className="flex flex-col sm:flex-row items-center gap-4 pt-2">
+          <button
+            type="submit"
+            className="w-full sm:w-auto rounded-full bg-gradient-to-r from-blue-600 to-indigo-700 px-8 py-3 text-white font-semibold shadow-lg hover:shadow-xl transition-all hover:-translate-y-0.5"
+          >
+            Send Message
+          </button>
           <p className="text-sm text-slate-500 dark:text-slate-400">Messages are saved locally in your browser.</p>
         </div>
       </form>
