@@ -3,9 +3,11 @@
 import Link from "next/link";
 import { useEffect, useState } from "react";
 import { getFavorites, toggleFavorite } from "@/lib/storage";
+import { useTranslation } from "@/lib/i18n";
 
 export default function OpportunityCard({ item, onDelete, showSave = true, showDelete = Boolean(onDelete), onFavoriteChange }) {
   const [saved, setSaved] = useState(false);
+  const { t } = useTranslation();
 
   useEffect(() => {
     setSaved(getFavorites().some((f) => f.id === item.id));
@@ -19,6 +21,42 @@ export default function OpportunityCard({ item, onDelete, showSave = true, showD
     setSaved(updated.some((f) => f.id === item.id));
     if (typeof onFavoriteChange === "function") {
       onFavoriteChange(updated);
+    }
+  };
+
+  // Map category to translation key
+  const getCategoryKey = (category) => {
+    switch (category) {
+      case "Job":
+        return "opportunities.job";
+      case "Internship":
+        return "opportunities.internship";
+      case "Scholarship":
+        return "opportunities.scholarship";
+      case "Remote work":
+        return "opportunities.remoteWork";
+      case "Volunteer work":
+        return "opportunities.volunteerWork";
+      case "Advanced Training":
+        return "opportunities.advancedTraining";
+      case "Professional Development":
+        return "opportunities.professionalDevelopment";
+      default:
+        return "opportunities.all";
+    }
+  };
+
+  // Map type to translation key
+  const getTypeKey = (type) => {
+    switch (type) {
+      case "Remote":
+        return "opportunities.remote";
+      case "On-site":
+        return "opportunities.onSite";
+      case "Hybrid":
+        return "opportunities.hybrid";
+      default:
+        return "opportunities.all";
     }
   };
 
@@ -61,8 +99,8 @@ export default function OpportunityCard({ item, onDelete, showSave = true, showD
             </p>
           </div>
           <div className="flex flex-col items-end gap-2 flex-shrink-0">
-            <span className="text-xs uppercase tracking-[0.15em] font-semibold text-slate-500 dark:text-slate-400 truncate max-w-[120px] text-right">{item.type}</span>
-            <span className={`px-3 py-1.5 rounded-full text-xs font-bold ${categoryColor} whitespace-nowrap`}>{item.category}</span>
+            <span className="text-xs uppercase tracking-[0.15em] font-semibold text-slate-500 dark:text-slate-400 truncate max-w-[120px] text-right">{t(getTypeKey(item.type))}</span>
+            <span className={`px-3 py-1.5 rounded-full text-xs font-bold ${categoryColor} whitespace-nowrap`}>{t(getCategoryKey(item.category))}</span>
           </div>
         </div>
 
@@ -86,7 +124,7 @@ export default function OpportunityCard({ item, onDelete, showSave = true, showD
           <div className="flex items-center gap-1.5">
             <span className={isExpiringSoon ? "text-red-500" : "text-amber-500"}>⏰</span>
             <span className={"font-medium " + deadlineTextClass}>
-              {isExpiringSoon ? "Expiring soon (" + daysLeft + "d left)" : "Due in " + daysLeft + " days"}
+              {isExpiringSoon ? t("card.expiringSoon") + " (" + daysLeft + t("card.daysLeft") + ")" : t("card.dueIn") + " " + daysLeft + " " + t("card.daysLeft")}
             </span>
           </div>
           <span className="whitespace-nowrap">{item.deadline}</span>
@@ -101,7 +139,7 @@ export default function OpportunityCard({ item, onDelete, showSave = true, showD
                 onClick={toggleSave}
                 className={"flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-semibold transition-all duration-200 " + saveButtonClass}
               >
-                {saved ? "❤️ Saved" : "🤍 Save"}
+                {saved ? t("card.saved") : t("card.save")}
               </button>
             )}
             {showDelete && (
@@ -110,12 +148,12 @@ export default function OpportunityCard({ item, onDelete, showSave = true, showD
                 onClick={() => onDelete?.(item.id)}
                 className="flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-semibold bg-red-50 dark:bg-red-900/20 text-red-600 dark:text-red-400 hover:bg-red-100 dark:hover:bg-red-900/30 transition-all duration-200"
               >
-                🗑️ Remove
+                🗑️ {t("card.remove")}
               </button>
             )}
           </div>
           <Link href={`/opportunities/${item.id}`} className="flex items-center gap-1 px-3 py-1.5 rounded-full text-xs font-semibold bg-gradient-to-r from-blue-500 to-indigo-600 text-white hover:from-blue-600 hover:to-indigo-700 shadow-md hover:shadow-lg transition-all duration-200 flex-shrink-0">
-            View →
+            {t("card.view")}
           </Link>
         </div>
       </div>

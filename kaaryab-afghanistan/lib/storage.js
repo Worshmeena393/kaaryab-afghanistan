@@ -4,6 +4,19 @@ const STORAGE_KEY = "kaarYab-opportunities";
 const FAVORITES_KEY = "kaarYab-favorites";
 const MESSAGES_KEY = "kaarYab-messages";
 
+// Helper to format date as YYYY-MM-DD
+const formatDate = (dateStr) => {
+  if (!dateStr) return new Date(Date.now() + 30 * 24 * 60 * 60 * 1000).toISOString().split('T')[0];
+  const date = new Date(dateStr);
+  if (isNaN(date.getTime())) {
+    return new Date(Date.now() + 30 * 24 * 60 * 60 * 1000).toISOString().split('T')[0];
+  }
+  const year = date.getFullYear();
+  const month = String(date.getMonth() + 1).padStart(2, '0');
+  const day = String(date.getDate()).padStart(2, '0');
+  return `${year}-${month}-${day}`;
+};
+
 export function getStoredOpportunities() {
   if (typeof window === "undefined") return opportunities;
 
@@ -32,7 +45,7 @@ export function getStoredOpportunities() {
       category: "Job",
       location: "Remote",
       type: "Remote",
-      deadline: new Date(Date.now() + 30 * 24 * 60 * 60 * 1000).toISOString().split('T')[0],
+      deadline: formatDate(mergedItem.deadline),
       description: "No description provided.",
       requirements: [],
       applyLink: "https://example.com/apply",

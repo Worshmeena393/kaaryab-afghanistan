@@ -11,8 +11,6 @@ export default function ThemeToggle() {
     const initial = stored || (prefersDark ? "dark" : "light");
     setMode(initial);
     document.documentElement.classList.toggle("dark", initial === "dark");
-    console.log("Initial theme:", initial);
-    console.log("HTML has dark class:", document.documentElement.classList.contains("dark"));
   }, []);
 
   const toggleMode = () => {
@@ -20,8 +18,6 @@ export default function ThemeToggle() {
     setMode(next);
     localStorage.setItem("kaarYab-theme", next);
     document.documentElement.classList.toggle("dark", next === "dark");
-    console.log("Theme toggled to:", next);
-    console.log("HTML has dark class:", document.documentElement.classList.contains("dark"));
   };
 
   return (

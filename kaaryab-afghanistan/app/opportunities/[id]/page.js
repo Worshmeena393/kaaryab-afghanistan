@@ -6,6 +6,7 @@ import { useRouter, useParams } from "next/navigation";
 import { useEffect, useState } from "react";
 import { isFavorite, toggleFavorite } from "@/lib/storage";
 import OpportunityForm from "@/components/OpportunityForm";
+import { useTranslation } from "@/lib/i18n";
 
 // Get category color (same as OpportunityCard)
 const getCategoryColor = (category) => {
@@ -23,12 +24,49 @@ const getCategoryColor = (category) => {
   }
 };
 
+// Map category to translation key
+const getCategoryKey = (category) => {
+  switch (category) {
+    case "Job":
+      return "opportunities.job";
+    case "Internship":
+      return "opportunities.internship";
+    case "Scholarship":
+      return "opportunities.scholarship";
+    case "Remote work":
+      return "opportunities.remoteWork";
+    case "Volunteer work":
+      return "opportunities.volunteerWork";
+    case "Advanced Training":
+      return "opportunities.advancedTraining";
+    case "Professional Development":
+      return "opportunities.professionalDevelopment";
+    default:
+      return "opportunities.all";
+  }
+};
+
+// Map type to translation key
+const getTypeKey = (type) => {
+  switch (type) {
+    case "Remote":
+      return "opportunities.remote";
+    case "On-site":
+      return "opportunities.onSite";
+    case "Hybrid":
+      return "opportunities.hybrid";
+    default:
+      return "opportunities.all";
+  }
+};
+
 export default function OpportunityDetail() {
   const params = useParams();
   const [opportunity, setOpportunity] = useState(null);
   const [favorite, setFavorite] = useState(false);
   const [editing, setEditing] = useState(false);
   const router = useRouter();
+  const { t } = useTranslation();
 
   useEffect(() => {
     const list = getStoredOpportunities();
@@ -46,9 +84,9 @@ export default function OpportunityDetail() {
           <div className="h-24 w-24 rounded-full bg-slate-200 dark:bg-slate-800 flex items-center justify-center mx-auto mb-6">
             <span className="text-5xl">😕</span>
           </div>
-          <h1 className="text-3xl font-extrabold text-slate-900 dark:text-white mb-4">Opportunity not found</h1>
+          <h1 className="text-3xl font-extrabold text-slate-900 dark:text-white mb-4">{t("detail.notFound")}</h1>
           <Link href="/opportunities" className="inline-flex items-center gap-2 px-6 py-3 rounded-2xl bg-gradient-to-r from-blue-600 to-indigo-700 text-white font-semibold hover:from-blue-700 hover:to-indigo-800 transition-all duration-200 shadow-lg hover:shadow-xl">
-            ← Back to opportunities
+            {t("detail.backToOpportunities")}
           </Link>
         </div>
       </div>
@@ -68,7 +106,7 @@ export default function OpportunityDetail() {
   };
 
   const handleDelete = () => {
-    if (window.confirm("Are you sure you want to delete this opportunity?")) {
+    if (window.confirm(t("detail.confirmDelete"))) {
       deleteOpportunity(opportunity.id);
       router.push("/opportunities");
     }
@@ -79,11 +117,11 @@ export default function OpportunityDetail() {
       <div className="max-w-4xl mx-auto space-y-8 pt-8">
         <div className="flex items-center gap-4">
           <Link href={`/opportunities/${opportunity.id}`} className="flex items-center gap-2 text-slate-600 dark:text-slate-400 hover:text-blue-600 dark:hover:text-blue-400 font-medium transition-all">
-            ← Back to details
+            {t("detail.backToDetails")}
           </Link>
         </div>
         <div className="bg-white dark:bg-slate-900 rounded-3xl border border-slate-200 dark:border-slate-800 p-8 shadow-xl">
-          <h1 className="text-3xl font-extrabold text-slate-900 dark:text-white mb-6">Edit Opportunity</h1>
+          <h1 className="text-3xl font-extrabold text-slate-900 dark:text-white mb-6">{t("detail.editOpportunity")}</h1>
           <OpportunityForm initialData={opportunity} onSubmit={handleEdit} />
         </div>
       </div>
@@ -129,7 +167,7 @@ export default function OpportunityDetail() {
           <div className="flex flex-col gap-6 lg:flex-row lg:items-start lg:justify-between">
             <div className="flex-1">
               <Link href="/opportunities" className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/10 backdrop-blur-sm border border-white/20 text-white text-sm font-medium hover:bg-white/20 transition-all mb-4">
-                ← Back to opportunities
+                {t("detail.backToOpportunities")}
               </Link>
               <h1 className="text-4xl sm:text-5xl font-extrabold text-white leading-tight mb-4">{opportunity.title}</h1>
               <p className="text-xl text-blue-100 flex items-center gap-3">
@@ -148,21 +186,21 @@ export default function OpportunityDetail() {
                 onClick={handleToggleFavorite}
                 className={`flex items-center gap-2 px-6 py-3 rounded-2xl text-sm font-bold transition-all duration-200 shadow-lg ${favorite ? "bg-gradient-to-r from-pink-500 to-rose-600 text-white hover:shadow-xl" : "bg-white/10 backdrop-blur-sm text-white border border-white/20 hover:bg-white/20"}`}
               >
-                {favorite ? "❤️ Saved" : "🤍 Save"}
+                {favorite ? t("detail.saved") : t("detail.save")}
               </button>
               <button
                 type="button"
                 onClick={() => setEditing(true)}
-                className="flex items-center gap-2 px-6 py-3 rounded-2xl text-sm font-bold bg-white text-blue-600 hover:bg-blue-50 transition-all duration-200 shadow-lg hover:shadow-xl"
+                className="flex items-center gap-2 px-6 py-3 rounded-2xl text-sm font-bold bg-white/10 backdrop-blur-sm text-white border border-white/20 hover:bg-white/20 transition-all duration-200 shadow-lg hover:shadow-xl"
               >
-                ✏️ Edit
+                {t("detail.edit")}
               </button>
               <button
                 type="button"
                 onClick={handleDelete}
                 className="flex items-center gap-2 px-6 py-3 rounded-2xl text-sm font-bold bg-white/10 backdrop-blur-sm text-red-200 border border-red-200/30 hover:bg-red-500/20 hover:text-red-100 transition-all duration-200 shadow-lg"
               >
-                🗑️ Delete
+                {t("detail.delete")}
               </button>
             </div>
           </div>
@@ -176,7 +214,7 @@ export default function OpportunityDetail() {
           <div className="rounded-3xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 p-8 shadow-xl h-full flex flex-col justify-between">
             <div>
               <h2 className="text-2xl font-extrabold text-slate-900 dark:text-white mb-6 flex items-center gap-2">
-                <span>📝</span> Description
+                <span>📝</span> {t("detail.description")}
               </h2>
               <p className="text-slate-700 dark:text-slate-300 leading-relaxed text-lg">{opportunity.description}</p>
 
@@ -184,7 +222,7 @@ export default function OpportunityDetail() {
               {opportunity.requirements && opportunity.requirements.length > 0 && (
                 <div className="mt-10">
                   <h3 className="text-xl font-bold text-slate-900 dark:text-white mb-5 flex items-center gap-2">
-                    <span>✅</span> Requirements
+                    <span>✅</span> {t("detail.requirements")}
                   </h3>
                   <ul className="space-y-3">
                     {opportunity.requirements.map((req, idx) => (
@@ -201,7 +239,7 @@ export default function OpportunityDetail() {
               {opportunity.tags && opportunity.tags.length > 0 && (
                 <div className="mt-10">
                   <h3 className="text-xl font-bold text-slate-900 dark:text-white mb-5 flex items-center gap-2">
-                    <span>🏷️</span> Tags
+                    <span>🏷️</span> {t("detail.tags")}
                   </h3>
                   <div className="flex flex-wrap gap-3">
                     {opportunity.tags.map((tag, idx) => (
@@ -223,63 +261,63 @@ export default function OpportunityDetail() {
             <div className={`absolute top-0 left-0 right-0 h-2 bg-gradient-to-r ${categoryGradient}`}></div>
             <div className="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 p-8 rounded-3xl h-full flex flex-col justify-between">
               <div>
-                <p className="text-xs uppercase tracking-[0.25em] text-slate-500 dark:text-slate-400 font-bold mb-6">Opportunity details</p>
-                
-                <div className="space-y-5">
-                  {/* Category */}
-                  <div className="p-4 bg-slate-50 dark:bg-slate-800/50 rounded-2xl">
-                    <p className="text-xs uppercase tracking-wide text-slate-500 dark:text-slate-400 font-semibold mb-1">Category</p>
-                    <p className="text-lg font-bold text-slate-900 dark:text-white">{opportunity.category}</p>
-                  </div>
+                <p className="text-xs uppercase tracking-[0.25em] text-slate-500 dark:text-slate-400 font-bold mb-6">{t("detail.opportunityDetails")}</p>
+        
+        <div className="space-y-5">
+          {/* Category */}
+          <div className="p-4 bg-slate-50 dark:bg-slate-800/50 rounded-2xl">
+            <p className="text-xs uppercase tracking-wide text-slate-500 dark:text-slate-400 font-semibold mb-1">{t("detail.category")}</p>
+            <p className="text-lg font-bold text-slate-900 dark:text-white">{t(getCategoryKey(opportunity.category))}</p>
+          </div>
 
-                  {/* Work Type */}
-                  <div className="p-4 bg-slate-50 dark:bg-slate-800/50 rounded-2xl">
-                    <p className="text-xs uppercase tracking-wide text-slate-500 dark:text-slate-400 font-semibold mb-1">Work Type</p>
-                    <p className="text-lg font-bold text-slate-900 dark:text-white">{opportunity.type}</p>
-                  </div>
+          {/* Work Type */}
+          <div className="p-4 bg-slate-50 dark:bg-slate-800/50 rounded-2xl">
+            <p className="text-xs uppercase tracking-wide text-slate-500 dark:text-slate-400 font-semibold mb-1">{t("detail.workType")}</p>
+            <p className="text-lg font-bold text-slate-900 dark:text-white">{t(getTypeKey(opportunity.type))}</p>
+          </div>
 
-                  {/* Deadline */}
-                  <div className={`p-4 rounded-2xl ${isExpiringSoon ? "bg-red-50 dark:bg-red-900/20 border border-red-200 dark:border-red-800" : "bg-slate-50 dark:bg-slate-800/50"}`}>
-                    <p className="text-xs uppercase tracking-wide text-slate-500 dark:text-slate-400 font-semibold mb-1">Deadline</p>
-                    <p className="text-lg font-bold text-slate-900 dark:text-white">{opportunity.deadline}</p>
-                    <p className={`text-sm font-semibold mt-1 ${isExpiringSoon ? "text-red-600 dark:text-red-400" : "text-slate-600 dark:text-slate-400"}`}>
-                      {isExpiringSoon ? `⚠️ Expiring soon (${daysLeft} days left)` : `⏰ ${daysLeft} days left`}
-                    </p>
-                  </div>
-                </div>
-              </div>
+          {/* Deadline */}
+          <div className={`p-4 rounded-2xl ${isExpiringSoon ? "bg-red-50 dark:bg-red-900/20 border border-red-200 dark:border-red-800" : "bg-slate-50 dark:bg-slate-800/50"}`}>
+            <p className="text-xs uppercase tracking-wide text-slate-500 dark:text-slate-400 font-semibold mb-1">{t("detail.deadline")}</p>
+            <p className="text-lg font-bold text-slate-900 dark:text-white">{opportunity.deadline}</p>
+            <p className={`text-sm font-semibold mt-1 ${isExpiringSoon ? "text-red-600 dark:text-red-400" : "text-slate-600 dark:text-slate-400"}`}>
+              {isExpiringSoon ? `⚠️ ${t("card.expiringSoon")} (${daysLeft} ${t("card.daysLeft")})` : `⏰ ${daysLeft} ${t("card.daysLeft")}`}
+            </p>
+          </div>
+        </div>
+      </div>
 
-              {/* Apply Button */}
-              <div className="mt-8">
-                <a
-                  href={validApplyUrl || "#"}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  onClick={handleApplyClick}
-                  className={`inline-flex items-center justify-center w-full rounded-2xl bg-gradient-to-r ${categoryGradient} text-white px-8 py-4 font-bold hover:opacity-90 transition-all duration-200 shadow-lg hover:shadow-xl cursor-pointer ${!validApplyUrl ? "opacity-70 cursor-not-allowed" : ""}`}
-                >
-                  {!validApplyUrl ? "Apply Link Unavailable" : "Apply Now →"}
-                </a>
-                {opportunity.applyLink?.includes("example.com") && (
-                  <div className="mt-3 p-4 bg-yellow-50 dark:bg-yellow-900/20 border border-yellow-200 dark:border-yellow-800 rounded-2xl">
-                    <div className="flex items-start gap-3">
-                      <span className="text-xl mt-0.5">⚠️</span>
-                      <p className="text-sm text-yellow-800 dark:text-yellow-200 leading-relaxed">
-                        This is a <strong>demo link</strong> for educational purposes only—it does not lead to a real application page!
-                      </p>
-                    </div>
-                  </div>
-                )}
-                {!validApplyUrl && opportunity.applyLink && (
-                  <div className="mt-3 p-4 bg-red-50 dark:bg-red-900/20 border border-red-200 dark:border-red-800 rounded-2xl">
-                    <div className="flex items-start gap-3">
-                      <span className="text-xl mt-0.5">⚠️</span>
-                      <p className="text-sm text-red-800 dark:text-red-200 leading-relaxed">
-                        The application link is invalid. Please contact the opportunity provider for more information!
-                      </p>
-                    </div>
-                  </div>
-                )}
+      {/* Apply Button */}
+      <div className="mt-8">
+        <a
+          href={validApplyUrl || "#"}
+          target="_blank"
+          rel="noopener noreferrer"
+          onClick={handleApplyClick}
+          className={`inline-flex items-center justify-center w-full rounded-2xl bg-gradient-to-r ${categoryGradient} text-white px-8 py-4 font-bold hover:opacity-90 transition-all duration-200 shadow-lg hover:shadow-xl cursor-pointer ${!validApplyUrl ? "opacity-70 cursor-not-allowed" : ""}`}
+        >
+          {!validApplyUrl ? t("detail.applyUnavailable") : t("detail.applyNow")}
+        </a>
+        {opportunity.applyLink?.includes("example.com") && (
+          <div className="mt-3 p-4 bg-yellow-50 dark:bg-yellow-900/20 border border-yellow-200 dark:border-yellow-800 rounded-2xl">
+            <div className="flex items-start gap-3">
+              <span className="text-xl mt-0.5">⚠️</span>
+              <p className="text-sm text-yellow-800 dark:text-yellow-200 leading-relaxed">
+                {t("detail.demoWarning")}
+              </p>
+            </div>
+          </div>
+        )}
+        {!validApplyUrl && opportunity.applyLink && (
+          <div className="mt-3 p-4 bg-red-50 dark:bg-red-900/20 border border-red-200 dark:border-red-800 rounded-2xl">
+            <div className="flex items-start gap-3">
+              <span className="text-xl mt-0.5">⚠️</span>
+              <p className="text-sm text-red-800 dark:text-red-200 leading-relaxed">
+                {t("detail.invalidLink")}
+              </p>
+            </div>
+          </div>
+        )}
               </div>
             </div>
           </div>

@@ -4,20 +4,23 @@ import Link from "next/link";
 import { useEffect, useState } from "react";
 import { usePathname } from "next/navigation";
 import ThemeToggle from "@/components/ThemeToggle";
-
-const navLinks = [
-  { href: "/", label: "Home" },
-  { href: "/about", label: "About" },
-  { href: "/opportunities", label: "Opportunities" },
-  { href: "/dashboard", label: "Dashboard" },
-  { href: "/favorites", label: "Favorites" },
-  { href: "/messages", label: "Messages" },
-  { href: "/contact", label: "Contact" },
-];
+import LanguageSelector from "@/components/LanguageSelector";
+import { useTranslation } from "@/lib/i18n";
 
 export default function Navbar() {
   const pathname = usePathname();
   const [open, setOpen] = useState(false);
+  const { t } = useTranslation();
+
+  const navLinks = [
+    { href: "/", key: "home" },
+    { href: "/about", key: "about" },
+    { href: "/opportunities", key: "opportunities" },
+    { href: "/dashboard", key: "dashboard" },
+    { href: "/favorites", key: "favorites" },
+    { href: "/messages", key: "messages" },
+    { href: "/contact", key: "contact" },
+  ];
 
   useEffect(() => {
     setOpen(false);
@@ -27,12 +30,18 @@ export default function Navbar() {
     <header className="sticky top-0 z-50 border-b border-slate-200/80 bg-white/90 backdrop-blur dark:border-slate-800/80 dark:bg-slate-950/90">
       <div className="mx-auto flex max-w-7xl items-center justify-between gap-4 px-4 py-4 sm:px-6 lg:px-8">
         <Link href="/" className="flex items-center gap-3">
-          <div className="rounded-full bg-gradient-to-r from-sky-600 to-blue-600 px-4 py-3 text-white shadow-lg shadow-sky-500/20">
-            K
+          <div className="rounded-full bg-gradient-to-r from-blue-500 to-indigo-600 p-3 shadow-lg shadow-blue-500/30">
+            <svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M16 2C13.2386 2 11 4.23858 11 7V8 7 10 8 12 9V26H10V27H22V26H20V9C20 8 21 7 21 7V7C21 4.23858 18.7614 2 16 2Z" fill="#ffffff" opacity="0.9" />
+              <path d="M12 18H20V20H12V18ZM12 14H20V16H12V14Z" fill="#e0e7ff" />
+              <path d="M24.5 5.5L26.5 7.5L22.5 11.5L20.5 9.5L24.5 5.5Z" fill="#ffffff" />
+            </svg>
           </div>
           <div>
             <p className="text-lg font-semibold text-slate-900 dark:text-white">KaarYab Afghanistan</p>
-            <p className="text-sm text-slate-500 dark:text-slate-400">Opportunity finder</p>
+            <p className="text-sm text-slate-500 dark:text-slate-400">
+              {t("home.findGoals")}
+            </p>
           </div>
         </Link>
 
@@ -60,15 +69,16 @@ export default function Navbar() {
                     : "text-slate-700 hover:bg-slate-100 dark:text-slate-200 dark:hover:bg-slate-900"
                 }`}
               >
-                {link.label}
+                {t(`nav.${link.key}`)}
               </Link>
             ))}
             <Link
               href="/add-opportunity"
               className="rounded-full bg-gradient-to-r from-blue-600 to-sky-500 px-4 py-2 text-sm font-semibold text-white shadow-lg shadow-blue-500/20"
             >
-              Add Opportunity
+              {t("nav.addOpportunity")}
             </Link>
+            <LanguageSelector />
             <ThemeToggle />
           </div>
         </div>
@@ -87,16 +97,17 @@ export default function Navbar() {
                     : "text-slate-700 hover:bg-slate-100 dark:text-slate-200 dark:hover:bg-slate-900"
                 }`}
               >
-                {link.label}
+                {t(`nav.${link.key}`)}
               </Link>
             ))}
             <Link
               href="/add-opportunity"
               className="block rounded-3xl bg-blue-600 px-4 py-3 text-sm font-semibold text-white"
             >
-              Add Opportunity
+              {t("nav.addOpportunity")}
             </Link>
-            <div className="pt-2">
+            <div className="flex flex-wrap items-center gap-2 pt-2">
+              <LanguageSelector />
               <ThemeToggle />
             </div>
           </div>

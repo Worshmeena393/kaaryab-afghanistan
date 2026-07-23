@@ -5,10 +5,12 @@ import { useRouter } from "next/navigation";
 import { useState } from "react";
 import { opportunities as sampleOpportunities } from "@/data/opportunities";
 import OpportunityCard from "@/components/OpportunityCard";
+import { useTranslation } from "@/lib/i18n";
 
 export default function Home() {
   const router = useRouter();
   const [searchQuery, setSearchQuery] = useState("");
+  const { t } = useTranslation();
   const featuredOpportunities = sampleOpportunities.slice(0, 3);
 
   // Calculate stats
@@ -19,38 +21,38 @@ export default function Home() {
 
   const categories = [
     {
-      name: "Scholarships",
+      key: "scholarships",
       icon: "🎓",
       count: scholarshipCount,
-      color: "from-purple-500 to-indigo-600",
+      color: "from-purple-500 to-indigo-600 dark:from-purple-400 dark:to-indigo-500",
       filter: "Scholarship",
     },
     {
-      name: "Remote Jobs",
+      key: "remoteJobs",
       icon: "💻",
       count: sampleOpportunities.filter(
         (o) => o.category === "Job" || o.category === "Remote work"
       ).length,
-      color: "from-blue-500 to-cyan-600",
+      color: "from-blue-500 to-cyan-600 dark:from-blue-400 dark:to-cyan-500",
       filter: "Remote work",
     },
     {
-      name: "Internships",
+      key: "internships",
       icon: "📈",
       count: sampleOpportunities.filter((o) => o.category === "Internship")
         .length,
-      color: "from-green-500 to-emerald-600",
+      color: "from-green-500 to-emerald-600 dark:from-green-400 dark:to-emerald-500",
       filter: "Internship",
     },
     {
-      name: "Training",
+      key: "training",
       icon: "📚",
       count: sampleOpportunities.filter(
         (o) =>
           o.category === "Advanced Training" ||
           o.category === "Professional Development"
       ).length,
-      color: "from-orange-500 to-red-600",
+      color: "from-orange-500 to-red-600 dark:from-orange-400 dark:to-red-500",
       filter: "Advanced Training",
     },
   ];
@@ -83,10 +85,10 @@ export default function Home() {
               <span className="text-sm font-semibold">✨ KaarYab Afghanistan</span>
             </div>
             <h1 className="text-4xl md:text-5xl lg:text-6xl font-extrabold leading-tight">
-              Discover opportunities for <span className="text-blue-200">Afghan youth</span>
+              {t("home.heroTitle")}
             </h1>
             <p className="text-lg md:text-xl text-blue-100 max-w-3xl mx-auto">
-              KaarYab Afghanistan helps students, graduates, and young professionals find remote work, internships, scholarships, and skill-building programs in one place.
+              {t("home.heroSubtitle")}
             </p>
           </div>
 
@@ -113,7 +115,7 @@ export default function Home() {
                 type="text"
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
-                placeholder="Search opportunities, scholarships, jobs..."
+                placeholder={t("home.searchPlaceholder")}
                 className="flex-1 py-3 bg-transparent border-none outline-none text-slate-900 dark:text-white placeholder-slate-400 text-base"
               />
             </div>
@@ -121,7 +123,7 @@ export default function Home() {
               type="submit"
               className="px-8 py-4 rounded-xl bg-gradient-to-r from-blue-600 to-indigo-700 hover:from-blue-700 hover:to-indigo-800 text-white font-bold shadow-lg transition-all duration-300 hover:shadow-xl"
             >
-              Search
+              {t("home.searchButton")}
             </button>
           </form>
 
@@ -131,21 +133,21 @@ export default function Home() {
               <div className="text-3xl">📋</div>
               <div className="text-left">
                 <p className="text-3xl font-bold">{totalOpportunities}+</p>
-                <p className="text-sm text-blue-100">Opportunities</p>
+                <p className="text-sm text-blue-100">{t("home.totalOpportunities")}</p>
               </div>
             </div>
             <div className="bg-white/20 backdrop-blur-sm border border-white/30 rounded-2xl px-6 py-4 flex items-center gap-4">
               <div className="text-3xl">🎓</div>
               <div className="text-left">
                 <p className="text-3xl font-bold">{scholarshipCount}+</p>
-                <p className="text-sm text-blue-100">Scholarships</p>
+                <p className="text-sm text-blue-100">{t("home.scholarships")}</p>
               </div>
             </div>
             <div className="bg-white/20 backdrop-blur-sm border border-white/30 rounded-2xl px-6 py-4 flex items-center gap-4">
               <div className="text-3xl">💎</div>
               <div className="text-left">
                 <p className="text-3xl font-bold">100%</p>
-                <p className="text-sm text-blue-100">Free</p>
+                <p className="text-sm text-blue-100">{t("home.free")}</p>
               </div>
             </div>
           </div>
@@ -155,17 +157,17 @@ export default function Home() {
       {/* Category Quick Links Section */}
       <section className="max-w-6xl mx-auto px-6">
         <div className="text-center space-y-3 mb-10">
-          <h2 className="font-bold text-2xl md:text-3xl mb-1 text-slate-900 dark:!text-yellow-400">
-            Explore by Category
+          <h2 className="font-bold text-2xl md:text-3xl mb-1 text-blue-600 dark:text-blue-400">
+            {t("home.exploreCategory")}
           </h2>
-          <p className="text-sm md:text-base text-slate-600 dark:!text-yellow-200">
-            Find opportunities tailored to your goals
+          <p className="text-sm md:text-base text-slate-600 dark:text-slate-300">
+            {t("home.findGoals")}
           </p>
         </div>
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
           {categories.map((category) => (
             <button
-              key={category.name}
+              key={category.key}
               onClick={() => handleCategoryClick(category.filter)}
               className="group text-left bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-700 rounded-2xl p-6 hover:shadow-xl transition-all duration-300 hover:-translate-y-1"
             >
@@ -175,11 +177,11 @@ export default function Home() {
                 {category.icon}
               </div>
               <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-1">
-                {category.name}
+                {t(`categories.${category.key}`)}
               </h3>
               <p className="text-slate-600 dark:text-slate-400 text-sm">
-                {category.count} opportunities available
-              </p>
+              {category.count} {t("card.opportunitiesAvailable")}
+            </p>
             </button>
           ))}
         </div>
@@ -189,18 +191,18 @@ export default function Home() {
       <section className="max-w-6xl mx-auto px-6">
         <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 mb-10">
           <div>
-            <h2 className="font-bold text-2xl md:text-3xl mb-1 text-slate-900 dark:!text-yellow-400">
-              Featured Opportunities
+            <h2 className="font-bold text-2xl md:text-3xl mb-1 text-blue-600 dark:text-blue-400">
+              {t("home.featuredOpportunities")}
             </h2>
-            <p className="text-sm md:text-base text-slate-600 dark:!text-yellow-200">
-              Explore handpicked roles and programs for you
+            <p className="text-sm md:text-base text-slate-600 dark:text-slate-300">
+              {t("home.exploreHandpicked")}
             </p>
           </div>
           <Link
             href="/opportunities"
             className="text-blue-600 dark:text-blue-400 font-semibold hover:underline flex items-center gap-2"
           >
-            View All Opportunities
+            {t("home.viewAll")}
             <svg
               className="h-4 w-4"
               fill="none"
@@ -226,11 +228,11 @@ export default function Home() {
       {/* Why KaarYab Section */}
       <section className="max-w-6xl mx-auto px-6 pb-10">
         <div className="text-center space-y-3 mb-12">
-          <h2 className="font-bold text-2xl md:text-3xl mb-1 text-slate-900 dark:!text-yellow-400">
-            Why KaarYab?
+          <h2 className="font-bold text-2xl md:text-3xl mb-1 text-blue-600 dark:text-blue-400">
+            {t("home.whyKaarYab")}
           </h2>
-          <p className="text-sm md:text-base text-slate-600 dark:!text-yellow-200">
-            Built with purpose for the future of Afghanistan
+          <p className="text-sm md:text-base text-slate-600 dark:text-slate-300">
+            {t("home.builtForPurpose")}
           </p>
         </div>
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
@@ -239,10 +241,10 @@ export default function Home() {
               ✅
             </div>
             <h3 className="text-2xl font-bold text-gray-900 dark:text-white mb-3">
-              Verified Roles
+              {t("home.verifiedRoles")}
             </h3>
             <p className="text-slate-600 dark:text-slate-400">
-              All opportunities are carefully reviewed and verified for authenticity and quality.
+              {t("home.verifiedDesc")}
             </p>
           </div>
           <div className="text-center bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-700 rounded-2xl p-8">
@@ -250,10 +252,10 @@ export default function Home() {
               🌍
             </div>
             <h3 className="text-2xl font-bold text-gray-900 dark:text-white mb-3">
-              Remote Focus
+              {t("home.remoteFocus")}
             </h3>
             <p className="text-slate-600 dark:text-slate-400">
-              Prioritizing remote and flexible opportunities so you can work and learn from anywhere.
+              {t("home.remoteDesc")}
             </p>
           </div>
           <div className="text-center bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-700 rounded-2xl p-8">
@@ -261,10 +263,10 @@ export default function Home() {
               📚
             </div>
             <h3 className="text-2xl font-bold text-gray-900 dark:text-white mb-3">
-              Free Resources
+              {t("home.freeResources")}
             </h3>
             <p className="text-slate-600 dark:text-slate-400">
-              Everything on KaarYab is completely free — no hidden fees, no premium subscriptions.
+              {t("home.freeDesc")}
             </p>
           </div>
         </div>

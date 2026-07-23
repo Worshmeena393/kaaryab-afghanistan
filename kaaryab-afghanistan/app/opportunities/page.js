@@ -4,6 +4,7 @@ import { useMemo, useState, useEffect } from "react";
 import { useSearchParams } from "next/navigation";
 import { getStoredOpportunities, deleteOpportunity } from "@/lib/storage";
 import OpportunityCard from "@/components/OpportunityCard";
+import { useTranslation } from "@/lib/i18n";
 
 const categories = [
   "All",
@@ -20,8 +21,79 @@ const types = ["All", "Remote", "On-site", "Hybrid"];
 const deadlineOptions = ["All", "Next 14 days", "Next 30 days"];
 const sortOptions = ["Newest", "Deadline soon", "Deadline latest"];
 
+// Map category to translation key
+const getCategoryKey = (category) => {
+  switch (category) {
+    case "All":
+      return "opportunities.all";
+    case "Job":
+      return "opportunities.job";
+    case "Internship":
+      return "opportunities.internship";
+    case "Scholarship":
+      return "opportunities.scholarship";
+    case "Online course":
+      return "filters.onlineCourse";
+    case "Remote work":
+      return "opportunities.remoteWork";
+    case "Volunteer work":
+      return "opportunities.volunteerWork";
+    case "Advanced Training":
+      return "opportunities.advancedTraining";
+    case "Professional Development":
+      return "opportunities.professionalDevelopment";
+    default:
+      return "opportunities.all";
+  }
+};
+
+// Map type to translation key
+const getTypeKey = (type) => {
+  switch (type) {
+    case "All":
+      return "opportunities.all";
+    case "Remote":
+      return "opportunities.remote";
+    case "On-site":
+      return "opportunities.onSite";
+    case "Hybrid":
+      return "opportunities.hybrid";
+    default:
+      return "opportunities.all";
+  }
+};
+
+// Map deadline option to translation key
+const getDeadlineKey = (deadline) => {
+  switch (deadline) {
+    case "All":
+      return "opportunities.all";
+    case "Next 14 days":
+      return "filters.next14Days";
+    case "Next 30 days":
+      return "filters.next30Days";
+    default:
+      return "opportunities.all";
+  }
+};
+
+// Map sort option to translation key
+const getSortKey = (sort) => {
+  switch (sort) {
+    case "Newest":
+      return "filters.newest";
+    case "Deadline soon":
+      return "filters.deadlineSoon";
+    case "Deadline latest":
+      return "filters.deadlineLatest";
+    default:
+      return "filters.newest";
+  }
+};
+
 export default function Opportunities() {
   const searchParams = useSearchParams();
+  const { t } = useTranslation();
   const [opportunities, setOpportunities] = useState(getStoredOpportunities());
   const [search, setSearch] = useState("");
   const [category, setCategory] = useState("All");
@@ -118,23 +190,23 @@ export default function Opportunities() {
           <div className="flex flex-col gap-10 lg:flex-row lg:items-center lg:justify-between">
             <div className="flex-1">
               <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/10 backdrop-blur-sm border border-white/20 mb-4">
-                <span className="text-sm font-medium text-blue-100">✨ Updated daily</span>
+                <span className="text-sm font-medium text-blue-100">✨ {t("home.free")}</span>
               </div>
               <h1 className="text-4xl sm:text-5xl font-extrabold text-white leading-tight">
-                Find Your Next <br /><span className="text-blue-200">Opportunity</span>
+                {t("home.heroTitle")}
               </h1>
               <p className="mt-4 text-lg text-blue-100 max-w-2xl">
-                Discover curated jobs, internships, scholarships, and remote work tailored for Afghan youth to build their future.
+                {t("home.heroSubtitle")}
               </p>
             </div>
 
             {/* Stats Grid */}
             <div className="grid grid-cols-2 gap-4 w-full lg:w-auto">
               {[
-                { label: "Total", value: counts.total, icon: "📋" },
-                { label: "Jobs", value: counts.jobs, icon: "💼" },
-                { label: "Internships", value: counts.internships, icon: "📈" },
-                { label: "Scholarships", value: counts.scholarships, icon: "🎓" },
+                { label: t("home.totalOpportunities"), value: counts.total, icon: "📋" },
+                { label: t("opportunities.job"), value: counts.jobs, icon: "💼" },
+                { label: t("opportunities.internship"), value: counts.internships, icon: "📈" },
+                { label: t("home.scholarships"), value: counts.scholarships, icon: "🎓" },
               ].map((card) => (
                 <div key={card.label} className="bg-white/10 backdrop-blur-md border border-white/20 rounded-2xl p-4 sm:p-5 text-center">
                   <span className="text-3xl sm:text-4xl">{card.icon}</span>
@@ -152,10 +224,10 @@ export default function Opportunities() {
         <aside className="sticky top-20 self-start rounded-2xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 p-5 shadow-xl h-fit flex flex-col">
           <div className="pb-3 border-b border-slate-100 dark:border-slate-800">
             <h2 className="text-lg font-bold text-slate-900 dark:text-white flex items-center gap-2">
-              <span>🔍</span> Search & Filters
+              <span>🔍</span> {t("filters.allOpportunities")}
             </h2>
             <p className="mt-1 text-slate-600 dark:text-slate-400 text-xs">
-              Narrow results to find exactly what you're looking for.
+              {t("home.findGoals")}
             </p>
           </div>
 
@@ -163,11 +235,11 @@ export default function Opportunities() {
             {/* Search Input */}
             <div className="space-y-1.5">
               <label className="block text-xs font-semibold text-slate-700 dark:text-slate-300 flex items-center gap-1.5">
-                <span>🔎</span> Search
+                <span>🔎</span> {t("filters.search")}
               </label>
               <input
                 type="text"
-                placeholder="Search by title, org, or keywords..."
+                placeholder={t("home.searchPlaceholder")}
                 value={search}
                 onChange={(e) => setSearch(e.target.value)}
                 className="w-full rounded-lg border border-slate-300 dark:border-slate-700 bg-slate-50 dark:bg-slate-800 px-3 py-2 text-sm text-slate-900 dark:text-slate-100 focus:ring-2 focus:ring-blue-500 focus:border-blue-500 focus:bg-white dark:focus:bg-slate-900 transition-all duration-200"
@@ -177,7 +249,7 @@ export default function Opportunities() {
             {/* Category Select */}
             <div className="space-y-1.5">
               <label className="block text-xs font-semibold text-slate-700 dark:text-slate-300 flex items-center gap-1.5">
-                <span>📂</span> Category
+                <span>📂</span> {t("filters.category")}
               </label>
               <select
                 value={category}
@@ -185,7 +257,7 @@ export default function Opportunities() {
                 className="w-full rounded-lg border border-slate-300 dark:border-slate-700 bg-slate-50 dark:bg-slate-800 px-3 py-2 text-sm text-slate-900 dark:text-slate-100 focus:ring-2 focus:ring-blue-500 focus:border-blue-500 focus:bg-white dark:focus:bg-slate-900 transition-all duration-200"
               >
                 {categories.map((option) => (
-                  <option key={option} value={option}>{option}</option>
+                  <option key={option} value={option}>{t(getCategoryKey(option))}</option>
                 ))}
               </select>
             </div>
@@ -193,7 +265,7 @@ export default function Opportunities() {
             {/* Location Select */}
             <div className="space-y-1.5">
               <label className="block text-xs font-semibold text-slate-700 dark:text-slate-300 flex items-center gap-1.5">
-                <span>📍</span> Location
+                <span>📍</span> {t("filters.location")}
               </label>
               <select
                 value={location}
@@ -201,7 +273,7 @@ export default function Opportunities() {
                 className="w-full rounded-lg border border-slate-300 dark:border-slate-700 bg-slate-50 dark:bg-slate-800 px-3 py-2 text-sm text-slate-900 dark:text-slate-100 focus:ring-2 focus:ring-blue-500 focus:border-blue-500 focus:bg-white dark:focus:bg-slate-900 transition-all duration-200"
               >
                 {locations.map((option) => (
-                  <option key={option} value={option}>{option}</option>
+                  <option key={option} value={option}>{option === "All" ? t("opportunities.all") : option}</option>
                 ))}
               </select>
             </div>
@@ -209,7 +281,7 @@ export default function Opportunities() {
             {/* Work Type Select */}
             <div className="space-y-1.5">
               <label className="block text-xs font-semibold text-slate-700 dark:text-slate-300 flex items-center gap-1.5">
-                <span>💻</span> Work Type
+                <span>💻</span> {t("filters.workType")}
               </label>
               <select
                 value={type}
@@ -217,7 +289,7 @@ export default function Opportunities() {
                 className="w-full rounded-lg border border-slate-300 dark:border-slate-700 bg-slate-50 dark:bg-slate-800 px-3 py-2 text-sm text-slate-900 dark:text-slate-100 focus:ring-2 focus:ring-blue-500 focus:border-blue-500 focus:bg-white dark:focus:bg-slate-900 transition-all duration-200"
               >
                 {types.map((option) => (
-                  <option key={option} value={option}>{option}</option>
+                  <option key={option} value={option}>{t(getTypeKey(option))}</option>
                 ))}
               </select>
             </div>
@@ -225,7 +297,7 @@ export default function Opportunities() {
             {/* Deadline Select */}
             <div className="space-y-1.5">
               <label className="block text-xs font-semibold text-slate-700 dark:text-slate-300 flex items-center gap-1.5">
-                <span>⏰</span> Deadline
+                <span>⏰</span> {t("filters.deadline")}
               </label>
               <select
                 value={deadline}
@@ -233,7 +305,7 @@ export default function Opportunities() {
                 className="w-full rounded-lg border border-slate-300 dark:border-slate-700 bg-slate-50 dark:bg-slate-800 px-3 py-2 text-sm text-slate-900 dark:text-slate-100 focus:ring-2 focus:ring-blue-500 focus:border-blue-500 focus:bg-white dark:focus:bg-slate-900 transition-all duration-200"
               >
                 {deadlineOptions.map((option) => (
-                  <option key={option} value={option}>{option}</option>
+                  <option key={option} value={option}>{t(getDeadlineKey(option))}</option>
                 ))}
               </select>
             </div>
@@ -241,7 +313,7 @@ export default function Opportunities() {
             {/* Sort Select */}
             <div className="space-y-1.5">
               <label className="block text-xs font-semibold text-slate-700 dark:text-slate-300 flex items-center gap-1.5">
-                <span>🔃</span> Sort By
+                <span>🔃</span> {t("filters.sortBy")}
               </label>
               <select
                 value={sort}
@@ -249,7 +321,7 @@ export default function Opportunities() {
                 className="w-full rounded-lg border border-slate-300 dark:border-slate-700 bg-slate-50 dark:bg-slate-800 px-3 py-2 text-sm text-slate-900 dark:text-slate-100 focus:ring-2 focus:ring-blue-500 focus:border-blue-500 focus:bg-white dark:focus:bg-slate-900 transition-all duration-200"
               >
                 {sortOptions.map((option) => (
-                  <option key={option} value={option}>{option}</option>
+                  <option key={option} value={option}>{t(getSortKey(option))}</option>
                 ))}
               </select>
             </div>
@@ -268,7 +340,7 @@ export default function Opportunities() {
             }}
             className="w-full rounded-lg border-2 border-dashed border-slate-300 dark:border-slate-700 bg-slate-50 dark:bg-slate-800/50 px-3 py-2 text-xs font-semibold text-slate-600 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800 transition-all duration-200 mt-4"
           >
-            🗑️ Clear all filters
+            🗑️ {t("filters.clearFilters")}
           </button>
         </aside>
 
@@ -278,10 +350,10 @@ export default function Opportunities() {
           <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between bg-white dark:bg-slate-900 rounded-2xl p-6 border border-slate-200 dark:border-slate-800 shadow-lg">
             <div>
               <p className="text-slate-900 dark:text-white font-bold text-xl flex items-center gap-2">
-                <span>📋</span> Showing {sorted.length} of {opportunities.length} opportunities
+                <span>📋</span> {t("filters.allOpportunities")}: {sorted.length} / {opportunities.length}
               </p>
               <p className="text-slate-600 dark:text-slate-400 text-sm mt-1">
-                {sorted.length === 0 ? "Try adjusting your filters" : "Use quick filters below to narrow down further"}
+                {sorted.length === 0 ? t("home.findGoals") : t("home.verifiedDesc")}
               </p>
             </div>
             <div className="flex flex-wrap gap-2">
@@ -292,7 +364,7 @@ export default function Opportunities() {
                   onClick={() => setDeadline(option)}
                   className={`rounded-full px-5 py-2.5 text-sm font-semibold transition-all duration-200 ${deadline === option ? "bg-gradient-to-r from-blue-500 to-indigo-600 text-white shadow-lg" : "bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300 hover:bg-slate-200 dark:hover:bg-slate-700"}`}
                 >
-                  {option}
+                  {t(getDeadlineKey(option))}
                 </button>
               ))}
             </div>
@@ -310,9 +382,9 @@ export default function Opportunities() {
                   <div className="h-20 w-20 rounded-full bg-slate-200 dark:bg-slate-800 flex items-center justify-center">
                     <span className="text-4xl">🔍</span>
                   </div>
-                  <h3 className="text-2xl font-bold text-slate-900 dark:text-white">No opportunities found</h3>
+                  <h3 className="text-2xl font-bold text-slate-900 dark:text-white">{t("detail.notFound")}</h3>
                   <p className="text-slate-600 dark:text-slate-400 max-w-md text-lg">
-                    No opportunities match your active filters. Try clearing the search or changing categories.
+                    {t("home.findGoals")}
                   </p>
                   <button
                     onClick={() => {
@@ -324,7 +396,7 @@ export default function Opportunities() {
                     }}
                     className="mt-2 px-8 py-4 rounded-2xl bg-gradient-to-r from-blue-600 to-indigo-700 text-white font-bold hover:from-blue-700 hover:to-indigo-800 shadow-xl hover:shadow-2xl transition-all duration-300"
                   >
-                    ✨ Clear All Filters
+                    ✨ {t("filters.clearFilters")}
                   </button>
                 </div>
               </div>
