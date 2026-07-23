@@ -9,6 +9,9 @@ export default function OpportunityCard({ item, onDelete, showSave = true, showD
     setSaved(getFavorites().some((f) => f.id === item.id));
   }, [item.id]);
 
+  const daysLeft = Math.max(0, Math.ceil((new Date(item.deadline) - new Date()) / 86400000));
+  const isExpiringSoon = daysLeft <= 7;
+
   const toggleSave = () => {
     const updated = toggleFavorite(item);
     setSaved(updated.some((f) => f.id === item.id));

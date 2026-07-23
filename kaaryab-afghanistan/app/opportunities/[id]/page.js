@@ -1,7 +1,17 @@
-import { opportunities } from "@/data/opportunities";
+"use client";
+
+import { getStoredOpportunities } from "@/lib/storage";
+import Link from "next/link";
+import { useEffect, useState } from "react";
+import { isFavorite, toggleFavorite } from "@/lib/storage";
 
 export default function OpportunityDetail({ params }) {
-  const opportunity = opportunities.find(
+  const [opportunity, setOpportunity] = useState(null);
+  const [favorite, setFavorite] = useState(false);
+
+  useEffect(() => {
+    const list = getStoredOpportunities();
+    const found = list.find(
     (item) => item.id === params.id
   );
 

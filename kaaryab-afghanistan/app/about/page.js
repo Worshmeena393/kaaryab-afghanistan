@@ -1,76 +1,93 @@
 ﻿import Link from "next/link";
+import Hero from "@/components/Hero";
 
 export default function About() {
   return (
     <div className="space-y-12">
-      <section className="rounded-[2rem] bg-blue-600/10 dark:bg-slate-900/70 border border-blue-200 dark:border-slate-700 p-10 shadow-sm">
-        <div className="max-w-4xl mx-auto text-center">
-          <p className="text-sm uppercase tracking-[0.24em] font-semibold text-blue-700 dark:text-sky-300">About KaarYab Afghanistan</p>
-          <h1 className="mt-4 text-4xl md:text-5xl font-extrabold text-slate-900 dark:text-white">Bridging Afghan talent to meaningful opportunities.</h1>
-          <p className="mt-6 text-slate-600 dark:text-slate-300 text-lg leading-8">
-            KaarYab Afghanistan is a community-focused platform for students, young professionals, and learners who want access to jobs, internships, scholarships, and remote work opportunities.
-          </p>
-          <div className="mt-8 flex flex-col sm:flex-row items-center justify-center gap-4">
-            <Link href="/opportunities" className="inline-flex items-center justify-center rounded-full bg-blue-600 px-6 py-3 text-white shadow-lg shadow-blue-600/20 hover:bg-blue-700 transition">
-              Explore Opportunities
-            </Link>
-            <Link href="/add-opportunity" className="inline-flex items-center justify-center rounded-full border border-slate-300 bg-white px-6 py-3 text-slate-900 hover:bg-slate-100 transition dark:border-slate-700 dark:bg-slate-950 dark:text-slate-100 dark:hover:bg-slate-900">
-              Share an Opportunity
-            </Link>
-          </div>
-        </div>
-      </section>
+      <Hero
+        eyebrow="About KaarYab Afghanistan"
+        title="Bridging Afghan talent to meaningful opportunities."
+        description="KaarYab Afghanistan is a community-focused platform for students, young professionals, and learners who want access to jobs, internships, scholarships, and remote work opportunities."
+        primaryLabel="Explore Opportunities"
+        secondaryLabel="Share an Opportunity"
+        className="bg-blue-600/10 dark:bg-slate-900/70 border border-blue-200 dark:border-slate-700"
+      />
 
-      <section className="grid gap-6 xl:grid-cols-[1.2fr_0.9fr]">
-        <div className="space-y-6">
-          <div className="rounded-[1.5rem] bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 p-8 shadow-sm">
-            <h2 className="text-2xl font-bold text-slate-900 dark:text-white">Our mission</h2>
-            <p className="mt-4 text-slate-600 dark:text-slate-300 leading-7">
+      <section className="grid gap-8 lg:grid-cols-2">
+        <div className="flex flex-col gap-8">
+          <div className="rounded-xl bg-gradient-to-br from-blue-600 to-blue-800 text-white p-10 shadow-xl flex-1 flex flex-col">
+            <div className="flex items-center gap-4 mb-6">
+              <div className="flex h-16 w-16 items-center justify-center rounded-full bg-white/20 backdrop-blur">
+                <span className="text-3xl">🚀</span>
+              </div>
+              <h2 className="text-3xl font-bold">Our Mission</h2>
+            </div>
+            <p className="mt-4 text-blue-100 leading-relaxed text-lg">
               We empower Afghan youth by curating high-quality opportunities, simplifying discovery, and helping people save important roles for a stronger career journey.
             </p>
           </div>
 
-          <div className="rounded-[1.5rem] bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 p-8 shadow-sm">
-            <h2 className="text-2xl font-bold text-slate-900 dark:text-white">What we offer</h2>
-            <ul className="mt-5 space-y-3 text-slate-600 dark:text-slate-300 list-disc pl-5 leading-7">
-              <li>Curated job and internship listings across Afghanistan and remote-friendly roles.</li>
-              <li>Scholarship alerts for students seeking financial support and online certificates.</li>
-              <li>Saved favorites and easy access to the opportunities you care about.</li>
-              <li>Simple search, filters, and deadline tracking to stay ahead.</li>
-            </ul>
-          </div>
-        </div>
-
-        <div className="rounded-[1.5rem] bg-gradient-to-br from-sky-500 to-blue-700 text-white p-8 shadow-lg">
-          <h2 className="text-2xl font-bold">Our values</h2>
-          <div className="mt-6 space-y-4">
-            <div>
-              <h3 className="font-semibold text-lg">Trust</h3>
-              <p className="mt-2 text-slate-100/90">We present opportunities clearly so users can feel confident about their next step.</p>
-            </div>
-            <div>
-              <h3 className="font-semibold text-lg">Access</h3>
-              <p className="mt-2 text-slate-100/90">We make opportunity discovery easy, fast, and available to everyone in our community.</p>
-            </div>
-            <div>
-              <h3 className="font-semibold text-lg">Growth</h3>
-              <p className="mt-2 text-slate-100/90">We support personal and professional growth through real openings and learning pathways.</p>
+          <div className="rounded-xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 p-10 shadow-lg flex-1 flex flex-col">
+            <h2 className="text-2xl font-bold text-slate-900 dark:text-white mb-6">What We Offer</h2>
+            <div className="space-y-4 flex-1">
+              {[
+                { icon: "💼", title: "Curated Jobs & Internships", desc: "Across Afghanistan and remote-friendly roles" },
+                { icon: "🎓", title: "Scholarship Alerts", desc: "Financial support and online certificates" },
+                { icon: "⭐", title: "Saved Favorites", desc: "Easy access to opportunities you care about" },
+                { icon: "🔍", title: "Smart Search", desc: "Filters and deadline tracking to stay ahead" },
+              ].map((item, idx) => (
+                <div key={idx} className="flex items-start gap-4 p-4 rounded-xl bg-slate-50 dark:bg-slate-800/50">
+                  <span className="text-2xl flex-shrink-0">{item.icon}</span>
+                  <div>
+                    <h3 className="font-semibold text-slate-900 dark:text-white">{item.title}</h3>
+                    <p className="mt-1 text-slate-600 dark:text-slate-400 text-sm">{item.desc}</p>
+                  </div>
+                </div>
+              ))}
             </div>
           </div>
         </div>
-      </section>
 
-      <section className="grid gap-6 md:grid-cols-3">
-        {[
-          { title: "Opportunity types", value: "Jobs, internships, scholarships", accent: "bg-blue-600/10 text-blue-700 dark:bg-blue-500/15" },
-          { title: "Easy discovery", value: "Search filters + saved favorites", accent: "bg-emerald-600/10 text-emerald-700 dark:bg-emerald-500/15" },
-          { title: "Remote-ready", value: "Remote and online roles", accent: "bg-slate-600/10 text-slate-700 dark:bg-slate-500/15" },
-        ].map((card) => (
-          <div key={card.title} className="rounded-[1.5rem] bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 p-6 shadow-sm">
-            <p className={`text-sm font-semibold uppercase tracking-[0.24em] ${card.accent}`}>{card.title}</p>
-            <p className="mt-4 text-3xl font-bold text-slate-900 dark:text-white">{card.value}</p>
+        <div className="flex flex-col gap-8">
+          <div className="rounded-xl bg-gradient-to-br from-slate-700 to-slate-900 text-white p-10 shadow-xl flex-1 flex flex-col">
+            <h2 className="text-2xl font-bold mb-6">Our Values</h2>
+            <div className="space-y-5 flex-1">
+              {[
+                { icon: "🛡️", title: "Trust", desc: "We present opportunities clearly so users can feel confident about their next step." },
+                { icon: "🌐", title: "Access", desc: "We make opportunity discovery easy, fast, and available to everyone in our community." },
+                { icon: "📈", title: "Growth", desc: "We support personal and professional growth through real openings and learning pathways." },
+                { icon: "💡", title: "Innovation", desc: "We continuously improve our platform to better serve Afghan youth." },
+              ].map((item, idx) => (
+                <div key={idx} className="flex items-start gap-4">
+                  <div className="flex h-12 w-12 flex-shrink-0 items-center justify-center rounded-full bg-white/10 backdrop-blur">
+                    <span className="text-xl">{item.icon}</span>
+                  </div>
+                  <div>
+                    <h3 className="font-semibold text-lg">{item.title}</h3>
+                    <p className="mt-2 text-slate-300 leading-relaxed text-sm">{item.desc}</p>
+                  </div>
+                </div>
+              ))}
+            </div>
           </div>
-        ))}
+
+          <div className="rounded-xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 p-10 shadow-lg flex-1 flex flex-col">
+            <h2 className="text-2xl font-bold text-slate-900 dark:text-white mb-6">Our Impact</h2>
+            <div className="grid grid-cols-2 gap-4 flex-1 content-center">
+              {[
+                { value: "500+", label: "Opportunities Listed" },
+                { value: "1000+", label: "Community Members" },
+                { value: "50+", label: "Partner Organizations" },
+                { value: "24/7", label: "Platform Access" },
+              ].map((stat) => (
+                <div key={stat.label} className="text-center p-6 rounded-xl bg-slate-50 dark:bg-slate-800/50">
+                  <p className="text-4xl font-bold text-blue-600 dark:text-blue-400">{stat.value}</p>
+                  <p className="mt-2 text-sm text-slate-600 dark:text-slate-400 font-medium">{stat.label}</p>
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
       </section>
     </div>
   );

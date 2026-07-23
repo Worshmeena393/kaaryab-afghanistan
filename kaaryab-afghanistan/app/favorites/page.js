@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useMemo, useState } from "react";
+import Link from "next/link";
 import OpportunityCard from "@/components/OpportunityCard";
 import { clearFavorites, deleteFavorite, getFavorites } from "@/lib/storage";
 
@@ -43,44 +44,56 @@ export default function Favorites() {
   };
 
   return (
-    <div>
-      <div className="mb-8 rounded-3xl border border-slate-200 dark:border-slate-800 bg-white/90 dark:bg-slate-950/90 p-6 shadow-sm">
-        <h1 className="text-3xl font-bold text-slate-900 dark:text-white">Saved Opportunities</h1>
-        <p className="mt-2 text-slate-600 dark:text-slate-300">
-          Keep track of opportunities you want to revisit. Use search and sorting to organize your saved list.
-        </p>
+    <div className="space-y-12">
+      <div className="rounded-2xl bg-gradient-to-br from-purple-600 to-indigo-700 text-white p-10 shadow-xl">
+        <div className="flex flex-col gap-4 md:flex-row md:items-center md:justify-between">
+          <div>
+            <h1 className="text-4xl font-bold">Saved Opportunities</h1>
+            <p className="mt-3 text-purple-100 max-w-2xl text-lg">
+              Keep track of opportunities you want to revisit. Use search and sorting to organize your saved list.
+            </p>
+          </div>
+          <div className="flex items-center gap-3">
+            <div className="rounded-2xl bg-white/20 backdrop-blur px-6 py-4">
+              <p className="text-sm text-purple-100">Total Saved</p>
+              <p className="text-3xl font-bold mt-1">{favorites.length}</p>
+            </div>
+          </div>
+        </div>
+      </div>
 
-        <div className="mt-6 grid gap-3 md:grid-cols-[1fr_auto] md:items-end">
-          <div className="grid gap-3 sm:grid-cols-2">
-            <label className="space-y-2">
-              <span className="text-sm font-medium text-slate-700 dark:text-slate-300">Search favorites</span>
+      <div className="rounded-2xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 p-8 shadow-lg">
+        <div className="grid gap-6 md:grid-cols-[1fr_auto] md:items-end">
+          <div className="grid gap-4 sm:grid-cols-2">
+            <div>
+              <label className="block text-sm font-semibold text-slate-700 dark:text-slate-300 mb-2">Search favorites</label>
               <input
                 type="search"
                 value={search}
                 onChange={(event) => setSearch(event.target.value)}
                 placeholder="Search by title, organization, or location"
-                className="w-full rounded-2xl border border-slate-300 bg-slate-50 px-4 py-3 text-slate-900 outline-none transition focus:border-blue-500 dark:border-slate-700 dark:bg-slate-900 dark:text-slate-100"
+                className="w-full rounded-xl border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-800 px-4 py-3 text-slate-900 dark:text-slate-100 focus:ring-2 focus:ring-purple-500 focus:border-transparent transition"
               />
-            </label>
-            <label className="space-y-2">
-              <span className="text-sm font-medium text-slate-700 dark:text-slate-300">Sort by</span>
+            </div>
+            <div>
+              <label className="block text-sm font-semibold text-slate-700 dark:text-slate-300 mb-2">Sort by</label>
               <select
                 value={sort}
                 onChange={(event) => setSort(event.target.value)}
-                className="w-full rounded-2xl border border-slate-300 bg-white px-4 py-3 text-slate-900 outline-none transition focus:border-blue-500 dark:border-slate-700 dark:bg-slate-900 dark:text-slate-100"
+                className="w-full rounded-xl border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-800 px-4 py-3 text-slate-900 dark:text-slate-100 focus:ring-2 focus:ring-purple-500 focus:border-transparent transition"
               >
                 <option value="recent">Most recent</option>
                 <option value="oldest">Oldest favorites</option>
                 <option value="alphabetical">Title A → Z</option>
               </select>
-            </label>
+            </div>
           </div>
 
           {favorites.length > 0 && (
             <button
               type="button"
               onClick={clearAllFavorites}
-              className="rounded-2xl bg-red-500 px-5 py-3 text-sm font-semibold text-white shadow-sm transition hover:bg-red-600"
+              className="rounded-xl bg-red-500 px-6 py-3 text-sm font-semibold text-white shadow-md transition hover:bg-red-600"
             >
               Clear all saved
             </button>
@@ -89,12 +102,20 @@ export default function Favorites() {
       </div>
 
       {favorites.length === 0 ? (
-        <div className="rounded-3xl border border-dashed border-slate-300 bg-slate-100 p-10 text-center dark:border-slate-700 dark:bg-slate-900">
-          <p className="text-lg font-semibold text-slate-900 dark:text-white">No opportunities saved yet.</p>
-          <p className="mt-2 text-slate-600 dark:text-slate-400">Browse the opportunities page and tap Save to collect your favorites.</p>
+        <div className="rounded-2xl border-2 border-dashed border-slate-300 dark:border-slate-700 p-16 text-center bg-slate-50 dark:bg-slate-900/50">
+          <div className="flex flex-col items-center gap-4">
+            <div className="h-16 w-16 rounded-full bg-slate-200 dark:bg-slate-800 flex items-center justify-center">
+              <span className="text-3xl">⭐</span>
+            </div>
+            <h3 className="text-xl font-semibold text-slate-900 dark:text-white">No opportunities saved yet</h3>
+            <p className="text-slate-600 dark:text-slate-400 max-w-md">Browse the opportunities page and tap Save to collect your favorites.</p>
+            <Link href="/opportunities" className="mt-4 px-6 py-3 rounded-xl bg-purple-600 text-white font-medium hover:bg-purple-700 transition">
+              Browse Opportunities
+            </Link>
+          </div>
         </div>
       ) : (
-        <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+        <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
           {sortedFavorites.map((item) => (
             <OpportunityCard
               key={item.id}

@@ -48,33 +48,36 @@ export default function Dashboard() {
 
       <div className="grid gap-6 sm:grid-cols-2 xl:grid-cols-3">
         {[
-          { title: "Total opportunities", value: opportunities.length, color: "from-slate-100 to-slate-50 text-slate-900" },
-          { title: "Saved favorites", value: saved.length, color: "from-sky-100 to-sky-50 text-slate-900" },
-          { title: "Messages", value: messages.length, color: "from-emerald-100 to-emerald-50 text-slate-900" },
-          { title: "Jobs", value: stats.jobs, color: "from-blue-100 to-blue-50 text-slate-900" },
-          { title: "Internships", value: stats.internships, color: "from-purple-100 to-purple-50 text-slate-900" },
-          { title: "Scholarships", value: stats.scholarships, color: "from-yellow-100 to-yellow-50 text-slate-900" },
+          { title: "Total opportunities", value: opportunities.length, icon: "📋", color: "from-slate-100 to-slate-50 text-slate-900" },
+          { title: "Saved favorites", value: saved.length, icon: "⭐", color: "from-sky-100 to-sky-50 text-slate-900" },
+          { title: "Messages", value: messages.length, icon: "💬", color: "from-emerald-100 to-emerald-50 text-slate-900" },
+          { title: "Jobs", value: stats.jobs, icon: "💼", color: "from-blue-100 to-blue-50 text-slate-900" },
+          { title: "Internships", value: stats.internships, icon: "📈", color: "from-purple-100 to-purple-50 text-slate-900" },
+          { title: "Scholarships", value: stats.scholarships, icon: "🎓", color: "from-yellow-100 to-yellow-50 text-slate-900" },
         ].map((card) => (
-          <div key={card.title} className={`rounded-[1.75rem] bg-gradient-to-br ${card.color} p-6 shadow-sm border border-slate-200/80`}>
-            <p className="text-sm uppercase tracking-[0.2em]">{card.title}</p>
-            <p className="mt-4 text-3xl font-bold">{card.value}</p>
+          <div key={card.title} className={`rounded-2xl bg-gradient-to-br ${card.color} p-8 shadow-lg border border-slate-200/80`}>
+            <div className="flex items-center justify-between">
+              <p className="text-sm uppercase tracking-[0.2em] font-medium">{card.title}</p>
+              <span className="text-2xl">{card.icon}</span>
+            </div>
+            <p className="mt-4 text-4xl font-bold">{card.value}</p>
           </div>
         ))}
       </div>
 
-      <div className="grid gap-6 lg:grid-cols-2">
-        <section className="rounded-[2rem] bg-white dark:bg-slate-950 border border-slate-200 dark:border-slate-800 p-8 shadow-sm">
+      <div className="grid gap-8 lg:grid-cols-2">
+        <section className="rounded-2xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 p-10 shadow-lg">
           <div className="flex items-center justify-between gap-4">
             <div>
               <h2 className="text-2xl font-bold text-slate-900 dark:text-white">Upcoming deadlines</h2>
               <p className="mt-2 text-slate-600 dark:text-slate-400">Keep track of the next opportunities closing soon.</p>
             </div>
-            <span className="rounded-full bg-blue-100 text-blue-700 px-4 py-2 text-sm dark:bg-blue-900/40 dark:text-blue-200">Next 30 days</span>
+            <span className="rounded-full bg-blue-100 text-blue-700 px-4 py-2 text-sm font-medium dark:bg-blue-900/40 dark:text-blue-200">Next 30 days</span>
           </div>
           <div className="mt-8 space-y-4">
             {upcoming.length > 0 ? (
               upcoming.map((item) => (
-                <div key={item.id} className="rounded-3xl border border-slate-200 dark:border-slate-800 p-5 bg-slate-50 dark:bg-slate-900">
+                <div key={item.id} className="rounded-xl border border-slate-200 dark:border-slate-800 p-5 bg-slate-50 dark:bg-slate-800/50 hover:shadow-md transition">
                   <div className="flex items-start justify-between gap-4">
                     <div>
                       <p className="text-lg font-semibold text-slate-900 dark:text-white">{item.title}</p>
@@ -86,27 +89,40 @@ export default function Dashboard() {
                 </div>
               ))
             ) : (
-              <div className="rounded-3xl border border-dashed border-slate-300 dark:border-slate-700 p-8 text-center text-slate-500 dark:text-slate-400">
-                No deadlines in the next 30 days.
+              <div className="rounded-xl border-2 border-dashed border-slate-300 dark:border-slate-700 p-10 text-center text-slate-500 dark:text-slate-400 bg-slate-50 dark:bg-slate-900/50">
+                <div className="flex flex-col items-center gap-3">
+                  <span className="text-3xl">📅</span>
+                  <p className="font-medium">No deadlines in the next 30 days.</p>
+                </div>
               </div>
             )}
           </div>
         </section>
 
-        <section className="rounded-[2rem] bg-white dark:bg-slate-950 border border-slate-200 dark:border-slate-800 p-8 shadow-sm">
+        <section className="rounded-2xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 p-10 shadow-lg">
           <h2 className="text-2xl font-bold text-slate-900 dark:text-white">Insights & actions</h2>
           <p className="mt-2 text-slate-600 dark:text-slate-400">Use the dashboard to review saved items, respond to messages, or add new opportunities.</p>
 
           <div className="mt-8 grid gap-4">
-            <div className="rounded-3xl border border-slate-200 dark:border-slate-800 p-5 bg-slate-50 dark:bg-slate-900">
-              <p className="text-sm uppercase tracking-[0.2em] text-slate-500 dark:text-slate-400">Saved items</p>
-              <p className="mt-3 text-3xl font-bold text-slate-900 dark:text-white">{saved.length}</p>
-              <p className="mt-2 text-slate-600 dark:text-slate-300">Items you marked as favorites are available across the platform.</p>
+            <div className="rounded-xl border border-slate-200 dark:border-slate-800 p-6 bg-slate-50 dark:bg-slate-800/50">
+              <div className="flex items-center justify-between">
+                <div>
+                  <p className="text-sm uppercase tracking-[0.2em] text-slate-500 dark:text-slate-400 font-medium">Saved items</p>
+                  <p className="mt-3 text-4xl font-bold text-slate-900 dark:text-white">{saved.length}</p>
+                </div>
+                <span className="text-4xl">⭐</span>
+              </div>
+              <p className="mt-3 text-slate-600 dark:text-slate-300">Items you marked as favorites are available across the platform.</p>
             </div>
-            <div className="rounded-3xl border border-slate-200 dark:border-slate-800 p-5 bg-slate-50 dark:bg-slate-900">
-              <p className="text-sm uppercase tracking-[0.2em] text-slate-500 dark:text-slate-400">Messages</p>
-              <p className="mt-3 text-3xl font-bold text-slate-900 dark:text-white">{messages.length}</p>
-              <p className="mt-2 text-slate-600 dark:text-slate-300">Review recent messages and applicant notes from the community.</p>
+            <div className="rounded-xl border border-slate-200 dark:border-slate-800 p-6 bg-slate-50 dark:bg-slate-800/50">
+              <div className="flex items-center justify-between">
+                <div>
+                  <p className="text-sm uppercase tracking-[0.2em] text-slate-500 dark:text-slate-400 font-medium">Messages</p>
+                  <p className="mt-3 text-4xl font-bold text-slate-900 dark:text-white">{messages.length}</p>
+                </div>
+                <span className="text-4xl">💬</span>
+              </div>
+              <p className="mt-3 text-slate-600 dark:text-slate-300">Review recent messages and applicant notes from the community.</p>
             </div>
           </div>
         </section>

@@ -1,58 +1,46 @@
 import Link from "next/link";
+import Hero from "@/components/Hero";
 
 export default function Home() {
   return (
     <div className="space-y-14">
-      <section className="rounded-[2rem] bg-blue-50 dark:bg-slate-900/80 border border-blue-100 dark:border-slate-700 p-10 md:p-16 shadow-sm">
-        <div className="max-w-4xl mx-auto text-center space-y-6">
-          <p className="text-sm font-semibold uppercase tracking-[0.24em] text-blue-600 dark:text-sky-400">
-            KaarYab Afghanistan
-          </p>
-          <h1 className="text-5xl md:text-6xl font-extrabold text-slate-900 dark:text-slate-50">
-            Discover opportunities for Afghan youth
-          </h1>
-          <p className="mx-auto max-w-3xl text-lg text-slate-600 dark:text-slate-300">
-            KaarYab Afghanistan helps students, graduates, and young professionals find remote work, internships, scholarships, and skill-building programs in one place.
-          </p>
+      <Hero
+        eyebrow="KaarYab Afghanistan"
+        title="Discover opportunities for Afghan youth"
+        description="KaarYab Afghanistan helps students, graduates, and young professionals find remote work, internships, scholarships, and skill-building programs in one place."
+        className="bg-blue-50 dark:bg-slate-900/80 border border-blue-100 dark:border-slate-700"
+      />
 
-          <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
-            <Link href="/opportunities" className="inline-flex items-center justify-center rounded-full bg-blue-600 px-8 py-3 text-white shadow-lg shadow-blue-600/10 hover:bg-blue-700 transition">
-              Browse Opportunities
-            </Link>
-            <Link href="/add-opportunity" className="inline-flex items-center justify-center rounded-full border border-slate-300 bg-white px-8 py-3 text-slate-900 hover:bg-slate-100 transition dark:border-slate-700 dark:bg-slate-950 dark:text-slate-100 dark:hover:bg-slate-900">
-              Add Opportunity
-            </Link>
+      <section className="grid gap-8 lg:grid-cols-2">
+        <div className="rounded-[2rem] bg-gradient-to-br from-blue-600 to-indigo-700 p-10 text-white shadow-xl">
+          <div className="flex items-center gap-3 mb-4">
+            <div className="flex h-12 w-12 items-center justify-center rounded-full bg-white/20 backdrop-blur">
+              <span className="text-2xl">🎯</span>
+            </div>
+            <h3 className="text-xl font-semibold">Find Your Path</h3>
           </div>
+          <p className="text-blue-100 leading-relaxed">Discover curated opportunities tailored for Afghan youth. From remote jobs to scholarships, we connect you with roles that match your skills and aspirations.</p>
+          <Link href="/opportunities" className="mt-6 inline-flex items-center gap-2 rounded-full bg-white/20 px-6 py-3 font-medium backdrop-blur transition hover:bg-white/30">
+            Browse Opportunities
+            <svg className="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" /></svg>
+          </Link>
         </div>
-      </section>
 
-      <section className="grid gap-6 md:grid-cols-3">
-        {[
-          { title: "Jobs", description: "Browse trusted full-time and part-time roles.", icon: "💼" },
-          { title: "Scholarships", description: "Find funding and learning support programs.", icon: "🎓" },
-          { title: "Internships", description: "Gain experience through real-world training.", icon: "📈" },
-        ].map((feature) => (
-          <div key={feature.title} className="rounded-[1.5rem] border border-slate-200 bg-white p-8 shadow-sm transition hover:shadow-lg dark:border-slate-800 dark:bg-slate-900">
-            <div className="text-4xl">{feature.icon}</div>
-            <h2 className="mt-4 text-2xl font-bold text-slate-900 dark:text-slate-100">{feature.title}</h2>
-            <p className="mt-3 text-slate-600 dark:text-slate-300">{feature.description}</p>
+        <div className="rounded-[2rem] bg-gradient-to-br from-emerald-500 to-teal-600 p-10 text-white shadow-xl">
+          <div className="flex items-center gap-3 mb-4">
+            <div className="flex h-12 w-12 items-center justify-center rounded-full bg-white/20 backdrop-blur">
+              <span className="text-2xl">🤝</span>
+            </div>
+            <h3 className="text-xl font-semibold">Share Opportunities</h3>
           </div>
-        ))}
-      </section>
-
-      <section className="rounded-[1.5rem] border border-slate-200 bg-white p-10 shadow-sm dark:border-slate-800 dark:bg-slate-900">
-        <div className="md:flex md:items-center md:justify-between gap-6">
-          <div>
-            <h2 className="text-3xl font-bold text-slate-900 dark:text-slate-50">Ready to build your future?</h2>
-            <p className="mt-3 text-slate-600 dark:text-slate-300 max-w-2xl">
-              Save favorites, submit new opportunities, and explore curated openings for Afghanistan and online work.
-            </p>
-          </div>
-          <Link href="/opportunities" className="mt-6 inline-flex items-center justify-center rounded-full bg-green-600 px-8 py-3 text-white hover:bg-green-700 transition md:mt-0">
-            Start exploring
+          <p className="text-emerald-100 leading-relaxed">Know about a job, internship, or scholarship? Help our community grow by sharing opportunities and supporting fellow Afghans in their career journey.</p>
+          <Link href="/add-opportunity" className="mt-6 inline-flex items-center gap-2 rounded-full bg-white/20 px-6 py-3 font-medium backdrop-blur transition hover:bg-white/30">
+            Submit Opportunity
+            <svg className="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 4v16m8-8H4" /></svg>
           </Link>
         </div>
       </section>
+
     </div>
   );
 }
