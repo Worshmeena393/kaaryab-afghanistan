@@ -1,10 +1,9 @@
 "use client";
 
-import { getStoredOpportunities, updateOpportunity, deleteOpportunity } from "@/lib/storage";
+import { getStoredOpportunities, updateOpportunity, deleteOpportunity, getOpportunityById, isFavorite, toggleFavorite } from "@/lib/storage";
 import Link from "next/link";
 import { useRouter, useParams } from "next/navigation";
 import { useEffect, useState } from "react";
-import { isFavorite, toggleFavorite } from "@/lib/storage";
 import OpportunityForm from "@/components/OpportunityForm";
 import { ConfirmModal } from "@/components/Modal";
 import { useTranslation } from "@/lib/i18n";
@@ -71,8 +70,7 @@ export default function OpportunityDetail() {
   const { t } = useTranslation();
 
   useEffect(() => {
-    const list = getStoredOpportunities();
-    const found = list.find((item) => item.id === params.id);
+    const found = getOpportunityById(params.id);
     setOpportunity(found || null);
     if (found) {
       setFavorite(isFavorite(found.id));

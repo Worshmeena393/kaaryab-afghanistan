@@ -1,6 +1,8 @@
 "use client";
 
-import { useMemo, useState, useEffect } from "react";
+export const dynamic = "force-dynamic";
+
+import { useMemo, useState, useEffect, Suspense } from "react";
 import { useSearchParams } from "next/navigation";
 import { getStoredOpportunities, deleteOpportunity } from "@/lib/storage";
 import OpportunityCard from "@/components/OpportunityCard";
@@ -21,7 +23,7 @@ const getDeadlineKey = (deadline) => {
   }
 };
 
-export default function Opportunities() {
+function OpportunitiesContent() {
   const searchParams = useSearchParams();
   const { t } = useTranslation();
   const [opportunities, setOpportunities] = useState(getStoredOpportunities());
@@ -203,5 +205,32 @@ export default function Opportunities() {
         </div>
       </div>
     </div>
+  );
+}
+
+function OpportunitiesLoading() {
+  return (
+    <div className="space-y-12">
+      <div className="relative rounded-3xl overflow-hidden h-64 sm:h-80 bg-gradient-to-br from-blue-600 via-indigo-600 to-violet-700 animate-pulse" />
+      <div className="grid gap-6 xl:grid-cols-[320px_1fr] items-start">
+        <div className="h-[520px] rounded-3xl bg-slate-200 dark:bg-slate-800 animate-pulse" />
+        <div className="space-y-8">
+          <div className="h-32 rounded-2xl bg-slate-200 dark:bg-slate-800 animate-pulse" />
+          <div className="grid gap-6 md:grid-cols-2 xl:grid-cols-3">
+            {Array.from({ length: 6 }).map((_, i) => (
+              <div key={i} className="h-72 rounded-3xl bg-slate-200 dark:bg-slate-800 animate-pulse" />
+            ))}
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+export default function OpportunitiesPage() {
+  return (
+    <Suspense fallback={<OpportunitiesLoading />}>
+      <OpportunitiesContent />
+    </Suspense>
   );
 }

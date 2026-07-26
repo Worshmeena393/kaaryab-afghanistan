@@ -4,7 +4,6 @@ const STORAGE_KEY = "kaarYab-opportunities";
 const FAVORITES_KEY = "kaarYab-favorites";
 const MESSAGES_KEY = "kaarYab-messages";
 
-// Helper to format date as YYYY-MM-DD
 const formatDate = (dateStr) => {
   if (!dateStr) return new Date(Date.now() + 30 * 24 * 60 * 60 * 1000).toISOString().split('T')[0];
   const date = new Date(dateStr);
@@ -17,29 +16,56 @@ const formatDate = (dateStr) => {
   return `${year}-${month}-${day}`;
 };
 
+const safeRead = (key, fallback) => {
+  if (typeof window === "undefined") return fallback;
+  try {
+    const raw = localStorage.getItem(key);
+    if (!raw) return fallback;
+    const parsed = JSON.parse(raw);
+    return Array.isArray(parsed) ? parsed : fallback;
+  } catch (err) {
+    console.warn(`[storage] Failed to parse ${key}, resetting.`, err);
+    try {
+      localStorage.removeItem(key);
+    } catch {
+      /* noop */
+    }
+    return fallback;
+  }
+};
+
+const safeWrite = (key, value) => {
+  if (typeof window === "undefined") return;
+  try {
+    localStorage.setItem(key, JSON.stringify(value));
+  } catch (err) {
+    console.warn(`[storage] Failed to write ${key}.`, err);
+  }
+};
+
+const normalizeId = (id) => (id == null ? id : String(id));
+
 export function getStoredOpportunities() {
   if (typeof window === "undefined") return opportunities;
 
-  const stored = JSON.parse(localStorage.getItem(STORAGE_KEY) || "null");
+  const stored = safeRead(STORAGE_KEY, null);
 
   if (!stored) {
-    localStorage.setItem(STORAGE_KEY, JSON.stringify(opportunities));
+    safeWrite(STORAGE_KEY, opportunities);
     return opportunities;
   }
 
-  // Create a map of default items for easy lookup
-  const defaultMap = new Map(opportunities.map((item) => [item.id, item]));
+  const defaultMap = new Map(opportunities.map((item) => [normalizeId(item.id), item]));
 
-  // Migrate stored items: merge with defaults to ensure all fields exist
   const migratedStored = stored.map((storedItem) => {
-    const defaultItem = defaultMap.get(storedItem.id);
+    const normalizedStoredId = normalizeId(storedItem.id);
+    const defaultItem = normalizedStoredId != null ? defaultMap.get(normalizedStoredId) : undefined;
     let mergedItem = storedItem;
     if (defaultItem) {
-      // Merge stored item with defaults, preserving user edits
       mergedItem = { ...defaultItem, ...storedItem };
     }
-    // Ensure all required fields exist, even for user-added items
     return {
+      id: normalizedStoredId ?? (defaultItem && normalizeId(defaultItem.id)) ?? String(Date.now() + Math.random()),
       title: "Untitled Opportunity",
       organization: "Unknown Organization",
       category: "Job",
@@ -55,29 +81,36 @@ export function getStoredOpportunities() {
   });
 
   const storedIds = new Set(migratedStored.map((item) => item.id));
-  const missingDefaults = opportunities.filter((item) => !storedIds.has(item.id));
+  const missingDefaults = opportunities.filter((item) => !storedIds.has(normalizeId(item.id)));
 
   const updated = [...migratedStored, ...missingDefaults];
-  localStorage.setItem(STORAGE_KEY, JSON.stringify(updated));
+  safeWrite(STORAGE_KEY, updated);
   return updated;
 }
 
 export function saveOpportunities(list) {
-  if (typeof window === "undefined") return;
-  localStorage.setItem(STORAGE_KEY, JSON.stringify(list));
+  safeWrite(STORAGE_KEY, list);
+}
+
+export function getOpportunityById(id) {
+  const targetId = normalizeId(id);
+  const list = getStoredOpportunities();
+  return list.find((item) => normalizeId(item.id) === targetId) || null;
 }
 
 export function addOpportunity(entry) {
   const current = getStoredOpportunities();
-  const updated = [entry, ...current];
+  const enriched = { ...entry, id: normalizeId(entry.id) ?? crypto.randomUUID?.() ?? String(Date.now() + Math.random()) };
+  const updated = [enriched, ...current];
   saveOpportunities(updated);
   return updated;
 }
 
 export function updateOpportunity(updatedItem) {
   const current = getStoredOpportunities();
+  const targetId = normalizeId(updatedItem.id);
   const updated = current.map((item) =>
-    item.id === updatedItem.id ? updatedItem : item
+    normalizeId(item.id) === targetId ? { ...updatedItem, id: targetId } : item
   );
   saveOpportunities(updated);
   return updated;
@@ -85,67 +118,103 @@ export function updateOpportunity(updatedItem) {
 
 export function deleteOpportunity(id) {
   const current = getStoredOpportunities();
-  const updated = current.filter((item) => item.id !== id);
+  const targetId = normalizeId(id);
+  const updated = current.filter((item) => normalizeId(item.id) !== targetId);
   saveOpportunities(updated);
   return updated;
 }
 
 export function getFavorites() {
   if (typeof window === "undefined") return [];
-  return JSON.parse(localStorage.getItem(FAVORITES_KEY) || "[]");
+  return safeRead(FAVORITES_KEY, []);
 }
 
 export function toggleFavorite(item) {
   if (typeof window === "undefined") return [];
   const list = getFavorites();
-  const exists = list.some((favorite) => favorite.id === item.id);
-  const updated = exists ? list.filter((favorite) => favorite.id !== item.id) : [...list, item];
-  localStorage.setItem(FAVORITES_KEY, JSON.stringify(updated));
+  const targetId = normalizeId(item.id);
+  const exists = list.some((favorite) => normalizeId(favorite.id) === targetId);
+  const updated = exists
+    ? list.filter((favorite) => normalizeId(favorite.id) !== targetId)
+    : [{ ...item, id: targetId }, ...list];
+  safeWrite(FAVORITES_KEY, updated);
   return updated;
 }
 
 export function deleteFavorite(id) {
   if (typeof window === "undefined") return [];
   const list = getFavorites();
-  const updated = list.filter((favorite) => favorite.id !== id);
-  localStorage.setItem(FAVORITES_KEY, JSON.stringify(updated));
+  const targetId = normalizeId(id);
+  const updated = list.filter((favorite) => normalizeId(favorite.id) !== targetId);
+  safeWrite(FAVORITES_KEY, updated);
   return updated;
 }
 
 export function clearFavorites() {
   if (typeof window === "undefined") return [];
-  localStorage.removeItem(FAVORITES_KEY);
+  try {
+    localStorage.removeItem(FAVORITES_KEY);
+  } catch {
+    /* noop */
+  }
   return [];
 }
 
 export function isFavorite(id) {
   if (typeof window === "undefined") return false;
-  return getFavorites().some((item) => item.id === id);
+  const targetId = normalizeId(id);
+  return getFavorites().some((item) => normalizeId(item.id) === targetId);
 }
 
 export function getMessages() {
   if (typeof window === "undefined") return [];
-  return JSON.parse(localStorage.getItem(MESSAGES_KEY) || "[]");
+  return safeRead(MESSAGES_KEY, []);
 }
 
 export function saveMessage(message) {
   if (typeof window === "undefined") return [];
   const current = getMessages();
-  const updated = [message, ...current];
-  localStorage.setItem(MESSAGES_KEY, JSON.stringify(updated));
+  const updated = [
+    { ...message, id: message.id ?? String(Date.now() + Math.random()) },
+    ...current,
+  ];
+  safeWrite(MESSAGES_KEY, updated);
   return updated;
 }
 
 export function deleteMessage(id) {
   if (typeof window === "undefined") return [];
   const list = getMessages();
-  const updated = list.filter((message) => message.id !== id);
-  localStorage.setItem(MESSAGES_KEY, JSON.stringify(updated));
+  const targetId = normalizeId(id);
+  const updated = list.filter((message) => normalizeId(message.id) !== targetId);
+  safeWrite(MESSAGES_KEY, updated);
   return updated;
 }
 
 export function clearMessages() {
   if (typeof window === "undefined") return [];
-  localStorage.removeItem(MESSAGES_KEY);
+  try {
+    localStorage.removeItem(MESSAGES_KEY);
+  } catch {
+    /* noop */
+  }
   return [];
+}
+
+export function getTheme() {
+  if (typeof window === "undefined") return "light";
+  try {
+    return localStorage.getItem("kaarYab-theme") || "light";
+  } catch {
+    return "light";
+  }
+}
+
+export function saveTheme(theme) {
+  if (typeof window === "undefined") return;
+  try {
+    localStorage.setItem("kaarYab-theme", theme);
+  } catch {
+    /* noop */
+  }
 }
