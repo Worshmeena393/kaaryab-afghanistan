@@ -47,6 +47,24 @@ select:focus {
   box-shadow: 0 0 0 2px rgba(59,130,246,0.2);
 }
 
+input[type="date"] {
+  position: relative;
+}
+
+input[type="date"]::-webkit-calendar-picker-indicator {
+  position: absolute;
+  inset: 0;
+  width: auto;
+  height: auto;
+  cursor: pointer;
+  background: transparent;
+  opacity: 0;
+}
+
+input[type="date"]::-moz-calendar-picker-indicator {
+  cursor: pointer;
+}
+
 .card {
   background: white;
   border-radius: 12px;

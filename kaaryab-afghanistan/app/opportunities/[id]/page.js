@@ -6,6 +6,7 @@ import { useRouter, useParams } from "next/navigation";
 import { useEffect, useState } from "react";
 import { isFavorite, toggleFavorite } from "@/lib/storage";
 import OpportunityForm from "@/components/OpportunityForm";
+import { ConfirmModal } from "@/components/Modal";
 import { useTranslation } from "@/lib/i18n";
 
 // Get category color (same as OpportunityCard)
@@ -65,6 +66,7 @@ export default function OpportunityDetail() {
   const [opportunity, setOpportunity] = useState(null);
   const [favorite, setFavorite] = useState(false);
   const [editing, setEditing] = useState(false);
+  const [confirmDelete, setConfirmDelete] = useState(false);
   const router = useRouter();
   const { t } = useTranslation();
 
@@ -106,10 +108,13 @@ export default function OpportunityDetail() {
   };
 
   const handleDelete = () => {
-    if (window.confirm(t("detail.confirmDelete"))) {
-      deleteOpportunity(opportunity.id);
-      router.push("/opportunities");
-    }
+    setConfirmDelete(true);
+  };
+
+  const handleConfirmDelete = () => {
+    deleteOpportunity(opportunity.id);
+    setConfirmDelete(false);
+    router.push("/opportunities");
   };
 
   if (editing) {
@@ -157,6 +162,16 @@ export default function OpportunityDetail() {
 
   return (
     <div className="space-y-10 max-w-6xl mx-auto pt-4">
+      <ConfirmModal
+        isOpen={confirmDelete}
+        onCancel={() => setConfirmDelete(false)}
+        onConfirm={handleConfirmDelete}
+        title={t("detail.delete")}
+        description={t("detail.confirmDelete")}
+        confirmLabel={t("detail.delete")}
+        cancelLabel={t("form.cancel")}
+        tone="danger"
+      />
       {/* Hero Header */}
       <div className="relative rounded-3xl overflow-hidden bg-gradient-to-br from-blue-600 via-indigo-600 to-violet-700">
         {/* Decorative blobs */}

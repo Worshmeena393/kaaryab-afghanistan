@@ -94,6 +94,7 @@
     "clearFilters": "Clear all filters",
     "search": "Search",
     "location": "Location",
+    "locationPlaceholder": "Kabul, Remote, Online...",
     "deadline": "Deadline",
     "sortBy": "Sort By",
     "next14Days": "Next 14 days",
@@ -134,13 +135,24 @@
     "descriptionLabel": "Description",
     "descriptionPlaceholder": "Describe the opportunity...",
     "requirementsLabel": "Requirements",
-    "requirementsPlaceholder": "Add a requirement (press Enter)",
+    "requirementsPlaceholder": "e.g., React, HTML/CSS, GitHub (comma separated)",
     "applyLinkLabel": "Apply Link",
     "applyLinkPlaceholder": "e.g., https://example.com/apply",
     "tagsLabel": "Tags",
-    "tagsPlaceholder": "Add a tag (press Enter)",
+    "tagsPlaceholder": "e.g., React, Next.js (comma separated)",
     "saveOpportunity": "Save Opportunity",
-    "cancel": "Cancel"
+    "cancel": "Cancel",
+    "commaSeparated": "Separate with commas.",
+    "errTitleMin": "Title must be at least 3 characters long.",
+    "errOrgMin": "Organization must be at least 2 characters long.",
+    "errCategoryReq": "Please select a category.",
+    "errLocationMin": "Location must be at least 2 characters long.",
+    "errTypeReq": "Please select a work type.",
+    "errDeadlineReq": "Please set a deadline.",
+    "errDeadlineInvalid": "Please enter a valid date.",
+    "errDescMin": "Description must be at least 10 characters long.",
+    "errReqMin": "Please add at least one requirement.",
+    "errLinkMin": "Please enter a valid link."
   },
   "about": {
     "title": "About KaarYab Afghanistan",
@@ -221,6 +233,7 @@
   },
   "footer": {
     "copyright": "© 2026 KaarYab Afghanistan",
-    "note": "Note: This website uses Demo Data for educational purposes."
+    "note": "Note: This website uses Demo Data for educational purposes.",
+    "tagline": "KaarYab Afghanistan connects Afghan youth with verified jobs, internships, scholarships, and training opportunities in one trusted place."
   }
 }

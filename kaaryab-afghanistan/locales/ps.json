@@ -94,6 +94,7 @@
     "clearFilters": "ټول فلټرونه پاک کړئ",
     "search": "لټون",
     "location": "موقعیت",
+    "locationPlaceholder": "کابل، لرې، آنلاین...",
     "deadline": "آخری مهلت",
     "sortBy": "د اندازې کولو ډول",
     "next14Days": "بلې 14 ورځې",
@@ -134,11 +135,22 @@
     "descriptionLabel": "توضیحات",
     "descriptionPlaceholder": "فرصت تشریح کړئ...",
     "requirementsLabel": "اړتیاوې",
-    "requirementsPlaceholder": "یو اړتیا اضافه کړئ (Enter کلیک کړئ)",
+    "requirementsPlaceholder": "مثال: ری‌اکت، HTML/CSS، ګیتهاب (کاما سره جدا کړئ)",
     "applyLinkLabel": "د غوښتنې لینک",
     "applyLinkPlaceholder": "مثال: https://example.com/apply",
     "tagsLabel": "ټاګونه",
-    "tagsPlaceholder": "یو ټاګ اضافه کړئ (Enter کلیک کړئ)",
+    "tagsPlaceholder": "مثال: ری‌اکت، نکست‌جی‌اس (کاما سره جدا کړئ)",
+    "commaSeparated": "کاما سره جدا کړئ.",
+    "errTitleMin": "سرلیک باید لږترلږه 3 حروف وي.",
+    "errOrgMin": "سازمان باید لږترلږه 2 حروف وي.",
+    "errCategoryReq": "لطفاً کټګورۍ وټاکئ.",
+    "errLocationMin": "موقعیت باید لږترلږه 2 حروف وي.",
+    "errTypeReq": "لطفاً د کار ډول وټاکئ.",
+    "errDeadlineReq": "لطفاً آخری مهلت ټاکئ.",
+    "errDeadlineInvalid": "لطفاً سم نیټه ولیکئ.",
+    "errDescMin": "توضیحات باید لږترلږه 10 حروف وي.",
+    "errReqMin": "لطفاً لږترلږه یو اړتیا اضافه کړئ.",
+    "errLinkMin": "لطفاً سم لینک ولیکئ.",
     "saveOpportunity": "فرصت ساتل",
     "cancel": "لغو"
   },
@@ -221,6 +233,7 @@
   },
   "footer": {
     "copyright": "© 2026 کار یاب افغانستان",
-    "note": "نکته: دا ویب پاڼه د ښوونې اهدافو لپاره نمونې ډاټا کاروي."
+    "note": "نکته: دا ویب پاڼه د ښوونې اهدافو لپاره نمونې ډاټا کاروي.",
+    "tagline": "کار یاب افغانستان افغان ځوانانو ته د تصدیق شويو دندو، انټرنشپونو، بورسیو او روزنیزو فرصتونو سره په یو باوري ځای کې اړیکه ونیسي."
   }
 }
