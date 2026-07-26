@@ -292,7 +292,7 @@ Dark Mode View
 
 Vercel Deployment:
 
-https://kaaryab-afghanistan-nu.vercel.app/
+https://kaaryab-afghanistan-theta.vercel.app/
 
 
 🔗 GitHub Repository
