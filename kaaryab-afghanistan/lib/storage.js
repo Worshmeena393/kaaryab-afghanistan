@@ -45,6 +45,9 @@ const safeWrite = (key, value) => {
 
 const normalizeId = (id) => (id == null ? id : String(id));
 
+const SEED_ID_SET = new Set(opportunities.map((item) => normalizeId(item.id)));
+const isSeedId = (id) => SEED_ID_SET.has(normalizeId(id));
+
 export function getStoredOpportunities() {
   if (typeof window === "undefined") return opportunities;
 
@@ -60,24 +63,25 @@ export function getStoredOpportunities() {
   const migratedStored = stored.map((storedItem) => {
     const normalizedStoredId = normalizeId(storedItem.id);
     const defaultItem = normalizedStoredId != null ? defaultMap.get(normalizedStoredId) : undefined;
-    let mergedItem = storedItem;
-    if (defaultItem) {
-      mergedItem = { ...defaultItem, ...storedItem };
-    }
-    return {
+    const mergedBase = defaultItem ? { ...defaultItem, ...storedItem } : storedItem;
+    const base = {
       id: normalizedStoredId ?? (defaultItem && normalizeId(defaultItem.id)) ?? String(Date.now() + Math.random()),
       title: "Untitled Opportunity",
       organization: "Unknown Organization",
       category: "Job",
       location: "Remote",
       type: "Remote",
-      deadline: formatDate(mergedItem.deadline),
+      deadline: formatDate(mergedBase.deadline),
       description: "No description provided.",
       requirements: [],
       applyLink: "https://example.com/apply",
       tags: [],
-      ...mergedItem,
+      ...mergedBase,
     };
+    if (isSeedId(base.id) && defaultItem) {
+      base.deadline = defaultItem.deadline;
+    }
+    return base;
   });
 
   const storedIds = new Set(migratedStored.map((item) => item.id));
