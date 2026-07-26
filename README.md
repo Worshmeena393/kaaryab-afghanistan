@@ -181,41 +181,13 @@ The application includes light and dark theme support.
 
 # 🖥️ Screenshots
 
-## Home Page
+The template contains screenshots of all pages displayed on mobile, laptop, and iPad devices.
 
-![Home Page](./screenshots/home.png)
 
----
 
-## Opportunities Page
 
-![Opportunities Page](./screenshots/opportunities.png)
 
----
 
-## Opportunity Details Page
-
-![Details Page](./screenshots/details.png)
-
----
-
-## Dashboard
-
-![Dashboard](./screenshots/dashboard.png)
-
----
-
-## Add Opportunity
-
-![Add Opportunity](./screenshots/add-opportunity.png)
-
----
-
-## Favorites
-
-![Favorites](./screenshots/favorites.png)
-
----
 
 # 🛠️ Technologies Used
 
