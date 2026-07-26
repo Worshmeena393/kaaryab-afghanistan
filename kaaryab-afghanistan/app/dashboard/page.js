@@ -123,28 +123,28 @@ export default function Dashboard() {
   }, [opportunities]);
 
   return (
-    <div className="space-y-10 max-w-6xl mx-auto">
-      <div className="rounded-[2rem] bg-gradient-to-r from-sky-600 to-blue-700 text-white p-10 shadow-lg">
+    <div className="space-y-8 md:space-y-10 max-w-6xl mx-auto">
+      <div className="rounded-[2rem] bg-gradient-to-r from-sky-600 to-blue-700 text-white p-6 sm:p-8 md:p-10 shadow-lg">
         <div className="flex flex-col gap-4 md:flex-row md:items-center md:justify-between">
           <div>
             <p className="uppercase tracking-[0.3em] text-sm text-sky-100/80">{t("dashboard.title")}</p>
-            <h1 className="mt-3 text-4xl font-extrabold">{t("dashboard.yourOpportunityOverview")}</h1>
-            <p className="mt-4 max-w-2xl text-slate-100/90">{t("dashboard.subtitle")}</p>
+            <h1 className="mt-2 sm:mt-3 text-3xl sm:text-4xl font-extrabold">{t("dashboard.yourOpportunityOverview")}</h1>
+            <p className="mt-3 max-w-2xl text-slate-100/90">{t("dashboard.subtitle")}</p>
           </div>
-          <Link href="/add-opportunity" className="inline-flex items-center justify-center rounded-full bg-white/10 px-6 py-3 text-white ring-1 ring-white/30 hover:bg-white/20 transition">
+          <Link href="/add-opportunity" className="inline-flex items-center justify-center rounded-full bg-white/10 px-5 py-3 text-white ring-1 ring-white/30 hover:bg-white/20 transition min-h-[44px]">
             {t("nav.addOpportunity")}
           </Link>
         </div>
       </div>
 
       {loading ? (
-        <div className="grid gap-6 sm:grid-cols-2 xl:grid-cols-3">
+        <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
           {Array.from({ length: 6 }).map((_, i) => (
-            <div key={i} className="h-36 rounded-3xl bg-slate-200/60 dark:bg-slate-800/60 animate-pulse" />
+            <div key={i} className="h-32 sm:h-36 rounded-3xl bg-slate-200/60 dark:bg-slate-800/60 animate-pulse" />
           ))}
         </div>
       ) : (
-        <div className="grid gap-6 sm:grid-cols-2 xl:grid-cols-3">
+        <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
           <DashboardCard title={t("dashboard.totalOpportunities")} value={opportunities.length} icon={totalIcon} gradient="from-blue-500 via-blue-600 to-indigo-700" />
           <DashboardCard title={t("dashboard.yourFavorites")} value={saved.length} icon={favIcon} gradient="from-pink-500 via-rose-500 to-red-600" />
           <DashboardCard title={t("dashboard.messages")} value={messages.length} icon={msgIcon} gradient="from-emerald-500 via-teal-600 to-green-700" />
@@ -154,16 +154,16 @@ export default function Dashboard() {
         </div>
       )}
 
-      <div className="grid gap-8 lg:grid-cols-2">
-        <section className="rounded-2xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 p-10 shadow-lg">
-          <div className="flex items-center justify-between gap-4">
+      <div className="grid gap-6 lg:grid-cols-2">
+        <section className="rounded-2xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 p-6 sm:p-8 md:p-10 shadow-lg">
+          <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between gap-4">
             <div>
-              <h2 className="text-2xl font-bold text-slate-900 dark:text-white">{t("dashboard.upcomingDeadlines")}</h2>
-              <p className="mt-2 text-slate-600 dark:text-slate-400">{t("dashboard.subtitle")}</p>
+              <h2 className="text-xl sm:text-2xl font-bold text-slate-900 dark:text-white">{t("dashboard.upcomingDeadlines")}</h2>
+              <p className="mt-2 text-slate-600 dark:text-slate-400 text-sm sm:text-base">{t("dashboard.subtitle")}</p>
             </div>
-            <span className="rounded-full bg-blue-100 text-blue-700 px-4 py-2 text-sm font-medium dark:bg-blue-900/40 dark:text-blue-200">{t("dashboard.next30Days")}</span>
+            <span className="rounded-full bg-blue-100 text-blue-700 px-4 py-2 text-sm font-medium dark:bg-blue-900/40 dark:text-blue-200 whitespace-nowrap">{t("dashboard.next30Days")}</span>
           </div>
-          <div className="mt-8 space-y-4">
+          <div className="mt-6 sm:mt-8 space-y-3 sm:space-y-4">
             {!loading && upcoming.length > 0 ? (
               upcoming.map((item) => (
                 <Link
@@ -201,11 +201,11 @@ export default function Dashboard() {
           </div>
         </section>
 
-        <section className="rounded-2xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 p-10 shadow-lg">
-          <h2 className="text-2xl font-bold text-slate-900 dark:text-white">{t("dashboard.insightsActions")}</h2>
-          <p className="mt-2 text-slate-600 dark:text-slate-400">{t("dashboard.dashboardDesc")}</p>
+        <section className="rounded-2xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 p-6 sm:p-8 md:p-10 shadow-lg">
+          <h2 className="text-xl sm:text-2xl font-bold text-slate-900 dark:text-white">{t("dashboard.insightsActions")}</h2>
+          <p className="mt-2 text-slate-600 dark:text-slate-400 text-sm sm:text-base">{t("dashboard.dashboardDesc")}</p>
 
-          <div className="mt-8 grid gap-4">
+          <div className="mt-6 sm:mt-8 grid gap-4">
             <div className="rounded-xl border border-slate-200 dark:border-slate-800 p-6 bg-slate-50 dark:bg-slate-800/50">
               <div className="flex items-center justify-between">
                 <div>
@@ -231,14 +231,14 @@ export default function Dashboard() {
       </div>
 
       {!loading && (
-        <div className="grid gap-8 lg:grid-cols-2">
-          <section className="rounded-2xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 p-10 shadow-lg">
-            <div className="flex items-center justify-between gap-4">
+        <div className="grid gap-6 lg:grid-cols-2">
+          <section className="rounded-2xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 p-6 sm:p-8 md:p-10 shadow-lg">
+            <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
               <div>
-                <h2 className="text-2xl font-bold text-slate-900 dark:text-white">Category Distribution</h2>
-                <p className="mt-2 text-slate-600 dark:text-slate-400">Opportunities grouped by category</p>
+                <h2 className="text-xl sm:text-2xl font-bold text-slate-900 dark:text-white">Category Distribution</h2>
+                <p className="mt-2 text-slate-600 dark:text-slate-400 text-sm sm:text-base">Opportunities grouped by category</p>
               </div>
-              <span className="rounded-full bg-indigo-100 text-indigo-700 px-4 py-2 text-sm font-medium dark:bg-indigo-900/40 dark:text-indigo-200">
+              <span className="rounded-full bg-indigo-100 text-indigo-700 px-4 py-2 text-sm font-medium dark:bg-indigo-900/40 dark:text-indigo-200 whitespace-nowrap">
                 {opportunities.length} total
               </span>
             </div>
@@ -271,43 +271,43 @@ export default function Dashboard() {
             )}
           </section>
 
-          <section className="rounded-2xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 p-10 shadow-lg">
-            <div className="flex items-center justify-between gap-4">
+          <section className="rounded-2xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 p-6 sm:p-8 md:p-10 shadow-lg">
+            <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
               <div>
-                <h2 className="text-2xl font-bold text-slate-900 dark:text-white">{t("dashboard.recentlyAdded")}</h2>
-                <p className="mt-2 text-slate-600 dark:text-slate-400">Latest opportunities submitted</p>
+                <h2 className="text-xl sm:text-2xl font-bold text-slate-900 dark:text-white">{t("dashboard.recentlyAdded")}</h2>
+                <p className="mt-2 text-slate-600 dark:text-slate-400 text-sm sm:text-base">Latest opportunities submitted</p>
               </div>
-              <Link href="/opportunities" className="text-sm font-semibold text-blue-600 dark:text-blue-400 hover:underline">
+              <Link href="/opportunities" className="text-sm font-semibold text-blue-600 dark:text-blue-400 hover:underline whitespace-nowrap">
                 {t("home.viewAll")} →
               </Link>
             </div>
 
             {recent.length > 0 ? (
-              <div className="mt-8 overflow-hidden rounded-2xl border border-slate-200 dark:border-slate-800">
-                <div className="overflow-x-auto">
-                  <table className="w-full text-left text-sm">
+              <div className="mt-6 sm:mt-8 overflow-hidden rounded-2xl border border-slate-200 dark:border-slate-800">
+                <div className="overflow-x-auto table-scroll">
+                  <table className="w-full min-w-[380px] text-left text-sm">
                     <thead className="bg-slate-50 dark:bg-slate-800/60 text-xs uppercase tracking-wider text-slate-500 dark:text-slate-400">
                       <tr>
-                        <th className="px-5 py-4 font-semibold">Title</th>
-                        <th className="px-5 py-4 font-semibold">Category</th>
-                        <th className="px-5 py-4 font-semibold">Deadline</th>
+                        <th className="px-4 sm:px-5 py-3 sm:py-4 font-semibold whitespace-nowrap">Title</th>
+                        <th className="px-4 sm:px-5 py-3 sm:py-4 font-semibold whitespace-nowrap">Category</th>
+                        <th className="px-4 sm:px-5 py-3 sm:py-4 font-semibold whitespace-nowrap">Deadline</th>
                       </tr>
                     </thead>
                     <tbody className="divide-y divide-slate-200 dark:divide-slate-800">
                       {recent.map((item) => (
                         <tr key={item.id} className="hover:bg-slate-50 dark:hover:bg-slate-800/40 transition">
-                          <td className="px-5 py-4">
-                            <Link href={`/opportunities/${item.id}`} className="font-semibold text-slate-900 dark:text-white hover:text-blue-600 dark:hover:text-blue-400 truncate block max-w-[220px]">
+                          <td className="px-4 sm:px-5 py-3 sm:py-4">
+                            <Link href={`/opportunities/${item.id}`} className="font-semibold text-slate-900 dark:text-white hover:text-blue-600 dark:hover:text-blue-400 truncate block max-w-[200px] sm:max-w-[280px]">
                               {item.title}
                             </Link>
                             <p className="mt-0.5 text-xs text-slate-500 dark:text-slate-400 truncate">{item.organization}</p>
                           </td>
-                          <td className="px-5 py-4">
+                          <td className="px-4 sm:px-5 py-3 sm:py-4 whitespace-nowrap">
                             <span className="inline-flex items-center rounded-full bg-blue-100 text-blue-700 dark:bg-blue-900/40 dark:text-blue-200 px-3 py-1 text-xs font-semibold">
                               {t(getCategoryKey(item.category))}
                             </span>
                           </td>
-                          <td className="px-5 py-4 text-slate-600 dark:text-slate-300 whitespace-nowrap">{item.deadline}</td>
+                          <td className="px-4 sm:px-5 py-3 sm:py-4 text-slate-600 dark:text-slate-300 whitespace-nowrap text-xs sm:text-sm">{item.deadline}</td>
                         </tr>
                       ))}
                     </tbody>

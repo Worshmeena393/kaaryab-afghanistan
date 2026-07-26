@@ -79,13 +79,13 @@ export default function OpportunityDetail() {
 
   if (!opportunity) {
     return (
-      <div className="max-w-3xl mx-auto pt-12">
-        <div className="text-center">
-          <div className="h-24 w-24 rounded-full bg-slate-200 dark:bg-slate-800 flex items-center justify-center mx-auto mb-6">
-            <span className="text-5xl">😕</span>
+      <div className="max-w-3xl mx-auto pt-8 sm:pt-12 px-4 sm:px-0">
+        <div className="text-center p-6 sm:p-8 bg-white dark:bg-slate-900 rounded-3xl border border-slate-200 dark:border-slate-800 shadow-lg">
+          <div className="h-20 w-20 sm:h-24 sm:w-24 rounded-full bg-slate-200 dark:bg-slate-800 flex items-center justify-center mx-auto mb-4 sm:mb-6">
+            <span className="text-4xl sm:text-5xl">😕</span>
           </div>
-          <h1 className="text-3xl font-extrabold text-slate-900 dark:text-white mb-4">{t("detail.notFound")}</h1>
-          <Link href="/opportunities" className="inline-flex items-center gap-2 px-6 py-3 rounded-2xl bg-gradient-to-r from-blue-600 to-indigo-700 text-white font-semibold hover:from-blue-700 hover:to-indigo-800 transition-all duration-200 shadow-lg hover:shadow-xl">
+          <h1 className="text-2xl sm:text-3xl font-extrabold text-slate-900 dark:text-white mb-4">{t("detail.notFound")}</h1>
+          <Link href="/opportunities" className="inline-flex items-center gap-2 px-5 sm:px-6 py-3 rounded-2xl bg-gradient-to-r from-blue-600 to-indigo-700 text-white font-semibold hover:from-blue-700 hover:to-indigo-800 transition-all duration-200 shadow-lg hover:shadow-xl min-h-[44px]">
             {t("detail.backToOpportunities")}
           </Link>
         </div>
@@ -117,14 +117,14 @@ export default function OpportunityDetail() {
 
   if (editing) {
     return (
-      <div className="max-w-4xl mx-auto space-y-8 pt-8">
+      <div className="max-w-4xl mx-auto space-y-6 sm:space-y-8 pt-6 sm:pt-8 px-4 sm:px-0">
         <div className="flex items-center gap-4">
           <Link href={`/opportunities/${opportunity.id}`} className="flex items-center gap-2 text-slate-600 dark:text-slate-400 hover:text-blue-600 dark:hover:text-blue-400 font-medium transition-all">
             {t("detail.backToDetails")}
           </Link>
         </div>
-        <div className="bg-white dark:bg-slate-900 rounded-3xl border border-slate-200 dark:border-slate-800 p-8 shadow-xl">
-          <h1 className="text-3xl font-extrabold text-slate-900 dark:text-white mb-6">{t("detail.editOpportunity")}</h1>
+        <div className="bg-white dark:bg-slate-900 rounded-3xl border border-slate-200 dark:border-slate-800 p-5 sm:p-8 shadow-xl">
+          <h1 className="text-2xl sm:text-3xl font-extrabold text-slate-900 dark:text-white mb-5 sm:mb-6">{t("detail.editOpportunity")}</h1>
           <OpportunityForm initialData={opportunity} onSubmit={handleEdit} />
         </div>
       </div>
@@ -159,7 +159,7 @@ export default function OpportunityDetail() {
   };
 
   return (
-    <div className="space-y-10 max-w-6xl mx-auto pt-4">
+    <div className="space-y-6 sm:space-y-8 md:space-y-10 max-w-6xl mx-auto pt-2 sm:pt-4 px-4 sm:px-0">
       <ConfirmModal
         isOpen={confirmDelete}
         onCancel={() => setConfirmDelete(false)}
@@ -173,45 +173,45 @@ export default function OpportunityDetail() {
       {/* Hero Header */}
       <div className="relative rounded-3xl overflow-hidden bg-gradient-to-br from-blue-600 via-indigo-600 to-violet-700">
         {/* Decorative blobs */}
-        <div className="absolute -top-32 -right-32 h-64 w-64 rounded-full bg-white/10 blur-3xl"></div>
-        <div className="absolute -bottom-32 -left-32 h-64 w-64 rounded-full bg-white/10 blur-3xl"></div>
+        <div className="absolute -top-24 sm:-top-32 -right-24 sm:-right-32 h-56 w-56 sm:h-64 sm:w-64 rounded-full bg-white/10 blur-3xl"></div>
+        <div className="absolute -bottom-24 sm:-bottom-32 -left-24 sm:-left-32 h-56 w-56 sm:h-64 sm:w-64 rounded-full bg-white/10 blur-3xl"></div>
         
-        <div className="relative z-10 p-8 sm:p-12">
-          <div className="flex flex-col gap-6 lg:flex-row lg:items-start lg:justify-between">
-            <div className="flex-1">
-              <Link href="/opportunities" className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/10 backdrop-blur-sm border border-white/20 text-white text-sm font-medium hover:bg-white/20 transition-all mb-4">
+        <div className="relative z-10 p-5 sm:p-8 md:p-10 sm:p-12">
+          <div className="flex flex-col gap-5 sm:gap-6 lg:flex-row lg:items-start lg:justify-between">
+            <div className="flex-1 min-w-0">
+              <Link href="/opportunities" className="inline-flex items-center gap-2 px-3 sm:px-4 py-1.5 sm:py-2 rounded-full bg-white/10 backdrop-blur-sm border border-white/20 text-white text-xs sm:text-sm font-medium hover:bg-white/20 transition-all mb-3 sm:mb-4 whitespace-nowrap">
                 {t("detail.backToOpportunities")}
               </Link>
-              <h1 className="text-4xl sm:text-5xl font-extrabold text-white leading-tight mb-4">{opportunity.title}</h1>
-              <p className="text-xl text-blue-100 flex items-center gap-3">
+              <h1 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-extrabold text-white leading-tight mb-3 sm:mb-4 break-words">{opportunity.title}</h1>
+              <p className="text-base sm:text-xl text-blue-100 flex flex-col sm:flex-row sm:items-center gap-2 sm:gap-3">
                 <span className="flex items-center gap-1.5">
                   🏢 {opportunity.organization}
                 </span>
-                <span className="text-blue-200/60">•</span>
+                <span className="hidden sm:inline text-blue-200/60">•</span>
                 <span className="flex items-center gap-1.5">
                   📍 {opportunity.location}
                 </span>
               </p>
             </div>
-            <div className="flex flex-wrap gap-3">
+            <div className="flex flex-wrap gap-2 sm:gap-3">
               <button
                 type="button"
                 onClick={handleToggleFavorite}
-                className={`flex items-center gap-2 px-6 py-3 rounded-2xl text-sm font-bold transition-all duration-200 shadow-lg ${favorite ? "bg-gradient-to-r from-pink-500 to-rose-600 text-white hover:shadow-xl" : "bg-white/10 backdrop-blur-sm text-white border border-white/20 hover:bg-white/20"}`}
+                className={`flex items-center justify-center gap-2 px-4 sm:px-6 py-2.5 sm:py-3 rounded-2xl text-xs sm:text-sm font-bold transition-all duration-200 shadow-lg ${favorite ? "bg-gradient-to-r from-pink-500 to-rose-600 text-white hover:shadow-xl" : "bg-white/10 backdrop-blur-sm text-white border border-white/20 hover:bg-white/20"} min-h-[44px]`}
               >
                 {favorite ? t("detail.saved") : t("detail.save")}
               </button>
               <button
                 type="button"
                 onClick={() => setEditing(true)}
-                className="flex items-center gap-2 px-6 py-3 rounded-2xl text-sm font-bold bg-white/10 backdrop-blur-sm text-white border border-white/20 hover:bg-white/20 transition-all duration-200 shadow-lg hover:shadow-xl"
+                className="flex items-center justify-center gap-2 px-4 sm:px-6 py-2.5 sm:py-3 rounded-2xl text-xs sm:text-sm font-bold bg-white/10 backdrop-blur-sm text-white border border-white/20 hover:bg-white/20 transition-all duration-200 shadow-lg hover:shadow-xl min-h-[44px]"
               >
                 {t("detail.edit")}
               </button>
               <button
                 type="button"
                 onClick={handleDelete}
-                className="flex items-center gap-2 px-6 py-3 rounded-2xl text-sm font-bold bg-white/10 backdrop-blur-sm text-red-200 border border-red-200/30 hover:bg-red-500/20 hover:text-red-100 transition-all duration-200 shadow-lg"
+                className="flex items-center justify-center gap-2 px-4 sm:px-6 py-2.5 sm:py-3 rounded-2xl text-xs sm:text-sm font-bold bg-white/10 backdrop-blur-sm text-red-200 border border-red-200/30 hover:bg-red-500/20 hover:text-red-100 transition-all duration-200 shadow-lg min-h-[44px]"
               >
                 {t("detail.delete")}
               </button>
@@ -224,24 +224,24 @@ export default function OpportunityDetail() {
         {/* Main Content */}
         <div className="lg:col-span-2 h-full">
           {/* Description Card */}
-          <div className="rounded-3xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 p-8 shadow-xl h-full flex flex-col justify-between">
+          <div className="rounded-3xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 p-5 sm:p-6 md:p-8 shadow-xl h-full flex flex-col justify-between">
             <div>
-              <h2 className="text-2xl font-extrabold text-slate-900 dark:text-white mb-6 flex items-center gap-2">
+              <h2 className="text-xl sm:text-2xl font-extrabold text-slate-900 dark:text-white mb-4 sm:mb-6 flex items-center gap-2">
                 <span>📝</span> {t("detail.description")}
               </h2>
-              <p className="text-slate-700 dark:text-slate-300 leading-relaxed text-lg">{opportunity.description}</p>
+              <p className="text-slate-700 dark:text-slate-300 leading-relaxed text-sm sm:text-base md:text-lg">{opportunity.description}</p>
 
               {/* Requirements */}
               {opportunity.requirements && opportunity.requirements.length > 0 && (
-                <div className="mt-10">
-                  <h3 className="text-xl font-bold text-slate-900 dark:text-white mb-5 flex items-center gap-2">
+                <div className="mt-8 sm:mt-10">
+                  <h3 className="text-lg sm:text-xl font-bold text-slate-900 dark:text-white mb-4 sm:mb-5 flex items-center gap-2">
                     <span>✅</span> {t("detail.requirements")}
                   </h3>
-                  <ul className="space-y-3">
+                  <ul className="space-y-2 sm:space-y-3">
                     {opportunity.requirements.map((req, idx) => (
-                      <li key={idx} className="flex items-start gap-3 p-4 bg-slate-50 dark:bg-slate-800/50 rounded-2xl">
-                        <span className="text-blue-500 text-lg mt-0.5">•</span>
-                        <span className="text-slate-700 dark:text-slate-300 font-medium">{req}</span>
+                      <li key={idx} className="flex items-start gap-3 p-3 sm:p-4 bg-slate-50 dark:bg-slate-800/50 rounded-2xl">
+                        <span className="text-blue-500 text-lg mt-0.5 flex-shrink-0">•</span>
+                        <span className="text-slate-700 dark:text-slate-300 font-medium text-sm sm:text-base">{req}</span>
                       </li>
                     ))}
                   </ul>
@@ -250,13 +250,13 @@ export default function OpportunityDetail() {
 
               {/* Tags */}
               {opportunity.tags && opportunity.tags.length > 0 && (
-                <div className="mt-10">
-                  <h3 className="text-xl font-bold text-slate-900 dark:text-white mb-5 flex items-center gap-2">
+                <div className="mt-8 sm:mt-10">
+                  <h3 className="text-lg sm:text-xl font-bold text-slate-900 dark:text-white mb-4 sm:mb-5 flex items-center gap-2">
                     <span>🏷️</span> {t("detail.tags")}
                   </h3>
-                  <div className="flex flex-wrap gap-3">
+                  <div className="flex flex-wrap gap-2 sm:gap-3">
                     {opportunity.tags.map((tag, idx) => (
-                      <span key={idx} className="px-5 py-2 rounded-2xl text-sm font-semibold bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300 border border-slate-200 dark:border-slate-700">
+                      <span key={idx} className="px-4 sm:px-5 py-1.5 sm:py-2 rounded-2xl text-xs sm:text-sm font-semibold bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300 border border-slate-200 dark:border-slate-700">
                         #{tag}
                       </span>
                     ))}
@@ -272,28 +272,28 @@ export default function OpportunityDetail() {
           {/* Details Card */}
           <div className="relative rounded-3xl overflow-hidden shadow-xl h-full flex flex-col">
             <div className={`absolute top-0 left-0 right-0 h-2 bg-gradient-to-r ${categoryGradient}`}></div>
-            <div className="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 p-8 rounded-3xl h-full flex flex-col justify-between">
+            <div className="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 p-5 sm:p-6 md:p-8 rounded-3xl h-full flex flex-col justify-between">
               <div>
-                <p className="text-xs uppercase tracking-[0.25em] text-slate-500 dark:text-slate-400 font-bold mb-6">{t("detail.opportunityDetails")}</p>
+                <p className="text-xs uppercase tracking-[0.25em] text-slate-500 dark:text-slate-400 font-bold mb-4 sm:mb-6">{t("detail.opportunityDetails")}</p>
         
-        <div className="space-y-5">
+        <div className="space-y-4 sm:space-y-5">
           {/* Category */}
-          <div className="p-4 bg-slate-50 dark:bg-slate-800/50 rounded-2xl">
+          <div className="p-3 sm:p-4 bg-slate-50 dark:bg-slate-800/50 rounded-2xl">
             <p className="text-xs uppercase tracking-wide text-slate-500 dark:text-slate-400 font-semibold mb-1">{t("detail.category")}</p>
-            <p className="text-lg font-bold text-slate-900 dark:text-white">{t(getCategoryKey(opportunity.category))}</p>
+            <p className="text-base sm:text-lg font-bold text-slate-900 dark:text-white">{t(getCategoryKey(opportunity.category))}</p>
           </div>
 
           {/* Work Type */}
-          <div className="p-4 bg-slate-50 dark:bg-slate-800/50 rounded-2xl">
+          <div className="p-3 sm:p-4 bg-slate-50 dark:bg-slate-800/50 rounded-2xl">
             <p className="text-xs uppercase tracking-wide text-slate-500 dark:text-slate-400 font-semibold mb-1">{t("detail.workType")}</p>
-            <p className="text-lg font-bold text-slate-900 dark:text-white">{t(getTypeKey(opportunity.type))}</p>
+            <p className="text-base sm:text-lg font-bold text-slate-900 dark:text-white">{t(getTypeKey(opportunity.type))}</p>
           </div>
 
           {/* Deadline */}
-          <div className={`p-4 rounded-2xl ${isExpiringSoon ? "bg-red-50 dark:bg-red-900/20 border border-red-200 dark:border-red-800" : "bg-slate-50 dark:bg-slate-800/50"}`}>
+          <div className={`p-3 sm:p-4 rounded-2xl ${isExpiringSoon ? "bg-red-50 dark:bg-red-900/20 border border-red-200 dark:border-red-800" : "bg-slate-50 dark:bg-slate-800/50"}`}>
             <p className="text-xs uppercase tracking-wide text-slate-500 dark:text-slate-400 font-semibold mb-1">{t("detail.deadline")}</p>
-            <p className="text-lg font-bold text-slate-900 dark:text-white">{opportunity.deadline}</p>
-            <p className={`text-sm font-semibold mt-1 ${isExpiringSoon ? "text-red-600 dark:text-red-400" : "text-slate-600 dark:text-slate-400"}`}>
+            <p className="text-base sm:text-lg font-bold text-slate-900 dark:text-white">{opportunity.deadline}</p>
+            <p className={`text-xs sm:text-sm font-semibold mt-1 ${isExpiringSoon ? "text-red-600 dark:text-red-400" : "text-slate-600 dark:text-slate-400"}`}>
               {isExpiringSoon ? `⚠️ ${t("card.expiringSoon")} (${daysLeft} ${t("card.daysLeft")})` : `⏰ ${daysLeft} ${t("card.daysLeft")}`}
             </p>
           </div>
@@ -301,31 +301,31 @@ export default function OpportunityDetail() {
       </div>
 
       {/* Apply Button */}
-      <div className="mt-8">
+      <div className="mt-6 sm:mt-8">
         <a
           href={validApplyUrl || "#"}
           target="_blank"
           rel="noopener noreferrer"
           onClick={handleApplyClick}
-          className={`inline-flex items-center justify-center w-full rounded-2xl bg-gradient-to-r ${categoryGradient} text-white px-8 py-4 font-bold hover:opacity-90 transition-all duration-200 shadow-lg hover:shadow-xl cursor-pointer ${!validApplyUrl ? "opacity-70 cursor-not-allowed" : ""}`}
+          className={`inline-flex items-center justify-center w-full rounded-2xl bg-gradient-to-r ${categoryGradient} text-white px-6 sm:px-8 py-3 sm:py-4 text-sm sm:text-base font-bold hover:opacity-90 transition-all duration-200 shadow-lg hover:shadow-xl cursor-pointer ${!validApplyUrl ? "opacity-70 cursor-not-allowed" : ""} min-h-[48px]`}
         >
           {!validApplyUrl ? t("detail.applyUnavailable") : t("detail.applyNow")}
         </a>
         {opportunity.applyLink?.includes("example.com") && (
-          <div className="mt-3 p-4 bg-yellow-50 dark:bg-yellow-900/20 border border-yellow-200 dark:border-yellow-800 rounded-2xl">
-            <div className="flex items-start gap-3">
-              <span className="text-xl mt-0.5">⚠️</span>
-              <p className="text-sm text-yellow-800 dark:text-yellow-200 leading-relaxed">
+          <div className="mt-3 p-3 sm:p-4 bg-yellow-50 dark:bg-yellow-900/20 border border-yellow-200 dark:border-yellow-800 rounded-2xl">
+            <div className="flex items-start gap-2 sm:gap-3">
+              <span className="text-lg sm:text-xl mt-0.5 flex-shrink-0">⚠️</span>
+              <p className="text-xs sm:text-sm text-yellow-800 dark:text-yellow-200 leading-relaxed">
                 {t("detail.demoWarning")}
               </p>
             </div>
           </div>
         )}
         {!validApplyUrl && opportunity.applyLink && (
-          <div className="mt-3 p-4 bg-red-50 dark:bg-red-900/20 border border-red-200 dark:border-red-800 rounded-2xl">
-            <div className="flex items-start gap-3">
-              <span className="text-xl mt-0.5">⚠️</span>
-              <p className="text-sm text-red-800 dark:text-red-200 leading-relaxed">
+          <div className="mt-3 p-3 sm:p-4 bg-red-50 dark:bg-red-900/20 border border-red-200 dark:border-red-800 rounded-2xl">
+            <div className="flex items-start gap-2 sm:gap-3">
+              <span className="text-lg sm:text-xl mt-0.5 flex-shrink-0">⚠️</span>
+              <p className="text-xs sm:text-sm text-red-800 dark:text-red-200 leading-relaxed">
                 {t("detail.invalidLink")}
               </p>
             </div>

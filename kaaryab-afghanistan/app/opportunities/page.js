@@ -107,30 +107,30 @@ function OpportunitiesContent() {
         <div className="absolute -top-24 -right-24 h-64 w-64 rounded-full bg-white/10 blur-3xl" />
         <div className="absolute -bottom-24 -left-24 h-64 w-64 rounded-full bg-white/10 blur-3xl" />
 
-        <div className="relative z-10 p-8 sm:p-12">
-          <div className="flex flex-col gap-10 lg:flex-row lg:items-center lg:justify-between">
+        <div className="relative z-10 p-6 sm:p-8 lg:p-12">
+          <div className="flex flex-col gap-6 lg:flex-row lg:items-center lg:justify-between">
             <div className="flex-1">
               <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/10 backdrop-blur-sm border border-white/20 mb-4">
                 <span className="text-sm font-medium text-blue-100">✨ {t("home.free")}</span>
               </div>
-              <h1 className="text-4xl sm:text-5xl font-extrabold text-white leading-tight">
+              <h1 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-white leading-tight">
                 {t("home.heroTitle")}
               </h1>
-              <p className="mt-4 text-lg text-blue-100 max-w-2xl">
+              <p className="mt-4 text-base sm:text-lg text-blue-100 max-w-2xl">
                 {t("home.heroSubtitle")}
               </p>
             </div>
 
-            <div className="grid grid-cols-2 gap-4 w-full lg:w-auto">
+            <div className="grid grid-cols-2 gap-3 sm:gap-4 w-full lg:w-auto">
               {[
                 { label: t("home.totalOpportunities"), value: counts.total, icon: "📋" },
                 { label: t("opportunities.job"), value: counts.jobs, icon: "💼" },
                 { label: t("opportunities.internship"), value: counts.internships, icon: "📈" },
                 { label: t("home.scholarships"), value: counts.scholarships, icon: "🎓" },
               ].map((card) => (
-                <div key={card.label} className="bg-white/10 backdrop-blur-md border border-white/20 rounded-2xl p-4 sm:p-5 text-center">
-                  <span className="text-3xl sm:text-4xl">{card.icon}</span>
-                  <p className="text-2xl sm:text-3xl font-bold text-white mt-2">{card.value}</p>
+                <div key={card.label} className="bg-white/10 backdrop-blur-md border border-white/20 rounded-2xl p-3 sm:p-5 text-center">
+                  <span className="text-2xl sm:text-4xl">{card.icon}</span>
+                  <p className="text-xl sm:text-3xl font-bold text-white mt-1 sm:mt-2">{card.value}</p>
                   <p className="text-xs sm:text-sm text-blue-100 mt-1">{card.label}</p>
                 </div>
               ))}
@@ -139,7 +139,7 @@ function OpportunitiesContent() {
         </div>
       </div>
 
-      <div className="grid gap-6 xl:grid-cols-[320px_1fr] items-start">
+      <div className="grid gap-6 lg:grid-cols-[300px_1fr] xl:grid-cols-[320px_1fr] items-start">
         <SearchFilter filters={filters} onChange={setFilters} resultCount={sorted.length} />
 
         <div className="space-y-8">
@@ -175,7 +175,7 @@ function OpportunitiesContent() {
             </div>
           </div>
 
-          <div className="grid gap-6 md:grid-cols-2 xl:grid-cols-3">
+          <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-2 xl:grid-cols-3">
             {sorted.length > 0 ? (
               sorted.map((item) => (
                 <OpportunityCard key={item.id} item={item} onDelete={removeOpportunity} />
