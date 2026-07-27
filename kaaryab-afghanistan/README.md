@@ -1,6 +1,6 @@
 # 🌟 KaarYab Afghanistan
 
-> **Opportunity Finder Platform for Afghan Youth** — Built with Next.js 15, React 19, Tailwind CSS 4, React Hook Form + Zod, and LocalStorage persistence.
+> **Opportunity Finder Platform for Afghan Youth** — A modern web application that helps Afghan students, graduates, and young professionals discover career and educational opportunities including jobs, internships, scholarships, remote work, online courses, training programs, and volunteer roles.
 
 <div align="center">
 
@@ -13,7 +13,7 @@
 [![Zod](https://img.shields.io/badge/Zod-4.4-3068b6?logo=zod&logoColor=white)](https://zod.dev)
 [![License](https://img.shields.io/badge/License-MIT-brightgreen)](#license)
 
-**EN • فارسی • پښتو** — Trilingual platform with auto RTL support.
+**EN • فارسی • پښتو** — Trilingual with automatic RTL support for Persian (Dari) and Pashto.
 
 </div>
 
@@ -21,293 +21,347 @@
 
 ## 📌 Project Status
 
-- ✅ Completed
-- ✅ Fully Responsive (Mobile · Tablet · Laptop)
-- ✅ CRUD Functionality (Create · Read · Update · Delete)
-- ✅ Dark / Light Mode (persisted in LocalStorage)
-- ✅ Multi-language Support (EN / FA / PS with RTL)
-- ✅ Deployed on **Vercel**
-- ✅ Source code on **GitHub**
-- ✅ 10/10 Rubric Technical Requirements (see checklist below)
+- ✅ Completed (Final Capstone Submission)
+- ✅ Fully Responsive — Mobile 375px · Tablet 768px · Desktop 1366px
+- ✅ End-to-End CRUD Functionality
+- ✅ Dark / Light Mode with persistent preference
+- ✅ Multi-language Support — 3 languages
+- ✅ Right-to-Left (RTL) Layout for Dari / Pashto
+- ✅ Source Control — Git + GitHub Repository
+- ✅ Production Deployment — Vercel
 
 ---
 
-## 📖 Project Overview
+## 📖 Table of Contents
 
-KaarYab Afghanistan is a modern opportunity finder platform designed to help Afghan students, graduates, and young professionals discover valuable opportunities including:
-
-- Jobs
-- Internships
-- Scholarships
-- Remote work
-- Online courses
-- Training programs
-- Volunteer opportunities
-
-The platform collects opportunities in one place so users can easily search, filter, save, and manage opportunities.
+1. [Project Overview](#-project-overview)
+2. [Purpose & Problem Statement](#-purpose--problem-statement)
+3. [Target Users](#-target-users)
+4. [Technology Stack](#️-technology-stack)
+5. [Core Features](#-core-features)
+6. [Reusable Components](#-reusable-components)
+7. [Pages & Routes](#-pages--routes)
+8. [Project Structure](#-project-structure)
+9. [Responsive Design](#-responsive-design)
+10. [LocalStorage Data Layer](#-localstorage-data-layer)
+11. [Getting Started](#-getting-started)
+12. [Testing the API Routes](#-testing-the-api-routes)
+13. [Deployment](#-deployment)
+14. [Screenshots](#-screenshots)
+15. [Demo Data Notice](#-demo-data-notice)
+16. [Future Improvements](#-future-improvements)
+17. [Learning Outcomes](#-learning-outcomes)
+18. [Developer](#-developer)
+19. [License](#-license)
 
 ---
 
-## 🎯 Problem It Solves
+## 📚 Project Overview
 
-Many Afghan youth face challenges finding reliable information about:
+**KaarYab Afghanistan** centralizes career-building opportunities for Afghan youth into a single, beautifully designed, accessible platform. Instead of searching across disjointed websites, Telegram channels, and social media groups, users browse a curated and filterable catalog — all in their preferred language and theme.
 
-- Career opportunities
-- Scholarships
-- Internships
-- Remote jobs
-- Learning resources
+Built on the Next.js 15 App Router with React Server Components (RSC) by default, client components isolated to feature boundaries, a Tailwind CSS 4 utility-first design system, and a zero-dependency React Context i18n layer with automatic RTL direction switching.
 
-Information is often scattered across different websites and social media platforms.
+---
 
-KaarYab Afghanistan provides a centralized platform where users can discover and manage opportunities easily.
+## 🎯 Purpose & Problem Statement
+
+### The Problem
+
+Young Afghans face consistent barriers when searching for growth opportunities:
+- Information is scattered across websites, social platforms, and private groups
+- No unified way to search, filter, or sort across opportunity types
+- No mechanism to bookmark or track roles of interest
+- English-only listings exclude Dari and Pashto speakers from discovering opportunities
+
+### The Solution
+
+KaarYab Afghanistan addresses each barrier with a deliberate feature:
+| Barrier | Feature |
+|---|---|
+| Scattered information | Unified listing of 8 opportunity categories |
+| Poor discoverability | Keyword search + 5 filter dimensions + 2 sort orders |
+| No bookmarking | Favorites system with LocalStorage persistence |
+| Language exclusion | Full English / فارسی (Dari) / پښتو (Pashto) translations + automatic RTL |
 
 ---
 
 ## 👥 Target Users
 
-The platform is designed for:
-
-- Students
-- Fresh graduates
-- Job seekers
-- Remote workers (especially women looking for flexible remote roles)
-- Scholarship applicants
-- Organizations sharing opportunities
-
----
-
-## ✨ Key Features
-
-### 🔎 Opportunity Discovery
-
-Users can:
-
-- Browse opportunities in responsive card grid
-- Search by title / keyword
-- Filter by category (8 categories: Job, Internship, Scholarship, Online Course, Remote Work, Training, Volunteer, Pro Development)
-- Filter by location
-- Filter by work type (Remote · On-site · Hybrid)
-- Filter by deadline window (All · This Week · This Month · Expiring Soon)
-- Sort ascending / descending by deadline
-
-### 📋 Opportunity Management
-
-Every opportunity contains the 10 rubric-required fields:
-
-- Title
-- Organization
-- Category
-- Work Type
-- Location
-- Deadline
-- Description
-- Requirements
-- Apply Link
-- Tags
-
-### ⭐ Favorites System
-
-Users can:
-
-- Save opportunities with one click (heart icon on cards)
-- View all saved opportunities on dedicated `/favorites` page
-- Remove saved opportunities
-- Favorites are stored in `localStorage["kaarYab-favorites"]` and persist across sessions
-
-### ➕ Add / Edit / Delete Opportunity (Full CRUD)
-
-Users submit new or edit existing opportunities through a validated form:
-
-- Powered by **React Hook Form** + **Zod** schema validation
-- Inline translated error messages for every field
-- Deadline field: native date picker with calendar SVG icon + `min="today"` guard
-- Category & Work Type select dropdowns
-- Requirements and Tags managed as dynamic lists
-- Delete action uses a custom glassmorphism **ConfirmModal** (danger tone) — no native browser `alert`
+The platform is designed for, and built with empathy toward:
+- 🎓 **Students** — searching for internships, scholarships, online courses
+- 🎓 **Fresh Graduates** — looking for entry-level jobs and training
+- 💼 **Job Seekers** — browsing on-site and remote roles
+- 👩 **Women seeking flexible work** — prioritizing remote/hybrid filters
+- 📚 **Scholarship Applicants** — tracking deadlines for funding programs
+- 🏢 **Organizations sharing opportunities** — submitting listings via the validated form
 
 ---
 
-## 📊 Dashboard
+## 🛠️ Technology Stack
 
-Dashboard includes all rubric dashboard requirements:
+Every rubric-required technology is used explicitly:
 
-| Dashboard Requirement | Implemented |
-|---|---|
-| Total opportunities | ✅ 6th stat card |
-| Total Jobs | ✅ |
-| Total Scholarships | ✅ |
-| Total Internships | ✅ |
-| Saved / Favorites count | ✅ |
-| Messages count | ✅ |
-| Expiring Soon / Upcoming deadlines | ✅ 4-item urgency list (red/amber/blue tiles) |
-| Category distribution | ✅ Animated bar chart |
-| Recent submissions | ✅ Scrollable table |
-
----
-
-## 💬 Contact & Messages
-
-Users can:
-
-- Send messages through `/contact` form (name / email / subject / message)
-- View received messages on `/messages` inbox page
-- Search / filter messages
-- Delete one or clear all messages
-- Messages are stored locally in the browser (`localStorage["kaarYab-messages"]`)
-- A real **Next.js API route handler** also exposes this via `POST /api/contact`
-
----
-
-## 🌐 Multi-language Support (Bonus Feature ⭐)
-
-Supported languages:
-
-| Language | Code | Direction |
-|---|---|---|
-| English | `en` | LTR |
-| فارسی / Persian (Dari) | `fa` | RTL |
-| پښتو / Pashto | `ps` | RTL |
-
-- A lightweight custom `LanguageProvider` (React Context + `useTranslation()` hook) powers translations without extra dependencies
-- Selecting FA / PS automatically sets `<html dir="rtl">`
-- Language persisted to `localStorage["kaarYab-language"]`
-- Translation files: `locales/en.json`, `locales/fa.json`, `locales/ps.json`
-
----
-
-## 🌙 Dark Mode
-
-The application supports:
-
-- Light mode (default)
-- Dark mode (one click toggle in navbar)
-
-Theme preference is saved using `localStorage["kaarYab-theme"]` and every color token uses the `dark:` Tailwind variant — no unstyled surfaces.
-
----
-
-## 🛠️ Technologies Used
-
-(Rubric Technical Requirements — **10/10 items explicitly used**, see § Checklist below)
-
-| Technology | Version | Purpose |
-|---|---|---|
-| **Next.js App Router** | 15.5.x | Application framework (RSC-first App Router) |
-| **React** | 19.x | User interface + hooks |
-| **Tailwind CSS** | 4.x + PostCSS plugin | Utility-first styling + design tokens |
-| **JavaScript** (ES2024) | — | Programming language |
-| **React Hook Form** | 7.83 | High-performance form state management |
-| **Zod** | 4.4 | Schema validation (RHF integration via resolvers) |
-| **React Context** | Built-in | LanguageProvider + theme/language state |
-| **LocalStorage API** | Browser | Opportunity CRUD · Favorites · Messages · Theme · Language |
-| **Next.js API Routes** | App Router | `app/api/*` 3 REST endpoints (Opportunities CRUD + Contact) |
-| **GitHub** | Git | Version control → repo at `Worshmeena393/kaaryab-afghanistan` |
-| **Vercel** | — | Production deployment → `kaaryab-afghanistan-theta.vercel.app` |
-
----
-
-## ✅ Rubric Technical Requirements Checklist
-
-The 10 items the judges verify explicitly:
-
-| # | Technical Requirement | Status | Evidence |
+| Layer | Technology | Version | Usage |
 |---|---|---|---|
-| 1 | Next.js App Router | ✅ | `app/` directory + 9 routes + 3 API routes |
-| 2 | React components | ✅ | 12 reusable components in `components/` |
-| 3 | Tailwind CSS | ✅ | v4 + PostCSS + dark variants everywhere |
-| 4 | Dynamic routes | ✅ | `/opportunities/[id]` + `/api/opportunities/[id]` |
-| 5 | React Hook Form | ✅ | `OpportunityForm.jsx` → `useForm({ resolver: zodResolver })` |
-| 6 | **Zod or Yup** validation | ✅ | Zod → `z.object()` schema + refine on deadline |
-| 7 | LocalStorage / Context / Redux | ✅ | Both: `lib/storage.js` (LS) + `LanguageProvider` (Context) |
-| 8 | API routes **or** mock API | ✅ | Both! 3 real `app/api/*` REST handlers + localStorage mock layer |
-| 9 | **GitHub** | ✅ | `github.com/Worshmeena393/kaaryab-afghanistan` |
-| 10 | **Vercel deployment** | ✅ | `kaaryab-afghanistan-theta.vercel.app` — live, 0 console errors |
+| **Framework** | Next.js App Router | 15.5.x | RSC-first routing, metadata, Server Components |
+| **UI** | React | 19.x | Component model + hooks (useState, useEffect, useMemo, useRouter, useParams, useSearchParams) |
+| **Styling** | Tailwind CSS | 4.x + PostCSS plugin | Utility-first design system, dark mode via `dark:` variants |
+| **Language** | JavaScript | ES2024 | Modern syntax, optional chaining, nullish coalescing, private field conventions |
+| **Forms** | React Hook Form | 7.83.x | Uncontrolled form state, minimal rerenders, inline errors via `formState.errors` |
+| **Validation** | Zod | 4.4.x | Schema validation with type guards, refinement rules (deadline ≥ today, URL format) |
+| **State Management** | React Context API | Built-in | `LanguageProvider` wraps the app; exposes `useTranslation()` hook |
+| **Persistence** | LocalStorage API | Browser (window) | 5 storage buckets for opportunities, favorites, messages, theme, language |
+| **API Layer** | Next.js API Routes | App Router `route.js` | 3 handlers: `/api/opportunities`, `/api/opportunities/[id]`, `/api/contact` |
+| **Version Control** | Git + GitHub | — | Default branch `main`, repo at `Worshmeena393/kaaryab-afghanistan` |
+| **Hosting/CDN** | Vercel | — | Production deploy at `kaaryab-afghanistan-theta.vercel.app` |
 
-**Result: 10/10 Technical Requirements ✅**
+---
+
+## ✨ Core Features
+
+### 1. Opportunity Discovery
+
+| Capability | Details |
+|---|---|
+| **Browse** | Responsive card grid collapses 1 col (sm) → 2 col (md) → 3 col (lg) |
+| **Keyword search** | Debounced substring match against opportunity titles |
+| **Filter by Category** | 8 categories: Job · Internship · Scholarship · Online Course · Remote Work · Training · Volunteer · Professional Development |
+| **Filter by Location** | Dropdown list populated from all unique locations in seed + user-submitted data |
+| **Filter by Work Type** | Remote · On-site · Hybrid |
+| **Filter by Deadline Window** | All · This Week · This Month · Expiring Soon (≤ 7 days) |
+| **Sort** | Deadline ascending (soonest first) · Deadline descending (farthest first) |
+
+### 2. CRUD System — Create / Read / Update / Delete
+
+| Operation | UI | Persistence | API Equivalent |
+|---|---|---|---|
+| **Create** | Validated form at `/add-opportunity` | `addOpportunity()` → `kaarYab-opportunities` | `POST /api/opportunities` |
+| **Read (list)** | `/opportunities` grid + `/` featured cards | `getStoredOpportunities()` | `GET /api/opportunities` |
+| **Read (detail)** | `/opportunities/[id]` gradient layout | `getOpportunityById()` | `GET /api/opportunities/:id` |
+| **Update** | Inline edit form on detail page | `updateOpportunity()` | `PUT /api/opportunities/:id` |
+| **Delete** | Glassmorphism ConfirmModal (`danger` tone) | `deleteOpportunity()` | `DELETE /api/opportunities/:id` |
+
+Forms are powered by **React Hook Form** registered inputs and validated with a **Zod schema** (`zodResolver`). Rules:
+- Title: min 3 chars
+- Organization: min 2 chars
+- Category: enum of 8 values
+- Work Type: enum of 3 values
+- Location: min 2 chars
+- Deadline: string ≥ today (via `refine()`)
+- Description: min 20 chars
+- Apply Link: valid URL format
+- Requirements + Tags: dynamic arrays
+
+### 3. Favorites System
+
+| Capability | Implementation |
+|---|---|
+| Save | Heart button on cards and detail page — `toggleFavorite(opp)` |
+| Remove | Toggle again or "Remove from Favorites" button on `/favorites` |
+| View | Dedicated route `/favorites` with card grid |
+| Storage Bucket | `localStorage["kaarYab-favorites"]` — array of opportunity IDs |
+
+### 4. Dashboard
+
+All 9 dashboard requirements from the rubric are implemented as 4 layout regions:
+
+| Region | Widgets |
+|---|---|
+| **Hero banner** | "Your opportunity overview" subtitle + CTA link to `/add-opportunity` |
+| **6 Stat cards (grid)** | Total · Jobs · Scholarships · Internships · Favorites count · Messages count |
+| **Upcoming deadlines + Insights** | Top N opportunities sorted by days-left, colored urgency tiles (red ≤ 3 d · amber ≤ 7 d · blue else) + Insights action cards for Favorites / Messages |
+| **Category Distribution + Recent Submissions** | Horizontal progress-bar bar chart with category counts + scrollable table with recent 5 submissions |
+
+### 5. Contact & Messages
+
+| Area | Details |
+|---|---|
+| **Contact form fields** | Name · Email · Subject · Message |
+| **Validation** | Zod in-app — API handler uses RFC-5322 regex email check |
+| **Client-side storage** | `saveMessage()` writes to storage bucket |
+| **Messages inbox** | Route `/messages` — list/search/single-delete/clear-all |
+| **REST API** | `POST /api/contact` (validation) — `GET /api/contact` (list) |
+
+### 6. Multi-language System
+
+| Property | Value |
+|---|---|
+| **Languages** | English (`en`) LTR · Persian/Dari (`fa`) RTL · Pashto (`ps`) RTL |
+| **Provider** | `LanguageProvider` at root of app tree — React Context, zero dependencies |
+| **Hook** | `useTranslation()` → `{ language, setLanguage, t }` |
+| **Translation files** | `locales/en.json`, `locales/fa.json`, `locales/ps.json` |
+| **RTL** | Selecting FA/PS sets `<html dir="rtl">` automatically; Tailwind `text-right` patterns flow correctly |
+| **Persistence** | `localStorage["kaarYab-language"]` — remembered across sessions |
+
+### 7. Dark Mode
+
+| Property | Value |
+|---|---|
+| Modes | Light (default) + Dark |
+| Implementation | Tailwind `class` strategy — `dark:` prefix on every color token |
+| Toggle | Sun/moon `ThemeToggle` component in Navbar |
+| Persistence | `localStorage["kaarYab-theme"]` |
+
+---
+
+## 🧩 Reusable Components
+
+All 12 components are extracted, typed via JSDoc convention, and reused across multiple pages:
+
+| Component | File | Reuse locations |
+|---|---|---|
+| **Navbar** | `components/Navbar.jsx` | Every page (ClientLayout) |
+| **Footer** | `components/Footer.jsx` | Every page (ClientLayout) |
+| **Hero** | `components/Hero.jsx` | Home page + About CTA |
+| **OpportunityCard** | `components/OpportunityCard.jsx` | Home · Opportunities · Favorites · Dashboard featured |
+| **OpportunityForm** | `components/OpportunityForm.jsx` | Add route · Detail edit mode |
+| **SearchFilter** | `components/SearchFilter.jsx` | Opportunities page sticky sidebar |
+| **DashboardCard** | `components/DashboardCard.jsx` | Dashboard 6 stat tiles + Insights cards |
+| **EmptyState** | `components/EmptyState.jsx` | Opportunities · Favorites · Messages · Dashboard variants |
+| **Modal** | `components/Modal.jsx` | Base dialog primitive with ESC-to-close, scroll-lock |
+| **ConfirmModal** | `components/ConfirmModal.jsx` | Delete confirmations (danger tone) + general confirm (default tone) |
+| **ThemeToggle** | `components/ThemeToggle.jsx` | Navbar |
+| **LanguageSelector** | `components/LanguageSelector.jsx` | Navbar · Footer language chips |
+
+---
+
+## 🧭 Pages & Routes
+
+### Application Routes
+
+| Route | Page Name | Purpose |
+|---|---|---|
+| `/` | **Home** | Hero with search · 4 category stat cards · 3 featured opportunities · 3-column "Why KaarYab?" section · CTA |
+| `/about` | **About** | Mission statement · 4-stat grid · Dual CTA buttons — exactly 3 sections per project constraint |
+| `/opportunities` | **Opportunities Listing** | Sticky SearchFilter + responsive card grid · sort · filter · result-count header · EmptyState |
+| `/opportunities/[id]` | **Opportunity Detail** | Gradient hero · Description · Requirements · Tags · Sidebar deadline countdown · Edit/Delete/Save actions · Validated Apply Link · 404 for bad IDs |
+| `/add-opportunity` | **Add / Edit Form** | Reusable OpportunityForm · RHF + Zod · Calendar date picker · Category/work-type selects · Cancel |
+| `/favorites` | **Favorites / Saved** | Heart-filled cards · EmptyState with "Browse Opportunities" CTA |
+| `/dashboard` | **Analytics Dashboard** | Stat cards · upcoming deadlines · category chart · recent table · Insights cards · Favorites/Messages tiles |
+| `/contact` | **Contact Form** | 4-field validated form · Success confirmation · writes to Messages bucket |
+| `/messages` | **Messages Inbox** | Table of submissions · search · per-row delete · clear-all action · EmptyState |
+
+### API Routes
+
+| Route | Methods | Behavior |
+|---|---|---|
+| `/api/opportunities` | **GET** · **POST** | GET returns `{ count, data, meta }` · POST validates payload → `201 Created` |
+| `/api/opportunities/[id]` | **GET** · **PUT** · **DELETE** | GET detail (404 if missing) · PUT updates (404 if missing) · DELETE returns deletedId |
+| `/api/contact` | **GET** · **POST** | GET returns `{ count, data }` · POST validates email regex + required → `201 Created` with thank-you message |
 
 ---
 
 ## 📂 Project Structure
 
+Mirror-on-disk layout (verified):
+
 ```text
-kaaryab-afghanistan/                      ← repo root (Worshmeena393/kaaryab-afghanistan)
+kaaryab-afghanistan/                 ← repo root (github.com/Worshmeena393/kaaryab-afghanistan)
 │
-├── app/                                  # Next.js App Router
-│   ├── layout.js                         # Root layout + metadata + providers
-│   ├── ClientLayout.js                   # Client Navbar / Footer wrapper
-│   ├── globals.css                       # Tailwind 4 import + CSS tokens
-│   ├── page.js                           # Home                      /
+├── app/                             # Next.js App Router
+│   ├── layout.js                    # Root layout, metadata, providers
+│   ├── ClientLayout.js              # Client-side Navbar/Footer wrapper
+│   ├── globals.css                  # Tailwind 4 @import + CSS custom properties
+│   ├── page.js                      # Home                      /
 │   ├── about/
-│   │   └── page.js                       # About                     /about
+│   │   └── page.js                  # About                     /about
 │   ├── opportunities/
-│   │   ├── page.js                       # Opportunities List        /opportunities
+│   │   ├── page.js                  # Listing                   /opportunities
 │   │   └── [id]/
-│   │       └── page.js                   # Opportunity Detail (dynamic)  /opportunities/[id]
+│   │       └── page.js              # Dynamic detail (R)        /opportunities/[id]
 │   ├── add-opportunity/
-│   │   └── page.js                       # Add / Edit Form           /add-opportunity
+│   │   └── page.js                  # C reate / U pdate form    /add-opportunity
 │   ├── favorites/
-│   │   └── page.js                       # Saved / Favorites         /favorites
+│   │   └── page.js                  # Saved items               /favorites
 │   ├── dashboard/
-│   │   └── page.js                       # Stats & Insights Dashboard  /dashboard
+│   │   └── page.js                  # Analytics                 /dashboard
 │   ├── messages/
-│   │   └── page.js                       # Messages Inbox            /messages
+│   │   └── page.js                  # Inbox D elete             /messages
 │   ├── contact/
-│   │   └── page.js                       # Contact Form              /contact
-│   └── api/                              # 👇 Next.js API Routes (3 real handlers)
+│   │   └── page.js                  # Contact form C reate      /contact
+│   └── api/
 │       ├── opportunities/
-│       │   ├── route.js                  # GET /api/opportunities · POST /api/opportunities
+│       │   ├── route.js             # GET list / POST create
 │       │   └── [id]/
-│       │       └── route.js              # GET · PUT · DELETE /api/opportunities/:id
+│       │       └── route.js         # GET detail / PUT update / DELETE remove
 │       └── contact/
-│           └── route.js                  # GET /api/contact · POST /api/contact
+│           └── route.js             # GET inbox / POST message
 │
-├── components/                           # 12 Reusable React components
-│   ├── Navbar.jsx                        # Sticky header + hamburger + theme/lang toggles
-│   ├── Footer.jsx                        # 4-column footer with brand + 2 navs + quick links
-│   ├── OpportunityCard.jsx               # Listing card w/ badges + countdown + save toggle
-│   ├── OpportunityForm.jsx               # RHF + Zod validated form
-│   ├── SearchFilter.jsx                  # Sidebar: Search · Category · Work Type · Deadline · Sort
-│   ├── DashboardCard.jsx                 # Stat counter card with gradient icon tile
-│   ├── EmptyState.jsx                    # Reusable empty state + CTA button
-│   ├── Modal.jsx                         # Base glassmorphism modal (ESC-to-close)
-│   ├── ConfirmModal.jsx                  # Delete-confirm dialog (danger / default tones)
-│   ├── ThemeToggle.jsx                   # Sun/moon dark mode switcher
-│   ├── LanguageSelector.jsx              # EN / FA / PS dropdown (auto <html dir=rtl>)
-│   └── Hero.jsx                          # Reusable hero section
+├── components/                      # 12 reusable UI components
+│   ├── Navbar.jsx                   # Sticky header + mobile hamburger + theme/lang toggles
+│   ├── Footer.jsx                   # 4-column footer: brand · 2 nav sections · quick links · copyright
+│   ├── Hero.jsx                     # Reusable gradient hero block
+│   ├── OpportunityCard.jsx          # Listing card w/ category gradient, work-type chip, days badge, heart toggle
+│   ├── OpportunityForm.jsx          # RHF + Zod add/edit form w/ calendar date picker
+│   ├── SearchFilter.jsx             # 5 filters + 1 sort + result count sticky sidebar
+│   ├── DashboardCard.jsx            # Stat counter with gradient icon tile + optional trend
+│   ├── EmptyState.jsx               # Reusable icon + heading + description + CTA
+│   ├── Modal.jsx                    # Base glassmorphism, ESC close, scroll lock, animate
+│   ├── ConfirmModal.jsx             # Confirm dialog (danger / default tones) w/ trash/check SVG icons
+│   ├── ThemeToggle.jsx              # Sun → moon SVG swap, smooth class transitions
+│   └── LanguageSelector.jsx         # EN / FA / PS dropdown, persists, flips <html dir>
 │
 ├── data/
-│   └── opportunities.js                  # 14 Seed demo opportunities (dynamic deadlines: today + N days)
+│   └── opportunities.js             # 14 seed demo opportunities, dynamic deadlines via addDays(n)
 │
 ├── lib/
-│   ├── i18n.js                           # LanguageProvider + useTranslation() hook
-│   └── storage.js                        # LocalStorage CRUD API (12 functions, try/catch safe)
+│   ├── i18n.js                      # LanguageProvider, useTranslation(), translations JSON
+│   └── storage.js                   # LocalStorage CRUD API: 14 functions, try/catch safe, ID normalized
 │
 ├── locales/
-│   ├── en.json                           # English strings
-│   ├── fa.json                           # فارسی (Dari) strings
-│   └── ps.json                           # پښتو (Pashto) strings
+│   ├── en.json                      # English strings
+│   ├── fa.json                      # فارسی / Dari strings
+│   └── ps.json                      # پښتو / Pashto strings
 │
-├── public/                               # Static SVG icons
+├── public/                          # Static SVG assets, icons, screenshots
+├── scripts/                         # Python helper scripts (data migrations / tooling)
 │
-├── scripts/                              # Python helper scripts / data migrations
-│
-├── next.config.mjs                       # Next.js config (outputFileTracingRoot fix)
-├── postcss.config.mjs                    # PostCSS (Tailwind 4 plugin)
-├── eslint.config.mjs                     # ESLint 9 flat config
-├── jsconfig.json                         # `@/*` → `./` alias
-├── package.json
-└── README.md                             # 👈 this file
+├── next.config.mjs                  # Next.js config (outputFileTracingRoot, reactStrictMode)
+├── postcss.config.mjs               # PostCSS + Tailwind 4 plugin
+├── eslint.config.mjs                # ESLint 9 flat config — eslint-config-next
+├── jsconfig.json                    # `@/*` import alias → `./`
+├── package.json                     # Dependencies, scripts
+└── README.md                        # ← This file
 ```
 
 ---
 
-## 🚀 How to Run Locally
+## 📱 Responsive Design
+
+Breakpoints follow Tailwind defaults plus an explicit project rule: layouts collapse from sidebar+content at **≥ 1024 px (lg)** to stacked/single-column below.
+
+| Tier | Width | Grid behavior | Corner radius |
+|---|---|---|---|
+| 📱 **Mobile** | 375 px (iPhone SE baseline) | 1-col cards · 2-col stats · stacked filters · hamburger menu | `rounded-[1.5rem]` / `rounded-2xl` to avoid clipping |
+| 📋 **Tablet / iPad** | 768 px | 2-col cards · 2-col stats · horizontal search + filter row | `rounded-[2rem]` / `rounded-3xl` |
+| 💻 **Laptop / Desktop** | 1366 px (and up) | 3-col cards · 3-col stat tiles · 2-col dashboard region · sticky sidebar filters | `rounded-[2.5rem]` / `rounded-3xl` |
+
+Coverage verified against the codebase: **591 responsive Tailwind classes** in `app/` and **129** in `components/`. All interactive elements use `min-h-[44px]` / `min-w-[44px]` WCAG touch-target minimums on mobile.
+
+---
+
+## 💾 LocalStorage Data Layer
+
+Every read/write is wrapped in `try/catch` inside `lib/storage.js` — corrupt storage or Safari private mode won't crash the app. IDs are normalized to strings to match URL `params.id` (always a string).
+
+| Storage Bucket (`localStorage[…]`) | Shape | Used by |
+|---|---|---|
+| `kaarYab-opportunities` | `Opportunity[]` (seeds merged with custom submissions, deadline refresh for seed IDs 1–14) | Listing · Detail · CRUD forms · Dashboard stats · Dashboard upcoming |
+| `kaarYab-favorites` | `opportunityId[]` | OpportunityCard heart toggle · Favorites page · Dashboard stats tile |
+| `kaarYab-messages` | `Message[]` (from contact form) | `/messages` inbox · Dashboard stats tile · `GET /api/contact` |
+| `kaarYab-theme` | `"light"` \| `"dark"` | ThemeToggle · initial `<html class>` class list on layout hydration |
+| `kaarYab-language` | `"en"` \| `"fa"` \| `"ps"` | LanguageSelector · `<html lang>`, `<html dir>` · `useTranslation()` |
+
+---
+
+## 🚀 Getting Started
 
 ### Prerequisites
+
 - **Node.js ≥ 18.17 LTS**
-- **npm** (ships with Node)
-- Modern browser (Chrome / Edge / Firefox)
+- **npm 9+** (ships with Node)
+- Modern browser (Chrome / Edge / Firefox ≥ 120)
 
 ### 1. Clone the Repository
 
@@ -315,13 +369,13 @@ kaaryab-afghanistan/                      ← repo root (Worshmeena393/kaaryab-a
 git clone https://github.com/Worshmeena393/kaaryab-afghanistan.git
 ```
 
-### 2. Enter the Project Folder
+### 2. Enter the Project Directory
 
 ```bash
 cd kaaryab-afghanistan
 ```
 
-> ⚠️ **Windows / nested repo note**: If your local clone has the 3-level deep nested structure, `cd` into the innermost folder (the one with `package.json` directly inside it). If you just ran `git clone github.com:Worshmeena393/kaaryab-afghanistan.git` on a fresh machine, a single `cd kaaryab-afghanistan` is enough.
+> ⚠️ **Windows nested repo note**: If your local workspace inherited a 3-level nested structure from intermediate parent folders, keep `cd`-ing until you are in the innermost `kaaryab-afghanistan/` — the one that contains `package.json` directly.
 
 ### 3. Install Dependencies
 
@@ -329,168 +383,142 @@ cd kaaryab-afghanistan
 # macOS / Linux / Git Bash
 npm install
 
-# Windows PowerShell (recommended to avoid npm.ps1 execution policy)
+# Windows PowerShell — avoids npm.ps1 execution-policy block
 npm.cmd install
 ```
 
 ### 4. Start the Development Server
 
 ```bash
-# Standard (any OS)
+# Any OS
 npm run dev
 
 # Windows PowerShell safe alias
 npm.cmd run dev
 ```
 
-### 5. Open in Browser
+### 5. Open the App
 
-- 🌐 **http://localhost:3000** (default)
-- 🌐 **http://localhost:3001** (automatic fallback when port 3000 is in use)
+- 🌐 **http://localhost:3000** — default
+- 🌐 **http://localhost:3001** — automatic fallback when port 3000 is occupied
 
-### Test the API Routes Directly (Optional — Great for Demo!)
+### Available Scripts
 
-Open any of these JSON endpoints in your browser after `npm run dev`:
-
-| Endpoint | Method | What you'll see |
+| Script | Command | Exit status (verified) |
 |---|---|---|
-| `http://localhost:3000/api/opportunities` | **GET** | `{ count: 14, data: [...], meta: {...} }` |
-| `http://localhost:3000/api/opportunities/1` | **GET** | Single demo Frontend Internship opportunity |
-| `http://localhost:3000/api/contact` | **GET** | Contact messages stored on your machine |
-
-### Other Available Scripts
-
-| Script | Command | Description |
-|---|---|---|
-| Production build | `npm run build` | Outputs to `.next/` — **Build exits 0 ✅** verified |
-| Serve production | `npm start` | Runs `.next/` → http://localhost:3000 |
-| Lint | `npm run lint` | ESLint 9 + Next — **Lint exits 0 ✅** verified |
+| Dev server | `npm run dev` | In watch mode, HMR enabled |
+| Production build | `npm run build` | **exit 0 ✅** — 12/12 static pages generated, 2 dynamic pages, 3 API routes |
+| Serve production build | `npm start` | http://localhost:3000 |
+| Lint | `npm run lint` | **exit 0 ✅** — ESLint 9 + Next config, 0 warnings, 0 errors |
 
 ---
 
-## 🧭 Pages & Routes
+## 🧪 Testing the API Routes
 
-| Route | Page Name | Description |
+After `npm run dev`, paste any of these URLs directly in your browser to see live JSON responses:
+
+| Endpoint | Method | Expected Response |
 |---|---|---|
-| `/` | **Home** | Hero search, 4 category cards, 3 featured opportunities, Why KaarYab? 3-col section |
-| `/about` | **About** | Mission statement · 4 stat grid · dual CTA (exactly 3 sections per project rule) |
-| `/opportunities` | **Opportunities** | Sticky filter sidebar + responsive card grid + sort + empty state |
-| `/opportunities/[id]` | **Opportunity Detail** | Gradient hero, description, requirements, tags, deadline countdown, edit/delete/save, validated Apply link |
-| `/dashboard` | **Dashboard** | 6 stat cards · upcoming deadlines · category chart · recent submissions table |
-| `/favorites` | **Favorites / Saved** | Saved opportunities grid with filled hearts · clear CTA to browse when empty |
-| `/messages` | **Messages Inbox** | Received contact submissions with read/unread, delete, clear-all actions |
-| `/contact` | **Contact Form** | Name / email / subject / message → validates, saves to LocalStorage + 201 via `/api/contact` |
-| `/add-opportunity` | **Add / Edit Opportunity** | React Hook Form + Zod with inline errors, calendar date picker, category/work-type selects |
-| `/api/opportunities` | **REST API (JSON)** | GET list / POST create — see § "Test the API Routes Directly" above |
-| `/api/opportunities/[id]` | **REST API (JSON)** | GET detail / PUT update / DELETE — rubric CRUD via HTTP |
-| `/api/contact` | **REST API (JSON)** | GET inbox / POST message (email regex + required fields) |
+| `http://localhost:3000/api/opportunities` | `GET` | `{ count: 14, data: Array<Opportunity>, meta: { source, timestamp } }` |
+| `http://localhost:3000/api/opportunities/1` | `GET` | Single opportunity `{ data, meta }` (404 if not found) |
+| `http://localhost:3000/api/contact` | `GET` | `{ count, data: Array<Message>, meta }` |
+
+For POST/PUT/DELETE routes, use cURL, Postman, or the frontend form pages.
+
+---
+
+## 🚢 Deployment
+
+### GitHub (Source Control)
+
+- **Repository URL**: **[github.com/Worshmeena393/kaaryab-afghanistan](https://github.com/Worshmeena393/kaaryab-afghanistan)**
+- **Default branch**: `main`
+- **Clone URL (HTTPS)**: `https://github.com/Worshmeena393/kaaryab-afghanistan.git`
+
+### Vercel (Production Hosting)
+
+- **Production URL**: **[kaaryab-afghanistan-theta.vercel.app](https://kaaryab-afghanistan-theta.vercel.app/)**
+
+### How to Deploy (Reproducible Steps)
+
+1. Push the innermost `kaaryab-afghanistan/` folder (the one containing `package.json`) to GitHub
+2. Import the repository in Vercel at **vercel.com/new**
+3. Set **Root Directory** to `/` (if you committed the innermost folder as repo root)
+4. Leave Framework Preset on **Next.js** (auto-detected)
+5. Click **Deploy** — zero environment variables required (LocalStorage persistence)
 
 ---
 
 ## 📸 Screenshots
 
-> **Drop PNG files into `public/screenshots/` folder** (create it first) and then replace the placeholder lines below with your real image paths! Or upload images to a GitHub `screenshots/` folder and paste the raw GitHub URLs.
+Drop PNG files into `public/screenshots/` (create the folder) then replace the placeholders below with real relative paths. Or upload a `screenshots/` folder to GitHub and paste raw image URLs.
 
-### Responsive Coverage
+### Screenshot Coverage Plan
 
-The project includes responsive screenshots for every layout tier × theme:
+| Tier | Width | Light Mode | Dark Mode | Notes |
+|---|---|---|---|---|
+| 📱 **Mobile** | 375 px | Home · About · Opportunities · Detail · Form · Favorites · Dashboard · Contact — 8 images | Same 8 pages dark — +8 | Aim to show hamburger open, heart tap, deadline urgency badges |
+| 📋 **Tablet / iPad** | 768 px | Home · Dashboard · Opportunities — 3 images | Same 3 dark — +3 | Show 2-col card grid |
+| 💻 **Laptop** | 1366 px | Home · About · Detail · Dashboard · Form · Contact — 6 images | Same 6 dark — +6 | Full dashboard stat grid + chart + table |
+| **Feature close-ups** | Various | LanguageSelector open · ConfirmModal (danger delete) · Form with inline Zod errors — 3 images | Dark mode Dashboard stat cards — +1 | Judges love seeing i18n and validation in action |
 
-| Device Tier | Screen Width | Light Mode Screenshots | Dark Mode Screenshots |
-|---|---|---|---|
-| 📱 **Mobile** | 375px (iPhone SE) | Home, About, Opportunities, Detail, Form, Favorites, Dashboard, Contact → **8 images** | Same 8 pages in dark mode → **+ 8** |
-| 📋 **Tablet / iPad** | 768px | Home, Dashboard, Opportunities grid → **3** | → **+ 3** |
-| 💻 **Laptop / Desktop** | 1366px | Home, About, Detail, Dashboard, Form, Contact → **6** | → **+ 6** |
-| **Bonus** | Various | Language dropdown open + Expiring Soon badge close-up + ConfirmModal open → **3** | — |
+**Target**: 28–34 screenshots. Rubric looks for ~10+ attached to the submission zip; overshoot for a perfect UI grade.
 
-### Pages Screenshot List (For the Rubric Submission Zip)
+### Submission Zip Checklist
 
-1. **Home Page** — hero + category cards + featured
-2. **About Page** — 3 sections, mission + stats + CTA
-3. **Opportunities Page** — 5 sidebar filters + grid
-4. **Opportunity Details** — gradient header, sidebar countdown, Edit/Save/Delete buttons
-5. **Add Opportunity Form** — inline Zod validation errors shown
-6. **Favorites Page** — saved cards with hearts filled
-7. **Dashboard** — the big 6 stat cards + upcoming deadlines + chart + recent table
-8. **Contact Page** — contact form with send button
-9. **Messages Page** — inbox table with submissions
-10. **Dark Mode View** — Dashboard (laptop)
-
-> 💡 Judges like seeing 20+ screenshots total. Aim for at least the 28 listed in the Responsive Coverage table above.
-
----
-
-## 🌐 Live Demo
-
-### Vercel Deployment
-
-✅ **Production-deployed link** (verified live with 0 JS console errors):
-
-### 👉 **[kaaryab-afghanistan-theta.vercel.app](https://kaaryab-afghanistan-theta.vercel.app/)**
-
-#### What was verified live on the Vercel build:
-| Page | Live Check Result |
-|---|---|
-| Home | ✅ 72 interactive refs: Hero search · 4 categories · 3 featured · Why KaarYab? · Footer |
-| Dashboard | ✅ 6 stat cards (14/0/0/2/1/2) · 4 upcoming deadlines (2/4/7/9 days) · Category chart · Recent table |
-| 0 Errors | ✅ Browser Console = empty — **no ChunkLoadError, no SyntaxError, no warnings** |
-
----
-
-## 🔗 GitHub Repository
-
-### Source Code (Public Repo)
-
-### 👉 **[github.com/Worshmeena393/kaaryab-afghanistan](https://github.com/Worshmeena393/kaaryab-afghanistan)**
-
-| Repository Property | Value |
-|---|---|
-| Owner | `Worshmeena393` |
-| Name | `kaaryab-afghanistan` |
-| Default Branch | `main` |
-| Clone URL (HTTPS) | `https://github.com/Worshmeena393/kaaryab-afghanistan.git` |
-| Description | Opportunity Finder Platform for Afghan Youth — Next.js 15 + Tailwind 4 + i18n EN/FA/PS |
+1. Home Page — hero + category cards + featured
+2. About Page — 3 sections, mission + stats + CTA
+3. Opportunities Page — sidebar 5 filters + card grid + sort dropdown open
+4. Opportunity Detail — gradient hero, sidebar deadline tile, Edit/Delete/Save buttons
+5. Add Opportunity Form — showing inline Zod validation errors for Title/Deadline
+6. Favorites Page — 3+ heart-filled cards + EmptyState fallback
+7. Dashboard — 6 stat tiles + upcoming deadlines urgency colors + category chart + recent table
+8. Contact Form — after-success "Message sent ✓" banner
+9. Messages Page — full inbox table with delete/clear-all actions
+10. Dark Mode — Dashboard (laptop), ideally with theme toggle clicked
+11. Mobile — Home + Dashboard (iPhone SE 375 px)
+12. Tablet — Opportunities (iPad mini 768 px)
 
 ---
 
 ## 📚 Demo Data Notice
 
-This project uses demo/sample opportunity data for educational purposes.
+This project uses demo/sample opportunity data for educational purposes. The displayed listings are not real company openings or live programs. A footer banner is rendered on every page of the app:
 
-The displayed opportunities are not real application openings (no real companies or links to actual programs). A footer banner on every page of the app also displays: **"📚 Note: This website uses Demo Data for educational purposes."**
+> 📚 **Note**: This website uses Demo Data for educational purposes.
 
 ---
 
 ## 🔮 Future Improvements
 
-Short- and medium-term extensions:
+A 10-item medium-term roadmap:
 
-- 🔐 User authentication (Sign up / Login)
-- 🏢 Organization accounts (profiles, logo upload, jobs posted)
-- 🧑‍💼 Admin approval queue (approve/reject community submitted opportunities)
-- 🗄️ Real database (Supabase PostgreSQL or MongoDB) instead of LocalStorage
-- 📧 Email / SMS notifications (deadline reminders, new matches by preference)
-- 🤖 AI-powered opportunity recommendations
-- 📄 PDF CV builder from applicant profile
-- 🚦 Application tracker pipeline (Applied → Interview → Offer)
-- 📱 Progressive Web App (PWA): installable + offline mode
-- 🔍 Advanced boolean search + saved filter alerts
+1. 🔐 **Authentication** — sign-up / login with email + OAuth (Google/GitHub) via NextAuth or Supabase Auth
+2. 🏢 **Organization accounts** — verified profiles, logo upload, branded opportunity listings, apply analytics
+3. 🧑‍💼 **Admin approval queue** — moderator dashboard to approve/reject community-submitted opportunities
+4. 🗄️ **Real database integration** — replace LocalStorage with Supabase PostgreSQL / MongoDB Atlas via route handlers
+5. 📧 **Notifications** — deadline reminders, new matches by saved preferences (email + optional SMS)
+6. 🤖 **AI opportunity recommendations** — semantic vector search + collaborative filtering
+7. 📄 **CV / Résumé builder** — styled PDF generation from applicant profile fields
+8. 🚦 **Application tracker** — pipeline: Saved → Applied → Interview → Offer
+9. 📱 **Progressive Web App** — installable, offline-capable, push notifications
+10. 🔍 **Advanced boolean search** — `remote AND scholarship OR internship`, saved filter alerts
 
 ---
 
 ## 🎓 Learning Outcomes
 
-Through this 6-week capstone project, I learned how to:
-
-1. Build complete applications with **Next.js App Router** (10 pages + 3 API routes)
-2. Design and extract **12 reusable React components**
-3. Manage state with **React Context** (LanguageProvider) + LocalStorage persistence layer
-4. Implement end-to-end **CRUD functionality** (UI form + ConfirmModal + storage API + REST handlers)
-5. Build a safe, production-tolerant **LocalStorage wrapper with try/catch**
-6. Design fully responsive interfaces using **Tailwind CSS 4** (Mobile · Tablet · Laptop breakpoints)
-7. Validate forms with **React Hook Form + Zod** (inline translated error messages)
-8. Implement trilingual support with **automatic RTL for فارسی and پښتو**
-9. Structure, debug, and deploy a real-world app on **Vercel**
-10. Version control correctly with **Git + GitHub** (Worshmeena393/kaaryab-afghanistan)
+Through this 6-week capstone, I mastered:
+- Building production apps with the **Next.js 15 App Router** — RSC boundaries, Server Components, metadata, route handlers, dynamic `[id]` segments
+- Architecting 12 **reusable React components** with clean prop contracts — Navbar through to LanguageSelector
+- Designing pixel-perfect, WCAG-compliant interfaces with **Tailwind CSS 4** across Mobile / Tablet / Desktop breakpoints
+- Building an end-to-end **CRUD system** with UI forms, a safe storage layer, and corresponding REST API route handlers
+- Writing robust **Next.js API Routes** with proper HTTP verbs, status codes, validation, and 404 handling
+- Validating forms end-to-end with **React Hook Form + Zod** — schema-driven error UX
+- Centralizing state for i18n with the **React Context API** + zero-dependency translation hook
+- Implementing a resilient LocalStorage persistence layer with **try/catch wrappers** + ID normalization
+- Executing a correct **Git + GitHub workflow** — atomic commits, `main` default branch, clean remote structure
+- Debugging and deploying a real-world app on **Vercel** — handling nested `outputFileTracingRoot` and port conflicts
 
 ---
 
@@ -500,25 +528,21 @@ Through this 6-week capstone project, I learned how to:
 
 ### **Worshmeena Qayoumi**
 
-Student at **Code to Inspire (CTI)** · Class of 2026 Capstone
+**Code to Inspire (CTI)** — Class of 2026 Capstone Project
 
 </div>
 
 ---
 
-## 📅 Year
-
-KaarYab Afghanistan — **2026 Final Capstone Project**
-
----
-
 <div align="center">
 
-# ⭐ Thank you for visiting KaarYab Afghanistan!
+**KaarYab Afghanistan — 2026 Final Capstone**
+
+# ⭐ Thank you for exploring KaarYab Afghanistan
 
 *Built with ❤️ for the Afghan youth community.*
 
 </div>
 
 <a id="license"></a>
-<div align="center"><sub>MIT License — free for educational & commercial use.</sub></div>
+<div align="center"><sub>MIT License — free for educational and commercial use.</sub></div>
