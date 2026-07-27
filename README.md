@@ -1,14 +1,25 @@
-# 🌟 KaarYab Afghanistan - Opportunity Finder Platform
+# 🌟 KaarYab Afghanistan
 
-## 📌 Project Name
+> **Opportunity Finder Platform for Afghan Youth** — Built with Next.js 16, React 19, Tailwind CSS, and LocalStorage persistence.
 
-**KaarYab Afghanistan**
+**EN • فارسی • پښتو** — Trilingual platform with RTL support.
 
 ---
 
-## 📖 Project Description
+# 📌 Project Status
 
-KaarYab Afghanistan is a modern opportunity finder platform designed to help Afghan youth discover valuable opportunities including:
+- ✅ Completed
+- ✅ Responsive Design
+- ✅ CRUD Functionality Implemented
+- ✅ Dark / Light Mode
+- ✅ Multi-language Support
+- ✅ Deployed on Vercel
+
+---
+
+# 📖 Project Overview
+
+KaarYab Afghanistan is a modern opportunity finder platform designed to help Afghan students, graduates, and young professionals discover valuable opportunities including:
 
 - Jobs
 - Internships
@@ -18,13 +29,13 @@ KaarYab Afghanistan is a modern opportunity finder platform designed to help Afg
 - Training programs
 - Volunteer opportunities
 
-The platform collects opportunities in one place so students, graduates, and job seekers can easily search, filter, save, and manage opportunities.
+The platform collects opportunities in one place so users can easily search, filter, save, and manage opportunities.
 
 ---
 
-## 🎯 Problem It Solves
+# 🎯 Problem It Solves
 
-Many young people in Afghanistan struggle to find reliable information about:
+Many Afghan youth face challenges finding reliable information about:
 
 - Career opportunities
 - Scholarships
@@ -32,9 +43,9 @@ Many young people in Afghanistan struggle to find reliable information about:
 - Remote jobs
 - Learning resources
 
-Information is often spread across different websites and social media platforms.
+Information is often scattered across different websites and social media platforms.
 
-KaarYab Afghanistan solves this problem by providing a centralized platform where users can discover and manage opportunities easily.
+KaarYab Afghanistan provides a centralized platform where users can discover and manage opportunities easily.
 
 ---
 
@@ -45,14 +56,13 @@ The platform is designed for:
 - Students
 - Fresh graduates
 - Job seekers
-- Women searching for remote opportunities
-- People looking for scholarships
-- People searching for internships
+- Remote workers
+- Scholarship applicants
 - Organizations sharing opportunities
 
 ---
 
-# ✨ Features
+# ✨ Key Features
 
 ## 🔎 Opportunity Discovery
 
@@ -70,38 +80,7 @@ Users can:
 
 ## 📋 Opportunity Management
 
-Each opportunity includes:
-
-- Title
-- Organization name
-- Category
-- Location
-- Work type
-- Deadline
-- Description
-- Requirements
-- Apply link
-- Tags
-
----
-
-## ⭐ Save Opportunities
-
-Users can:
-
-- Save interesting opportunities
-- View saved opportunities
-- Remove saved opportunities
-
-Saved data is stored using LocalStorage.
-
----
-
-## ➕ Add Opportunity
-
-Users can submit new opportunities using a form.
-
-The form includes:
+Each opportunity contains:
 
 - Title
 - Organization
@@ -116,9 +95,38 @@ The form includes:
 
 ---
 
-## ✏️ CRUD System
+## ⭐ Favorites System
 
-The application supports:
+Users can:
+
+- Save opportunities
+- View saved opportunities
+- Remove saved opportunities
+
+Favorites are stored using LocalStorage.
+
+---
+
+## ➕ Add Opportunity
+
+Users can submit new opportunities through a form containing:
+
+- Title
+- Organization
+- Category
+- Work Type
+- Location
+- Deadline
+- Description
+- Apply Link
+- Requirements
+- Tags
+
+---
+
+# ✏️ CRUD Functionality
+
+The platform supports:
 
 ### Create
 Add new opportunities.
@@ -134,15 +142,15 @@ Remove opportunities.
 
 ---
 
-## 📊 Dashboard
+# 📊 Dashboard
 
-The dashboard provides:
+Dashboard includes:
 
 - Total opportunities
-- Total jobs
-- Total internships
-- Total scholarships
-- Favorite count
+- Jobs count
+- Internship count
+- Scholarship count
+- Favorites count
 - Messages count
 - Upcoming deadlines
 - Category distribution
@@ -150,75 +158,64 @@ The dashboard provides:
 
 ---
 
-## 💬 Contact & Messages
+# 💬 Contact & Messages
 
 Users can:
 
-- Send messages through contact form
-- View received messages
+- Send messages
+- View messages
 - Search messages
 - Delete messages
 
-Messages are stored locally.
+Messages are stored locally in the browser.
 
 ---
 
-## 🌐 Multi-language Support
+# 🌐 Multi-language Support
+
+Supported languages:
+
+- English
+- فارسی (Dari)
+- پښتو (Pashto)
+
+The platform automatically supports RTL layout for Persian and Pashto.
+
+---
+
+# 🌙 Dark Mode
 
 The application supports:
 
-- English
-- فارسی
-- پښتو
+- Light mode
+- Dark mode
+
+Theme preference is saved using LocalStorage.
 
 ---
-
-## 🌙 Dark Mode
-
-The application includes light and dark theme support.
-
----
-
-# 🖥️ Screenshots
-
-The template contains screenshots of all pages displayed on mobile, laptop, and iPad devices.
-
-
-
-
-
-
 
 # 🛠️ Technologies Used
 
-## Frontend
-
-- Next.js
-- React
-- Tailwind CSS
-- JavaScript
-
-## State Management
-
-- React Context
-- LocalStorage
-
-## Development Tools
-
-- VS Code
-- Git
-- GitHub
-- Vercel
+| Technology | Purpose |
+|---|---|
+| Next.js 16 | Application framework |
+| React 19 | User interface |
+| Tailwind CSS | Styling |
+| JavaScript | Programming language |
+| React Context | State management |
+| LocalStorage | Data persistence |
+| GitHub | Version control |
+| Vercel | Deployment |
 
 ---
 
 # 📂 Project Structure
 
-```
+```text
 kaaryab-afghanistan/
 
 ├── app/
-│   ├── page.jsx
+│   ├── page.js
 │   ├── about/
 │   ├── opportunities/
 │   ├── dashboard/
@@ -238,115 +235,108 @@ kaaryab-afghanistan/
 │   └── opportunities.js
 
 ├── lib/
-│   └── utils.js
 
 ├── public/
 
 └── package.json
-```
 
----
-
-# 🚀 How to Run Locally
-
-## 1. Clone Repository
-
-```bash
+🚀 How to Run Locally
+1. Clone Repository
 git clone https://github.com/Worshmeena393/kaaryab-afghanistan.git
-```
-
----
-
-## 2. Go Into Project Folder
-
-```bash
+2. Enter Project Folder
 cd kaaryab-afghanistan
-```
-
----
-
-## 3. Install Dependencies
-
-```bash
+3. Install Dependencies
 npm install
-```
-
----
-
-## 4. Start Development Server
-
-```bash
+4. Start Development Server
 npm run dev
-```
 
----
+Open your browser:
 
-Open:
-
-```
 http://localhost:3000
-```
+🧭 Pages & Routes
+Route	Description
+/	Home page
+/about	About KaarYab
+/opportunities	Opportunity listing
+/opportunities/[id]	Opportunity details
+/dashboard	User dashboard
+/favorites	Saved opportunities
+/messages	Messages inbox
+/contact	Contact form
+/add-opportunity	Add opportunity form
+📸 Screenshots
 
----
+The project includes responsive screenshots for:
 
-# 🌍 Live Demo
+Mobile layout
+Tablet / iPad layout
+Laptop layout
+
+Screenshots include:
+all pages in mobile layout, light mode, dark mode, tablet layout, light mode, dark mode, laptop layout, light mode, dark mode layout 
+
+Home Page
+About Page
+Opportunities Page
+Opportunity Details
+Add Opportunity Form
+Favorites Page
+Dashboard
+Contact Page
+Messages Page
+Dark Mode View
+ 
+
+  
+🌐 Live Demo
+
+Vercel Deployment:
 
 https://kaaryab-afghanistan-nu.vercel.app/
 
----
 
-# 💻 GitHub Repository
+🔗 GitHub Repository
+
+Repository:
 
 https://github.com/Worshmeena393/kaaryab-afghanistan
 
----
-
-# 📚 Demo Data Notice
+📚 Demo Data Notice
 
 This project uses demo/sample opportunity data for educational purposes.
 
-The opportunities shown on the website are not real application opportunities.
+The displayed opportunities are not real application opportunities.
 
----
+🔮 Future Improvements
 
-# 🔮 Future Improvements
+Possible improvements:
 
-Possible future improvements:
-
-- User authentication
-- Organization accounts
-- Admin approval system
-- Real opportunity database
-- Email notifications
-- AI-based opportunity recommendations
-- CV builder
-- More advanced analytics
-- Real API integration
-
----
-
-# 🎓 Final Project Learning Outcomes
+User authentication
+Organization accounts
+Admin approval system
+Real database integration
+Email notifications
+AI opportunity recommendations
+CV builder
+Application tracking system
+🎓 Learning Outcomes
 
 Through this project, I learned:
 
-- Building applications with Next.js App Router
-- Creating reusable React components
-- Managing application state
-- Implementing dynamic routes
-- Creating CRUD functionality
-- Working with LocalStorage
-- Designing responsive interfaces
-- Deploying applications with Vercel
+Building applications with Next.js App Router
+Creating reusable React components
+Managing application state
+Creating CRUD functionality
+Working with LocalStorage
+Designing responsive interfaces
+Implementing multilingual support
+Deploying applications with Vercel
+👩‍💻 Developer
 
----
+Worshmeena Qayoumi
 
-# 👩‍💻 Developer
+KaarYab Afghanistan
 
-**Worshmeena Qayoumi**
-
-KaarYab Afghanistan  
 2026
-
----
 
 ⭐ Thank you for visiting KaarYab Afghanistan!
