@@ -1,19 +1,23 @@
 # 🌟 KaarYab Afghanistan
 
-> **Opportunity Finder Platform for Afghan Youth** — Built with Next.js 16, React 19, Tailwind CSS, and LocalStorage persistence.
+> **Opportunity Finder Platform for Afghan Youth** — Built with Next.js 15, React 19, Tailwind CSS 4, React Hook Form + Zod, and LocalStorage persistence.
 
-**EN • فارسی • پښتو** — Trilingual platform with RTL support.
+**EN • فارسی • پښتو** — Trilingual platform with automatic RTL support.
 
 ---
 
 # 📌 Project Status
 
 - ✅ Completed
-- ✅ Responsive Design
+- ✅ Fully Responsive Design
 - ✅ CRUD Functionality Implemented
 - ✅ Dark / Light Mode
-- ✅ Multi-language Support
+- ✅ Multi-language Support (EN / FA / PS)
+- ✅ RTL Support for Persian and Pashto
+- ✅ LocalStorage Persistence
+- ✅ API Routes Implemented
 - ✅ Deployed on Vercel
+- ✅ Source Code Available on GitHub
 
 ---
 
@@ -24,18 +28,18 @@ KaarYab Afghanistan is a modern opportunity finder platform designed to help Afg
 - Jobs
 - Internships
 - Scholarships
-- Remote work
-- Online courses
-- Training programs
-- Volunteer opportunities
+- Remote Work
+- Online Courses
+- Training Programs
+- Volunteer Opportunities
 
-The platform collects opportunities in one place so users can easily search, filter, save, and manage opportunities.
+The platform brings opportunities together in one place where users can search, filter, save, and manage opportunities easily.
 
 ---
 
 # 🎯 Problem It Solves
 
-Many Afghan youth face challenges finding reliable information about:
+Many Afghan youth face difficulties finding reliable information about:
 
 - Career opportunities
 - Scholarships
@@ -43,9 +47,9 @@ Many Afghan youth face challenges finding reliable information about:
 - Remote jobs
 - Learning resources
 
-Information is often scattered across different websites and social media platforms.
+Information is often distributed across different websites and social media platforms.
 
-KaarYab Afghanistan provides a centralized platform where users can discover and manage opportunities easily.
+KaarYab Afghanistan provides a centralized platform to make opportunity discovery easier.
 
 ---
 
@@ -69,7 +73,7 @@ The platform is designed for:
 Users can:
 
 - Browse opportunities
-- Search opportunities
+- Search by keyword
 - Filter by category
 - Filter by location
 - Filter by work type
@@ -78,9 +82,9 @@ Users can:
 
 ---
 
-## 📋 Opportunity Management
+## 📋 Opportunity Information
 
-Each opportunity contains:
+Each opportunity includes:
 
 - Title
 - Organization
@@ -95,7 +99,7 @@ Each opportunity contains:
 
 ---
 
-## ⭐ Favorites System
+# ⭐ Favorites System
 
 Users can:
 
@@ -103,48 +107,34 @@ Users can:
 - View saved opportunities
 - Remove saved opportunities
 
-Favorites are stored using LocalStorage.
+Favorites are stored using:
+
+
+and remain available after refreshing the browser.
 
 ---
 
-## ➕ Add Opportunity
+# ➕ Opportunity Management (CRUD)
 
-Users can submit new opportunities through a form containing:
+The platform supports complete CRUD functionality:
 
-- Title
-- Organization
-- Category
-- Work Type
-- Location
-- Deadline
-- Description
-- Apply Link
-- Requirements
-- Tags
-
----
-
-# ✏️ CRUD Functionality
-
-The platform supports:
-
-### Create
+## Create
 Add new opportunities.
 
-### Read
+## Read
 View opportunities and details.
 
-### Update
+## Update
 Edit existing opportunities.
 
-### Delete
+## Delete
 Remove opportunities.
 
 ---
 
 # 📊 Dashboard
 
-Dashboard includes:
+Dashboard provides:
 
 - Total opportunities
 - Jobs count
@@ -175,11 +165,13 @@ Messages are stored locally in the browser.
 
 Supported languages:
 
-- English
-- فارسی (Dari)
-- پښتو (Pashto)
+| Language | Direction |
+|---|---|
+| English | LTR |
+| فارسی (Dari) | RTL |
+| پښتو (Pashto) | RTL |
 
-The platform automatically supports RTL layout for Persian and Pashto.
+The application automatically changes layout direction based on language selection.
 
 ---
 
@@ -187,10 +179,10 @@ The platform automatically supports RTL layout for Persian and Pashto.
 
 The application supports:
 
-- Light mode
-- Dark mode
+- Light Mode
+- Dark Mode
 
-Theme preference is saved using LocalStorage.
+Theme preferences are saved using LocalStorage.
 
 ---
 
@@ -198,13 +190,16 @@ Theme preference is saved using LocalStorage.
 
 | Technology | Purpose |
 |---|---|
-| Next.js 16 | Application framework |
-| React 19 | User interface |
-| Tailwind CSS | Styling |
-| JavaScript | Programming language |
-| React Context | State management |
-| LocalStorage | Data persistence |
-| GitHub | Version control |
+| Next.js 15 | Application Framework |
+| React 19 | User Interface |
+| Tailwind CSS 4 | Responsive Styling |
+| JavaScript | Programming Language |
+| React Hook Form | Form Management |
+| Zod | Form Validation |
+| React Context | State Management |
+| LocalStorage | Data Persistence |
+| Next.js API Routes | REST API |
+| GitHub | Version Control |
 | Vercel | Deployment |
 
 ---
@@ -222,7 +217,8 @@ kaaryab-afghanistan/
 │   ├── favorites/
 │   ├── messages/
 │   ├── contact/
-│   └── add-opportunity/
+│   ├── add-opportunity/
+│   └── api/
 
 ├── components/
 │   ├── Navbar.jsx
@@ -235,6 +231,13 @@ kaaryab-afghanistan/
 │   └── opportunities.js
 
 ├── lib/
+│   ├── storage.js
+│   └── i18n.js
+
+├── locales/
+│   ├── en.json
+│   ├── fa.json
+│   └── ps.json
 
 ├── public/
 
@@ -243,6 +246,7 @@ kaaryab-afghanistan/
 🚀 How to Run Locally
 1. Clone Repository
 git clone https://github.com/Worshmeena393/kaaryab-afghanistan.git
+
 2. Enter Project Folder
 cd kaaryab-afghanistan
 3. Install Dependencies
@@ -250,30 +254,32 @@ npm install
 4. Start Development Server
 npm run dev
 
-Open your browser:
+Open:
 
 http://localhost:3000
 🧭 Pages & Routes
 Route	Description
-/	Home page
+/	Home Page
 /about	About KaarYab
-/opportunities	Opportunity listing
-/opportunities/[id]	Opportunity details
-/dashboard	User dashboard
-/favorites	Saved opportunities
-/messages	Messages inbox
-/contact	Contact form
-/add-opportunity	Add opportunity form
+/opportunities	Opportunity Listing
+/opportunities/[id]	Opportunity Details
+/dashboard	Dashboard
+/favorites	Saved Opportunities
+/messages	Messages Inbox
+/contact	Contact Form
+/add-opportunity	Add Opportunity Form
+
 📸 Screenshots
 
-The project includes responsive screenshots for:
+The project was tested on:
 
 Mobile layout
-Tablet / iPad layout
-Laptop layout
+Tablet layout
+Laptop/Desktop layout
+Light mode
+Dark mode
 
 Screenshots include:
-all pages in mobile layout, light mode, dark mode, tablet layout, light mode, dark mode, laptop layout, light mode, dark mode layout 
 
 Home Page
 About Page
@@ -284,28 +290,23 @@ Favorites Page
 Dashboard
 Contact Page
 Messages Page
-Dark Mode View
- 
-
-  
+Dark Mode Dashboard
 🌐 Live Demo
+Vercel Deployment
 
-Vercel Deployment:
-
-https://kaaryab-afghanistan-nu.vercel.app/
-
+🚀 https://kaaryab-afghanistan-theta.vercel.app/
 
 🔗 GitHub Repository
 
-Repository:
+Source Code:
 
 https://github.com/Worshmeena393/kaaryab-afghanistan
 
 📚 Demo Data Notice
 
-This project uses demo/sample opportunity data for educational purposes.
+This project uses sample/demo opportunity data for educational purposes.
 
-The displayed opportunities are not real application opportunities.
+The opportunities displayed are not real job or scholarship applications.
 
 🔮 Future Improvements
 
@@ -319,6 +320,8 @@ Email notifications
 AI opportunity recommendations
 CV builder
 Application tracking system
+Progressive Web App (PWA)
+
 🎓 Learning Outcomes
 
 Through this project, I learned:
@@ -326,17 +329,17 @@ Through this project, I learned:
 Building applications with Next.js App Router
 Creating reusable React components
 Managing application state
-Creating CRUD functionality
+Implementing CRUD functionality
 Working with LocalStorage
-Designing responsive interfaces
+Building responsive interfaces
 Implementing multilingual support
 Deploying applications with Vercel
+Using Git and GitHub professionally
 👩‍💻 Developer
-
 Worshmeena Qayoumi
 
 KaarYab Afghanistan
 
-2026
+2026 Final Capstone Project
 
 ⭐ Thank you for visiting KaarYab Afghanistan!
