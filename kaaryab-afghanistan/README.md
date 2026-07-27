@@ -4,7 +4,7 @@
 
 <div align="center">
 
-[![Vercel](https://img.shields.io/badge/Vercel-Live-000?logo=vercel&logoColor=white)](https://kaaryab-afghanistan-nu.vercel.app/)
+[![Vercel](https://img.shields.io/badge/Vercel-Live-000?logo=vercel&logoColor=white)](https://kaaryab-afghanistan-theta.vercel.app/)
 [![GitHub](https://img.shields.io/badge/GitHub-Worshmeena393%2Fkaaryab--afghanistan-181717?logo=github&logoColor=white)](https://github.com/Worshmeena393/kaaryab-afghanistan)
 [![Next.js](https://img.shields.io/badge/Next.js-15-000?logo=next.js&logoColor=white)](https://nextjs.org)
 [![React](https://img.shields.io/badge/React-19-61dafb?logo=react&logoColor=white)](https://react.dev)
@@ -203,7 +203,7 @@ Theme preference is saved using `localStorage["kaarYab-theme"]` and every color 
 | **LocalStorage API** | Browser | Opportunity CRUD · Favorites · Messages · Theme · Language |
 | **Next.js API Routes** | App Router | `app/api/*` 3 REST endpoints (Opportunities CRUD + Contact) |
 | **GitHub** | Git | Version control → repo at `Worshmeena393/kaaryab-afghanistan` |
-| **Vercel** | — | Production deployment → `kaaryab-afghanistan-nu.vercel.app` |
+| **Vercel** | — | Production deployment → `kaaryab-afghanistan-theta.vercel.app` |
 
 ---
 
@@ -222,7 +222,7 @@ The 10 items the judges verify explicitly:
 | 7 | LocalStorage / Context / Redux | ✅ | Both: `lib/storage.js` (LS) + `LanguageProvider` (Context) |
 | 8 | API routes **or** mock API | ✅ | Both! 3 real `app/api/*` REST handlers + localStorage mock layer |
 | 9 | **GitHub** | ✅ | `github.com/Worshmeena393/kaaryab-afghanistan` |
-| 10 | **Vercel deployment** | ✅ | `kaaryab-afghanistan-nu.vercel.app` — live, 0 console errors |
+| 10 | **Vercel deployment** | ✅ | `kaaryab-afghanistan-theta.vercel.app` — live, 0 console errors |
 
 **Result: 10/10 Technical Requirements ✅**
 
@@ -425,7 +425,7 @@ The project includes responsive screenshots for every layout tier × theme:
 
 ✅ **Production-deployed link** (verified live with 0 JS console errors):
 
-### 👉 **[kaaryab-afghanistan-nu.vercel.app](https://kaaryab-afghanistan-nu.vercel.app/)**
+### 👉 **[kaaryab-afghanistan-theta.vercel.app](https://kaaryab-afghanistan-theta.vercel.app/)**
 
 #### What was verified live on the Vercel build:
 | Page | Live Check Result |
