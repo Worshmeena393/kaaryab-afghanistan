@@ -1,7 +1,15 @@
 import { NextResponse } from "next/server";
+import { z } from "zod";
 import { saveMessage, getMessages } from "@/lib/storage";
 
 export const dynamic = "force-dynamic";
+
+const contactSchema = z.object({
+  name: z.string().min(2, "Name is required"),
+  email: z.string().email("Invalid email format"),
+  subject: z.string().min(3, "Subject is required"),
+  message: z.string().min(10, "Message must be at least 10 characters"),
+});
 
 export async function GET() {
   try {
@@ -10,14 +18,20 @@ export async function GET() {
       {
         count: messages.length,
         data: messages,
-        meta: { timestamp: new Date().toISOString() },
+        meta: {
+          source: "KaarYab storage layer (server in-memory + browser LocalStorage hybrid)",
+          timestamp: new Date().toISOString(),
+        },
       },
-      { status: 200 }
+      { status: 200 },
     );
   } catch (err) {
     return NextResponse.json(
-      { error: "Failed to read messages", message: err instanceof Error ? err.message : "Unknown error" },
-      { status: 500 }
+      {
+        error: "Failed to read messages",
+        message: err instanceof Error ? err.message : "Unknown error",
+      },
+      { status: 500 },
     );
   }
 }
@@ -25,37 +39,32 @@ export async function GET() {
 export async function POST(request) {
   try {
     const payload = await request.json();
-    const { name, email, subject, message } = payload || {};
-
-    if (!name || !email || !subject || !message) {
+    const parsed = contactSchema.safeParse(payload || {});
+    if (!parsed.success) {
       return NextResponse.json(
         {
-          error: "Missing required fields",
+          error: "Validation failed",
+          details: parsed.error.flatten(),
           required: ["name", "email", "subject", "message"],
         },
-        { status: 400 }
+        { status: 400 },
       );
     }
-
-    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(String(email))) {
-      return NextResponse.json(
-        { error: "Invalid email format" },
-        { status: 400 }
-      );
-    }
-
-    const newMessage = saveMessage(payload);
+    const created = saveMessage(parsed.data);
     return NextResponse.json(
       {
         message: "Message sent successfully. Thank you for contacting KaarYab Afghanistan!",
-        data: newMessage,
+        data: created,
       },
-      { status: 201 }
+      { status: 201 },
     );
   } catch (err) {
     return NextResponse.json(
-      { error: "Invalid JSON payload", message: err instanceof Error ? err.message : "Unknown error" },
-      { status: 400 }
+      {
+        error: "Invalid JSON payload",
+        message: err instanceof Error ? err.message : "Unknown error",
+      },
+      { status: 400 },
     );
   }
 }
