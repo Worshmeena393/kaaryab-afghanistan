@@ -415,7 +415,7 @@ git clone https://github.com/Worshmeena393/kaaryab-afghanistan.git
 
 **Production Website:**
 
-https://kaaryab-afghanistan-theta.vercel.app/
+https://kaaryab-afghanistan-six.vercel.app/
 
 The application is deployed using Vercel with automatic Next.js optimization and production builds.
 
